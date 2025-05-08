@@ -1,0 +1,1 @@
+export const TextMainGradient ="bg-gradient-to-br bg-clip-text text-transparent from-mainColorLight via-mainColorLight to-secondaryColorLight dark:from-mainColorDark dark:via-mainColorDark dark:to-secondaryColorDark"

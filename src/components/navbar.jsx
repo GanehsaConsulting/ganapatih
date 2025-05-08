@@ -1,0 +1,107 @@
+"use client"
+import Link from "next/link"
+import ThemeSwitch from "./theme-switch"
+import { navbarItems } from "@/data/system"
+import { Button } from "./ui/button"
+import Logo from "../assets/icon.png"
+import TextLogo from "../assets/icon-text.png"
+import Image from "next/image"
+import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
+import { MegaMenuNavbar } from "./mega-menu"
+import { ServicesMegaMenu } from "./services-mega-menu"
+
+export const Navbar = ({ children }) => {
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [expandedId, setExpandedId] = useState(null);
+    const path = usePathname();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+            setIsScrolled(scrollPosition > 0);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+    return (
+        <>
+            <div className={`${isScrolled && "pl-4 pr-4 dark:bg-mainColorLight/25 bg-mainColorDark/10 border-b border-darkColor/15 dark:border-lightColor/15 shadow-mainShadow/5 backdrop-blur-3xl"}  navbar min-h-[55px] h-[55px] sticky top-0 px-24 z-[555] duration-200`}>
+                <div className="navbar-start flex items-center">
+
+                    <Image
+                        width={21}
+                        height={21}
+                        src={Logo}
+                        alt="Ganapatih Logo"
+                        className="dark:brightness-125 z-50"
+                    />
+                    <Image
+                        width={130}
+                        height={21}
+                        src={TextLogo}
+                        alt="Ganapatih Logo"
+                        className="dark:brightness-125 z-50 -ml-1"
+                    />
+                    <ul className="menu menu-horizontal px-1">
+                        <MegaMenuNavbar
+                            id="service"
+                            title="Layanan"
+                            expandedId={expandedId}
+                            setExpandedId={setExpandedId}
+
+                        >
+                            <ServicesMegaMenu
+                                onClose={() => setExpandedId(null)}
+                                expandedId={expandedId} />
+                        </MegaMenuNavbar>
+                        {navbarItems.slice(0, 3).map((el, idx) => (
+                            <li key={idx}>
+                                <Link
+                                    href={el.href}
+                                >
+                                    {el.label}
+                                </Link>
+                            </li>
+
+                        ))}
+                    </ul>
+                </div>
+                <div className="navbar-end space-x-2">
+                    <label className="input h-[36px] border border-neutral-400/15 bg-lightColor dark:bg-darkColor rounded-main">
+                        <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g
+                                strokeLinejoin="round"
+                                strokeLinecap="round"
+                                strokeWidth="2.5"
+                                fill="none"
+                                stroke="currentColor"
+                            >
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                            </g>
+                        </svg>
+                        <input
+                            type="text"
+                            placeholder="Cari layanan..."
+                            // value={search}
+                            // onChange={(e) => setSearch(e.target.value)}
+                            className="grow"
+                        />
+                    </label>
+                    <ThemeSwitch
+                        className={'bg-lightColor dark:bg-darkColor p-2 w-9 h-9 rounded-secondary aspect-square hover:brightness-110 border'}
+                    />
+                </div>
+            </div>
+            < div className={`fixed top-0 z-[80] ${expandedId ? "opacity-100 backdrop-blur-sm w-screen h-screen" : "opacity-0"} noBar bg-lightColor/30 dark:bg-lightColor/20 transition-opacity duration-500`} />
+            <div>
+                {children}
+            </div>
+        </>
+    )
+}
