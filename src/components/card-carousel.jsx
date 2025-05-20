@@ -1,13 +1,12 @@
 "use client"
 import { useState } from "react";
 import { KonsultanPajakPackages } from "@/data/categories/tax";
-import { RiArrowDropLeftFill, RiArrowDropLeftLine, RiArrowDropRightFill, RiArrowDropRightLine, RiCheckFill, RiInformationFill, RiWhatsappLine } from "react-icons/ri";
+import { RiCheckFill, RiInformationFill, RiWhatsappLine } from "react-icons/ri";
 import { BsFillXCircleFill } from "react-icons/bs";
 import { formatToRupiah } from "./helper/formatToRupiah";
 import { LuPlus } from "react-icons/lu";
 import { Button } from "./ui/button";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
-import { IoMdArrowDropright } from "react-icons/io";
 
 export const CardCarousel = () => {
     const [expandedFeatures, setExpandedFeatures] = useState([]);

@@ -1,11 +1,8 @@
 "use client"
 import Link from "next/link"
+import Image from "next/image"
 import ThemeSwitch from "./theme-switch"
 import { navbarItems } from "@/data/system"
-import { Button } from "./ui/button"
-import Logo from "../assets/icon.png"
-import TextLogo from "../assets/icon-text.png"
-import Image from "next/image"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { MegaMenuNavbar } from "./mega-menu"
@@ -36,14 +33,14 @@ export const Navbar = ({ children }) => {
                     <Image
                         width={21}
                         height={21}
-                        src={Logo}
+                        src={"/assets/icon.png"}
                         alt="Ganapatih Logo"
                         className="dark:brightness-125 z-50"
                     />
                     <Image
                         width={130}
                         height={21}
-                        src={TextLogo}
+                        src={"/assets/icon-text.png"}
                         alt="Ganapatih Logo"
                         className="dark:brightness-125 z-50 -ml-1"
                     />
