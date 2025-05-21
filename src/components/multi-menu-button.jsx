@@ -77,7 +77,7 @@ const CategorySection = ({ label, items, isExpanded, toggle, pathActive }) => {
         <div className={`${isExpanded ? "" : "border-b pb-[1px] hover:border-0"}`}>
             <Button
                 onClick={toggle}
-                className={`flex items-center gap-2 justify-between w-full px-0 ${isExpanded ? "!px-4 bg-secondaryColorDark/35 dark:bg-secondaryColorDark/50" : ""}`}
+                className={`flex items-center gap-2 justify-between w-full px-0 ${isExpanded ? "!px-4 bg-secondaryColorDark/35 dark:bg-secondaryColorLight/50" : ""}`}
                 variant={isExpanded ? "main" : "ghost"}
                 size="ghost"
             >

@@ -99,7 +99,7 @@ const ToggleSection = ({ id, title, openKeys, setOpenKeys, children }) => {
             <Button
                 onClick={toggle}
                 variant={"ghost"}
-                className={`${isOpen ? "bg-mainColorDark/15 dark:bg-mainColorDark/40 border-none !px-4" : "!px-0 hover:!px-4"} flex items-center gap-2 justify-between w-full font-semibold`}
+                className={`${isOpen ? "bg-mainColorDark/30 dark:bg-mainColorDark/60 border-none !px-4" : "!px-0 hover:!px-4"} flex items-center gap-2 justify-between w-full font-semibold`}
             >
                 {title}
                 {isOpen ? <ChevronDownIcon /> : <ChevronRightIcon />}

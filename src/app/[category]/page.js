@@ -1,9 +1,16 @@
-import React from 'react';
+"use client"
 import { BreadcrumbDynamic } from '@/components/breadcrumb-dynamic';
 import { Sidebar } from '@/components/sidebar';
+import { SearchBar } from '@/components/search-bar';
+import DropdownSort from '@/components/dropdown-sort';
+import { usePathname } from 'next/navigation';
 
 export default function CategoryPage() {
-
+    const path = usePathname()
+    const pathnames = path
+        .split('/')
+        .filter((x) => x)
+        .map((segment) => segment.replace(/-/g, ' '));
     return (
         <>
             <section className='margin my-5'>
@@ -13,8 +20,22 @@ export default function CategoryPage() {
                 <section className='col-span-2'>
                     <Sidebar />
                 </section>
-                <section className='col-span-7'>
+                <section className='ml-5 col-span-7'>
+                    <div className='text-md mb-2 text-muted-foreground'>
+                        Menampilkan 20 layanan dari {" "}
+                        <span className='font-bold text-lg text-mainColorLight dark:text-mainColorDark capitalize'>
+                            {pathnames}
+                        </span>
 
+                    </div>
+                    <div className='grid grid-cols-10 gap-2'>
+                        <div className='col-span-8'>
+                            <SearchBar />
+                        </div>
+                        <div className='col-span-2'>
+                            <DropdownSort />
+                        </div>
+                    </div>
                 </section>
             </main>
         </>
