@@ -15,18 +15,20 @@ export const CardGrid = ({
             {data.map((item, idx) => (
                 <div
                     key={idx}
-                    className="hover:scale-102 hover:bg-lightColor/50 cursor-pointer duration-200 rounded-main p-3 shadow-custom/2 border border-neutral-300/50 dark:border-darkColor dark:bg-darkColor flex flex-col justify-between"
+                    className="hover:scale-[1.02] hover:bg-lightColor/50 cursor-pointer duration-200 rounded-main p-3 shadow-custom/2 border border-neutral-300/50 dark:border-darkColor dark:bg-darkColor flex flex-col justify-between"
                 >
                     <div className="flex flex-col justify-between h-full space-y-4">
+                        {/* Gambar dan nama produk */}
                         <div className="space-y-2">
                             <img
                                 src={item.image || imgFallback}
                                 alt={`img-${item.type}`}
-                                className="brightness-95 dark:brightness-80 dark:invert rounded-third"
+                                className="brightness-95 dark:brightness-80 dark:invert rounded-third w-full object-cover"
                             />
                             <h1 className="font-semibold text-md">{item.type}</h1>
                         </div>
 
+                        {/* Harga dan tombol aksi */}
                         <div className="space-y-3">
                             <div className="flex flex-col">
                                 <p className="text-xs font-medium opacity-60">Mulai Dari</p>
@@ -45,7 +47,7 @@ export const CardGrid = ({
                             <div className="flex items-center gap-2">
                                 <Button
                                     size="icon"
-                                    className="bg-green-500 dark:bg-green-500 border-none cursor-pointer"
+                                    className="bg-green-500 dark:bg-green-500 border-none"
                                     onClick={() => onContact?.(item)}
                                 >
                                     <RiWhatsappLine className="text-green-100" />
