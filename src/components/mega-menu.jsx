@@ -55,7 +55,7 @@ export const MegaMenuNavbar = ({
             {/* Mega Menu */}
             <div
                 onMouseEnter={() => setExpandedId(id)}
-                className={`fixed top-[0px] left-0 w-full bg-white dark:bg-black transition-all duration-450 ease-[cubic-bezier(0.25, 0.1, 0.25, 1)] overflow-hidden shadow-white dark:shadow-black
+                className={`fixed top-[0px] left-0 w-full bg-white dark:bg-black transition-all duration-450 ease-[cubic-bezier(0.25, 0.1, 0.25, 1)] overflow-hidden 
                          ${isExpanded
                         ? 'pointer-events-auto opacity-100 translate-y-0 max-h-[80vh]'
                         : 'pointer-events-none opacity-0 -translate-y-5 max-h-0'}`}

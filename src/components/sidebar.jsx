@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "./ui/button"
 import { ChevronRightIcon, ChevronDownIcon } from "lucide-react"
 import { services, sidebarItems } from "@/data/system"
@@ -10,14 +10,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { usePathname } from "next/navigation"
 
 export const Sidebar = () => {
+    const pathActive = usePathname()
+
     const [openKeys, setOpenKeys] = useState(["kategori-layanan", "rentang-harga"])
     const [priceRange, setPriceRange] = useState("")
 
-    const pathActive = usePathname()
-
-
     return (
-        <main className="border dark:border-darkColor px-5 py-4 rounded-main">
+        <main className={`sticky top-19 max-h-[90.4lvh] no-scrollbar overflow-y-auto border dark:border-darkColor px-5 py-4 rounded-main`}>
             <p className="text-xl font-medium mb-3">Filter Produk</p>
 
             <section className="space-y-2">

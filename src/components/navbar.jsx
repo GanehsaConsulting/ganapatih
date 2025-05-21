@@ -11,9 +11,12 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Button } from "./ui/button"
 
 export const Navbar = ({ children }) => {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [expandedId, setExpandedId] = useState(null);
     const path = usePathname();
+    
+    const [showSearch, setShowSearch] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
+    const [expandedId, setExpandedId] = useState(null);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -27,9 +30,7 @@ export const Navbar = ({ children }) => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-    const [showSearch, setShowSearch] = useState(false);
 
-    const [searchValue, setSearchValue] = useState("");
 
     return (
         <>
