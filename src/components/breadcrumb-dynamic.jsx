@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { slugify } from './helper/slugify';
 
 export const BreadcrumbDynamic = () => {
     const path = usePathname();
@@ -30,7 +31,11 @@ export const BreadcrumbDynamic = () => {
                     </BreadcrumbLink>
                 </BreadcrumbItem>
                 {pathnames.map((value, index) => {
-                    const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+                    const slug = slugify(value);
+                    const to = `/${pathnames
+                        .slice(0, index + 1)
+                        .map(slugify)
+                        .join('/')}`;
                     const isLast = index === pathnames.length - 1;
                     return (
                         <React.Fragment key={to}>

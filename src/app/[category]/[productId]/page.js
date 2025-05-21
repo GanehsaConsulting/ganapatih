@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import { KonsultanPajakPackages, taxConsultingFAQ } from "@/data/categories/tax"
 import { unslugify } from "@/components/helper/slugify"
 import { formatToRupiah } from "@/components/helper/formatToRupiah"
-import { RiCheckFill, RiInformationFill, RiQuestionFill, RiShoppingBagFill, RiWhatsappFill } from "react-icons/ri"
+import { RiCheckboxCircleFill, RiInformationFill, RiQuestionFill, RiShoppingBagFill, RiWhatsappFill } from "react-icons/ri"
 import { Button } from "@/components/ui/button"
 import {
     Select,
@@ -69,7 +69,7 @@ export default function ProductDetail() {
                             <SelectContent>
                                 {KonsultanPajakPackages.map((el, idx) => {
                                     return (
-                                        <SelectGroup>
+                                        <SelectGroup key={idx}>
                                             <SelectItem value={el.type}>
                                                 <div
                                                     className={``}>
@@ -98,7 +98,7 @@ export default function ProductDetail() {
                         />
                     </div>
 
-                    <section className="mt-auto space-y-5 ">
+                    <section className="mt-auto space-y-5">
                         {/* Harga */}
                         <div className="space-y-1">
                             <p className="text-sm text-muted-foreground">Harga mulai dari:</p>
@@ -144,7 +144,7 @@ export default function ProductDetail() {
                 </section>
 
             </main>
-            <main className="margin grid grid-cols-9 gap-5 my-5">
+            <main className="margin grid grid-cols-9 gap-5 my-10">
                 <section className="col-span-3 p-5 rounded-main bg-lightColor dark:bg-darkColor">
                     <p className="font-semibold">
                         FAQ
@@ -170,7 +170,7 @@ export default function ProductDetail() {
                     ))}
                 </section>
 
-                <section className="col-span-6 space-y-4 flex flex-col p-5 rounded-main bg-lightColor/0  border dark:bg-darkColor">
+                <section className="col-span-6 space-y-4 flex flex-col">
                     <Tabs defaultValue="account" className="w-full">
                         <TabsList className={"w-full"}>
                             <TabsTrigger value="account">Yang Kamu Dapatkan</TabsTrigger>
@@ -182,7 +182,7 @@ export default function ProductDetail() {
                                     <div key={i} className="flex items-center gap-3 mb-1">
                                         <span>
                                             {feature.status
-                                                ? <RiCheckFill className="text-green-500" />
+                                                ? <RiCheckboxCircleFill className="text-green-500" />
                                                 : <BsFillXCircleFill className="text-red-500" />}
                                         </span>
                                         <h4 className="font-medium dark:text-neutral-100 text-neutral-900">

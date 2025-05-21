@@ -12,7 +12,7 @@ import { Button } from "./ui/button"
 
 export const Navbar = ({ children }) => {
     const path = usePathname();
-    
+
     const [showSearch, setShowSearch] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     const [expandedId, setExpandedId] = useState(null);
@@ -82,7 +82,7 @@ export const Navbar = ({ children }) => {
                 <div className="navbar-end space-x-2 relative">
                     {showSearch ? (
                         <label
-                            className="input h-[36px] border border-neutral-400/15 bg-lightColor dark:bg-darkColor rounded-main flex items-center pr-2"
+                            className="input h-[36px] border border-neutral-400/15 bg-lightColor dark:bg-darkColor rounded-btnMain flex items-center pr-2"
                             onBlur={() => {
                                 if (!searchValue) setShowSearch(false);
                             }}
