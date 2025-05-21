@@ -7,6 +7,8 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { MegaMenuNavbar } from "./mega-menu"
 import { ServicesMegaMenu } from "./services-mega-menu"
+import { IoSearchOutline } from "react-icons/io5";
+import { Button } from "./ui/button"
 
 export const Navbar = ({ children }) => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -25,6 +27,10 @@ export const Navbar = ({ children }) => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+    const [showSearch, setShowSearch] = useState(false);
+
+    const [searchValue, setSearchValue] = useState("");
+
     return (
         <>
             <div className={`${isScrolled && "pl-4 pr-4 dark:bg-mainColorLight/25 bg-mainColorDark/10 border-b border-darkColor/15 dark:border-lightColor/15 shadow-mainShadow/5 backdrop-blur-3xl"}  navbar min-h-[55px] h-[55px] sticky top-0 px-24 z-[555] duration-200`}>
@@ -56,7 +62,7 @@ export const Navbar = ({ children }) => {
                                 onClose={() => setExpandedId(null)}
                                 expandedId={expandedId} />
                         </MegaMenuNavbar>
-                        {navbarItems.slice(0, 3).map((el, idx) => (
+                        {navbarItems.slice(0, 4).map((el, idx) => (
                             <li key={idx}>
                                 <Link
                                     href={el.href}
@@ -68,34 +74,54 @@ export const Navbar = ({ children }) => {
                         ))}
                     </ul>
                 </div>
-                <div className="navbar-end space-x-2">
-                    <label className="input h-[36px] border border-neutral-400/15 bg-lightColor dark:bg-darkColor rounded-main">
-                        <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <g
-                                strokeLinejoin="round"
-                                strokeLinecap="round"
-                                strokeWidth="2.5"
-                                fill="none"
-                                stroke="currentColor"
-                            >
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <path d="m21 21-4.3-4.3"></path>
-                            </g>
-                        </svg>
-                        <input
-                            type="text"
-                            placeholder="Cari layanan..."
-                            // value={search}
-                            // onChange={(e) => setSearch(e.target.value)}
-                            className="grow"
-                        />
-                    </label>
+                <div className="navbar-end space-x-2 relative">
+                    {showSearch ? (
+                        <label
+                            className="input h-[36px] border border-neutral-400/15 bg-lightColor dark:bg-darkColor rounded-main flex items-center pr-2"
+                            onBlur={() => {
+                                if (!searchValue) setShowSearch(false);
+                            }}
+                            tabIndex={-1}
+                        >
+                            <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g
+                                    strokeLinejoin="round"
+                                    strokeLinecap="round"
+                                    strokeWidth="2.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                >
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.3-4.3"></path>
+                                </g>
+                            </svg>
+                            <input
+                                autoFocus
+                                type="text"
+                                placeholder="Cari layanan..."
+                                className="grow bg-transparent outline-none"
+                                value={searchValue}
+                                onChange={e => setSearchValue(e.target.value)}
+                                onBlur={() => {
+                                    if (!searchValue) setShowSearch(false);
+                                }}
+                            />
+                        </label>
+                    ) : (
+                        <Button
+                            size="icon"
+                            onClick={() => setShowSearch(true)}
+                            aria-label="Show search"
+                        >
+                            <IoSearchOutline />
+                        </Button>
+                    )}
                     <ThemeSwitch
-                        className={'bg-lightColor dark:bg-darkColor p-2 w-9 h-9 rounded-secondary aspect-square hover:brightness-110 border'}
+                        className={'bg-lightColor dark:bg-darkColor p-2 w-9 h-9 rounded-main aspect-square hover:brightness-110 border'}
                     />
                 </div>
             </div>
-            < div className={`fixed top-0 z-[80] ${expandedId ? "opacity-100 backdrop-blur-sm w-screen h-screen" : "opacity-0"} noBar bg-lightColor/30 dark:bg-lightColor/20 transition-opacity duration-500`} />
+            <div className={`fixed top-0 z-[80] ${expandedId ? "opacity-100 backdrop-blur-sm w-screen h-screen" : "opacity-0"} noBar bg-lightColor/30 dark:bg-lightColor/20 transition-opacity duration-500`} />
             <div>
                 {children}
             </div>

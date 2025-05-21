@@ -1,15 +1,22 @@
 import React from 'react';
+import { BreadcrumbDynamic } from '@/components/breadcrumb-dynamic';
+import { Sidebar } from '@/components/sidebar';
 
-export default function CategoryPage({ params }) {
-    const { category } = params;
+export default function CategoryPage() {
 
     return (
-        <main>
-            <h1>Category: {category}</h1>
-            {/* TODO: Fetch and display category-specific content here */}
-            <section>
-                <p>This is the {category} category page.</p>
+        <>
+            <section className='margin my-5'>
+                <BreadcrumbDynamic />
             </section>
-        </main>
+            <main className='margin grid grid-cols-9'>
+                <section className='col-span-2'>
+                    <Sidebar />
+                </section>
+                <section className='col-span-7'>
+
+                </section>
+            </main>
+        </>
     );
 }

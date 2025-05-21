@@ -199,3 +199,7 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.margin {
+  @apply mx-5 md:mx-24;
+}
