@@ -13,7 +13,7 @@ const buttonVariants = cva(
         default:
           "bg-lightColor dark:bg-darkColor font-medium rounded-btnMain hover:brightness-110 hover:bg-neutral-300 dark:hover:bg-secondaryDark border",
         main:
-          "",
+          " bg-mainColorLight text-lightColor dark:bg-mainColorDark dark:text-darkColor font-semibold",
         icon:
           "rounded-full bg-lightColor dark:bg-darkColor font-medium hover:brightness-110 border",
         destructive:
@@ -30,6 +30,7 @@ const buttonVariants = cva(
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
         ghost: "h-9 px-0 hover:px-4 py-2 ",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
+        xs: "h-5 rounded-sm gap-1.5 px-2 has-[>svg]:px-1.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
       },

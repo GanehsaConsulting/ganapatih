@@ -21,6 +21,7 @@
   --radius-secondary: 17px;
   --radius-third: 14px;
   --radius-btnMain: 10px;
+  --radius-btnSecondary: 7px;
 
   /* BoxShadow */
   --shadow-custom: rgba(17, 17, 26, 0.1) 0px 4px 16px,

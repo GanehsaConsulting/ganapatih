@@ -1,39 +1,18 @@
 "use client"
-import { useState } from 'react'
+import DropdownSort from '@/components/dropdown-sort'
 import { usePathname } from 'next/navigation'
-
 import { BreadcrumbDynamic } from '@/components/breadcrumb-dynamic'
 import { Sidebar } from '@/components/sidebar'
 import { SearchBar } from '@/components/search-bar'
-import DropdownSort from '@/components/dropdown-sort'
 import { CardGrid } from '@/components/card-grid'
 import { KonsultanPajakPackages } from '@/data/categories/tax'
-import { ProductDialog } from '@/components/dialog-product'
-import { formatToRupiah } from '@/components/helper/formatToRupiah'
 
 export default function CategoryPage() {
-    const [selectedProduct, setSelectedProduct] = useState(null)
-
     const path = usePathname()
     const pathnames = path
         .split('/')
         .filter((x) => x)
         .map((segment) => segment.replace(/-/g, ' '))
-
-    const handleBuy = (item) => {
-        setSelectedProduct(item)
-    }
-
-    const handleContact = (item) => {
-        window.open(
-            `https://wa.me/628123456789?text=Halo, saya tertarik dengan paket ${item.type}`,
-            '_blank'
-        )
-    }
-
-    const closeDialog = () => {
-        setSelectedProduct(null)
-    }
 
     return (
         <>
@@ -65,52 +44,9 @@ export default function CategoryPage() {
 
                     <CardGrid
                         data={KonsultanPajakPackages}
-                        onBuy={handleBuy}
-                        onContact={handleContact}
                     />
                 </section>
             </main>
-
-            {/* Dialog untuk detail produk */}
-            <ProductDialog
-                open={!!selectedProduct}
-                onOpenChange={closeDialog}
-                title={selectedProduct?.type}
-                description="Detail informasi produk"
-                content={
-                    selectedProduct && (
-                        <div className="space-y-3">
-                            <img
-                                src={selectedProduct.image}
-                                alt={selectedProduct.type}
-                                className="rounded-xl w-full h-auto object-cover"
-                            />
-                            <div>
-                                <p className="text-sm font-medium opacity-60">Harga mulai dari:</p>
-                                <p className="text-xl font-bold text-mainColorLight dark:text-mainColorDark">
-                                    {formatToRupiah(selectedProduct.price)}
-                                </p>
-                                {selectedProduct.priceOriginal !== 0 && (
-                                    <p className="line-through text-sm text-red-600 dark:text-red-300">
-                                        {formatToRupiah(selectedProduct.priceOriginal)}
-                                    </p>
-                                )}
-                            </div>
-                            <p className="text-muted-foreground text-sm">
-                                {selectedProduct.description || "Deskripsi produk belum tersedia."}
-                            </p>
-                        </div>
-                    )
-                }
-                footer={
-                    <button
-                        className="px-4 py-2 bg-mainColorLight dark:bg-mainColorDark text-white font-semibold rounded"
-                        onClick={() => alert('Lanjut ke pembelian')}
-                    >
-                        Beli Sekarang
-                    </button>
-                }
-            />
         </>
     )
 }

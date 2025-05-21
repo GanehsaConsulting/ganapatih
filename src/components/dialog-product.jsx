@@ -23,7 +23,7 @@ export const ProductDialog = ({
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
 
-        <div className="py-4">
+        <div className="py-4 min-h-[60lvh]">
           {content}
         </div>
 

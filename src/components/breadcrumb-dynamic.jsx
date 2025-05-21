@@ -42,7 +42,7 @@ export const BreadcrumbDynamic = () => {
                                     </BreadcrumbPage>
                                 ) : (
                                     <BreadcrumbLink asChild>
-                                        <Link href={to}>
+                                        <Link href={to} className='capitalize'>
                                             {value.charAt(0).toUpperCase() + value.slice(1)}
                                         </Link>
                                     </BreadcrumbLink>
