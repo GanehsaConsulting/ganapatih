@@ -17,8 +17,9 @@
   --color-secondaryGray: #f3f4f5;
 
   /* Border Radius */
-  --radius-main: 10px;
-  --radius-secondary: 8px;
+  --radius-main: 20px;
+  --radius-secondary: 17px;
+  --radius-btnMain: 10px;
 
   /* BoxShadow */
   --shadow-custom: rgba(17, 17, 26, 0.1) 0px 4px 16px,

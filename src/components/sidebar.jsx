@@ -1,85 +1,118 @@
 "use client"
-import { services } from "@/data/system"
+import { useState } from "react"
 import { Button } from "./ui/button"
 import { ChevronRightIcon, ChevronDownIcon } from "lucide-react"
-import { useState } from "react"
+import { services, sidebarItems } from "@/data/system"
+import { MultiMenuButton } from "./multi-menu-button"
+import { Input } from "./ui/input"
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { usePathname } from "next/navigation"
 
 export const Sidebar = () => {
-    const [showCategories, setShowCategories] = useState(false)
-    const [expanded, setExpanded] = useState([])
+    const [openKeys, setOpenKeys] = useState(["kategori-layanan", "rentang-harga"])
+    const [priceRange, setPriceRange] = useState("")
 
-    const toggleExpand = (key) => {
-        setExpanded(prev =>
-            prev.includes(key)
-                ? prev.filter(k => k !== key)
-                : [...prev, key]
-        )
-    }
+    const pathActive = usePathname()
 
-    const categories = [
-        { key: "law", label: "Layanan Hukum" },
-        { key: "creative", label: "Layanan Kreatif" },
-        { key: "finance", label: "Layanan Finansial" },
-        { key: "management", label: "Layanan Manajemen" },
-        { key: "workspace", label: "Layanan Workspace" },
-    ]
 
     return (
         <main className="border dark:border-darkColor px-5 py-4 rounded-main">
-            <p className="text-xl font-medium mb-3">
-                Filter Produk
-            </p>
-            <section>
-                {/* Toggle kategori layanan */}
-                <Button
-                    onClick={() => setShowCategories(prev => !prev)}
-                    className={`${showCategories && "bg-mainColorDark/15 dark:bg-mainColorDark/40 border-none !px-4"} flex items-center gap-2 justify-between px-0 w-full font-semibold`}
+            <p className="text-xl font-medium mb-3">Filter Produk</p>
 
+            <section className="space-y-2">
+                <ToggleSection
+                    id="kategori-layanan"
+                    title="Kategori Layanan"
+                    openKeys={openKeys}
+                    setOpenKeys={setOpenKeys}
                 >
-                    Kategori Layanan
-                    {showCategories ? <ChevronDownIcon /> : <ChevronRightIcon />}
-                </Button>
+                    <MultiMenuButton
+                        pathActive={pathActive}
+                        categories={sidebarItems.categories}
+                        services={services}
+                    />
+                </ToggleSection>
 
-                {showCategories && (
-                    <section className="">
-                        <div className="border-l border-l-mainColorDark/30 pl-4 ml-4 mt-2 space-y-1">
-                            {categories.map((cat) => (
-                                <div key={cat.key}
-                                    className={`${expanded.includes(cat.key) ? "" : "border-b pb-[1px] hover:border-0"}`}
-                                >
-                                    <Button
-                                        onClick={() => toggleExpand(cat.key)}
-                                        className={`${expanded.includes(cat.key) ? "!px-4 bg-secondaryColorDark/35 dark:bg-secondaryColorDark/50" : ""} flex items-center gap-2 justify-between px-0 w-full`}
-                                        variant={expanded.includes(cat.key) ? "main" : "ghost"}
-                                        size="ghost"
-                                    >
-                                        {cat.label}
-                                        <span className={`${expanded.includes(cat.key) ? "text-black dark:text-white" : ""} text-muted-foreground`}>
-                                            {expanded.includes(cat.key) ? <ChevronDownIcon /> : <ChevronRightIcon />}
-                                        </span>
-                                    </Button>
-
-                                    {expanded.includes(cat.key) && (
-                                        <ul className="border-l border-l-secondaryColorDark/50 pl-4 ml-4 mt-2 mb-3 space-y-2">
-                                            {services[cat.key]?.map((item, idx, arr) => (
-                                                <li
-                                                    key={item.id}
-                                                    className={`cursor-pointer hover:text-black dark:hover:text-white hover:font-medium hover:scale-101 duration-300 flex gap-2 justify-between px-0 w-full text-sm text-muted-foreground border-b pb-2`}
-                                                >
-                                                    {item.label}
-                                                    <span className="mt-1">
-                                                        {item.icon}
-                                                    </span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-                )}
+                <ToggleSection
+                    id="rentang-harga"
+                    title="Rentang Harga"
+                    openKeys={openKeys}
+                    setOpenKeys={setOpenKeys}
+                >
+                    <ToggleChildrenWrapper className={"space-y-3"}>
+                        <section className="grid grid-cols-5 mt-2">
+                            <div className="col-span-2">
+                                <Input
+                                    className={""}
+                                    placeholder="Min"
+                                />
+                            </div>
+                            <div className="col-span-1 flex items-center justify-center">
+                                -
+                            </div>
+                            <div className="col-span-2">
+                                <Input
+                                    className={""}
+                                    placeholder="Max"
+                                />
+                            </div>
+                        </section>
+                        <section>
+                            <RadioGroup value={priceRange} onValueChange={setPriceRange}>
+                                {sidebarItems.rangeHarga.map((item, idx) => (
+                                    <div key={idx} className="flex items-center space-x-2">
+                                        <RadioGroupItem value={item.value} id={`price-${idx}`} />
+                                        <Label className={"truncate"} htmlFor={`price-${idx}`}>{item.label}</Label>
+                                    </div>
+                                ))}
+                            </RadioGroup>
+                        </section>
+                        <Button
+                            size={"sm"}
+                            className={"w-full"}
+                            variant={"secondary"}
+                        >
+                            Terapkan
+                        </Button>
+                    </ToggleChildrenWrapper>
+                </ToggleSection>
             </section>
         </main>
+    )
+}
+
+
+const ToggleSection = ({ id, title, openKeys, setOpenKeys, children }) => {
+    const isOpen = openKeys.includes(id)
+
+    const toggle = () => {
+        setOpenKeys(prev =>
+            prev.includes(id)
+                ? prev.filter(k => k !== id)
+                : [...prev, id]
+        )
+    }
+
+    return (
+        <section>
+            <Button
+                onClick={toggle}
+                variant={"ghost"}
+                className={`${isOpen ? "bg-mainColorDark/15 dark:bg-mainColorDark/40 border-none !px-4" : "!px-0 hover:!px-4"} flex items-center gap-2 justify-between w-full font-semibold`}
+            >
+                {title}
+                {isOpen ? <ChevronDownIcon /> : <ChevronRightIcon />}
+            </Button>
+            {isOpen && children}
+        </section>
+    )
+}
+
+const ToggleChildrenWrapper = ({ children, className }) => {
+    return (
+        <section className={`${className} border-l border-l-mainColorDark/30 pl-4 ml-4 mt-2 space-y-1`}>
+            {children}
+        </section>
     )
 }

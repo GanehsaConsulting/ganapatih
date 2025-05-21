@@ -1,67 +1,27 @@
 import { RiBarChartLine, RiBuilding2Line, RiBuilding3Line, RiBuildingLine, RiCalculatorLine, RiCheckDoubleLine, RiFileCopyLine, RiFileTextLine, RiGlobalLine, RiScalesLine, RiSearchLine, RiSettings3Line, RiSmartphoneLine, RiUser3Line } from "react-icons/ri";
 
-
 export const navbarItems = [
     { label: 'Tentang Kami', href: '/tentang' },
     { label: 'Testimoni', href: '/testimoni' },
     { label: 'Kontak', href: '/kontak' },
 ];
 
-export const categoryItems = [
-    {
-        id: 'kategori',
-        label: 'Kategori Layanan',
-        type: 'checkbox',
-        options: [
-            { label: 'Pendirian PT/CV', value: 'pendirian-pt' },
-            { label: 'Pelayanan Pajak', value: 'pelayanan-pajak' },
-            { label: 'Pembuatan Website', value: 'pembuatan-website' },
-            { label: 'Konsultasi Bisnis', value: 'konsultasi-bisnis' },
-        ],
-    },
-    {
-        id: 'subkategori',
-        label: 'Jenis Jasa',
-        type: 'checkbox',
-        options: [
-            { label: 'Lapor SPT Tahunan', value: 'spt-tahunan' },
-            { label: 'Konsultasi Pajak', value: 'konsultasi-pajak' },
-            { label: 'Buat PT Perorangan', value: 'pt-perorangan' },
-            { label: 'Landing Page', value: 'landing-page' },
-            { label: 'Website Company Profile', value: 'company-profile' },
-        ],
-    },
-    {
-        id: 'harga',
-        label: 'Kisaran Harga',
-        type: 'radio',
-        options: [
-            { label: 'Di bawah Rp500rb', value: 'lt-500' },
-            { label: 'Rp500rb - Rp1jt', value: '500-1000' },
-            { label: 'Di atas Rp1jt', value: 'gt-1000' },
-        ],
-    },
-    {
-        id: 'durasi',
-        label: 'Estimasi Waktu',
-        type: 'radio',
-        options: [
-            { label: '≤ 3 hari', value: 'lt-3' },
-            { label: '≤ 7 hari', value: 'lt-7' },
-            { label: '> 7 hari', value: 'gt-7' },
-        ],
-    },
-    {
-        id: 'tipe',
-        label: 'Tipe Layanan',
-        type: 'checkbox',
-        options: [
-            { label: 'Online', value: 'online' },
-            { label: 'Offline', value: 'offline' },
-        ],
-    },
-];
+export const sidebarItems = {
+    categories: [
+        { key: "law", label: "Layanan Hukum" },
+        { key: "creative", label: "Layanan Kreatif" },
+        { key: "finance", label: "Layanan Finansial" },
+        { key: "management", label: "Layanan Manajemen" },
+        { key: "workspace", label: "Layanan Workspace" },
+    ],
+    rangeHarga: [
+        { label: '< Rp 500.000', value: '0-500' },
+        { label: '< Rp 1.000.000', value: '500-1000' },
+        { label: '< Rp 2.000.000', value: '1000-2000' },
+        { label: '> Rp. 2.000.000', value: 'gt-2000' },
+    ]
 
+}
 
 export const heroSection = {
     title: 'Solusi Pajak Terpercaya untuk Bisnis Anda',

@@ -35,21 +35,25 @@ export const Navbar = ({ children }) => {
         <>
             <div className={`${isScrolled && "pl-4 pr-4 dark:bg-mainColorLight/25 bg-mainColorDark/10 border-b border-darkColor/15 dark:border-lightColor/15 shadow-mainShadow/5 backdrop-blur-3xl"}  navbar min-h-[55px] h-[55px] sticky top-0 px-24 z-[555] duration-200`}>
                 <div className="navbar-start flex items-center">
-
-                    <Image
-                        width={21}
-                        height={21}
-                        src={"/assets/icon.png"}
-                        alt="Ganapatih Logo"
-                        className="dark:brightness-125 z-50"
-                    />
-                    <Image
-                        width={130}
-                        height={21}
-                        src={"/assets/icon-text.png"}
-                        alt="Ganapatih Logo"
-                        className="dark:brightness-125 z-50 -ml-1"
-                    />
+                    <Link
+                        href={"/"}
+                        className="flex items-center"
+                    >
+                        <Image
+                            width={21}
+                            height={21}
+                            src={"/assets/icon.png"}
+                            alt="Ganapatih Logo"
+                            className="dark:brightness-125 z-50"
+                        />
+                        <Image
+                            width={130}
+                            height={21}
+                            src={"/assets/icon-text.png"}
+                            alt="Ganapatih Logo"
+                            className="dark:brightness-125 z-50 -ml-1"
+                        />
+                    </Link>
                     <ul className="menu menu-horizontal px-1">
                         <MegaMenuNavbar
                             id="service"
@@ -117,7 +121,7 @@ export const Navbar = ({ children }) => {
                         </Button>
                     )}
                     <ThemeSwitch
-                        className={'bg-lightColor dark:bg-darkColor p-2 w-9 h-9 rounded-main aspect-square hover:brightness-110 border'}
+                        className={'bg-lightColor dark:bg-darkColor p-2 w-9 h-9 rounded-btnMain aspect-square hover:brightness-110 border'}
                     />
                 </div>
             </div>
