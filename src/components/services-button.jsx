@@ -27,7 +27,7 @@ export const ServicesButton = () => {
     return (
         <>
             <section className="my-5 md:my-10">
-                <div className="margin w-fit flex flex-col font-semibold gap-2">
+                <div className="margin flex flex-col font-semibold gap-2">
                     <p className="hidden md:block text-xl md:text-2xl">Layanan Kami</p>
                     {/* Desktop View */}
                     <div className="hidden md:flex gap-2">

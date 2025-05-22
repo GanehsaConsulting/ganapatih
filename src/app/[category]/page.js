@@ -20,24 +20,24 @@ export default function CategoryPage() {
                 <BreadcrumbDynamic />
             </section>
 
-            <main className="margin grid grid-cols-9">
+            <main className="margin md:grid md:grid-cols-9">
                 <section className="col-span-2 h-full md:block hidden">
                     <Sidebar />
                 </section>
 
-                <section className="ml-5 col-span-7 space-y-5">
-                    <div className="text-md mb-2 text-muted-foreground">
+                <section className="md:ml-5 md:col-span-7 space-y-5">
+                    <div className="text-md mb-2 text-muted-foreground md:text-base text-sm">
                         Menampilkan 20 layanan dari{' '}
-                        <span className="font-bold text-lg text-mainColorLight dark:text-mainColorDark capitalize">
+                        <span className="font-bold text-base md:text-lg text-mainColorLight dark:text-mainColorDark capitalize">
                             {pathnames}
                         </span>
                     </div>
 
-                    <div className="grid grid-cols-10 gap-2">
-                        <div className="col-span-8">
+                    <div className="grid md:grid-cols-10 gap-2">
+                        <div className="md:col-span-8">
                             <SearchBar />
                         </div>
-                        <div className="col-span-2">
+                        <div className="md:col-span-2">
                             <DropdownSort />
                         </div>
                     </div>

@@ -36,9 +36,9 @@ export const CardCarousel = () => {
     };
 
     return (
-        <section>
-            <div className="md:mx-24 flex items-center justify-between">
-                <h1 className="text-3xl font-medium flex flex-col gap-1">
+        <section className="my-10">
+            <div className="margin flex items-center justify-between">
+                <h1 className="text-2xl md:text-3xl font-medium flex flex-col gap-1">
                     Paket Pelaporan Pajak
                     <span className="text-xs flex items-center gap-1">
                         <HiChevronRight />  Lihat semua
@@ -73,8 +73,8 @@ export const CardCarousel = () => {
                     return (
                         <div
                             key={idx}
-                            className={`${idx === 0 && "md:ml-24"} ${idx === KonsultanPajakPackages.length - 1 && "md:mr-24"}
-                                min-w-[25lvw] w-full h-fit grow rounded-main p-5 overflow-hidden shadow-custom/5 border border-neutral-300/50 dark:border-darkColor dark:bg-darkColor
+                            className={`${idx === 0 && "ml-5 md:ml-24"} ${idx === KonsultanPajakPackages.length - 1 && "mr-5 md:mr-24"}
+                                min-w-[85lvw] md:min-w-[25lvw] w-full h-fit grow rounded-main p-5 overflow-hidden shadow-custom/5 border border-neutral-300/50 dark:border-darkColor dark:bg-darkColor
                             `}
                         >
                             <div className="mb-5 h-[20lvh] flex flex-col justify-between space-y-4">

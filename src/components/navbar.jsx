@@ -128,10 +128,28 @@ export const Navbar = ({ children }) => {
             </nav>
             <nav className="md:hidden flex navbar">
                 <div className="flex-1">
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <Link
+                        href={"/"}
+                        className="flex items-center"
+                    >
+                        <Image
+                            width={21}
+                            height={21}
+                            src={"/assets/icon.png"}
+                            alt="Ganapatih Logo"
+                            className="dark:brightness-125 z-50"
+                        />
+                        <Image
+                            width={130}
+                            height={21}
+                            src={"/assets/icon-text.png"}
+                            alt="Ganapatih Logo"
+                            className="dark:brightness-125 z-50 -ml-1"
+                        />
+                    </Link>
                 </div>
                 <div className="flex gap-2 items-center">
-                         <ThemeSwitch
+                    <ThemeSwitch
                         className={'bg-lightColor dark:bg-darkColor p-2 w-9 h-9 rounded-btnMain aspect-square hover:brightness-110 border'}
                     />
                 </div>
