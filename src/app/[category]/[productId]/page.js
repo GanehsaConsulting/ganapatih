@@ -32,13 +32,13 @@ export default function ProductDetail() {
 
     return (
         <>
-            <section className="margin my-5">
+            <section className="margin my-5 hidden md:block">
                 <BreadcrumbDynamic />
             </section>
 
-            <main className="margin grid grid-cols-9 gap-5">
+            <main className="margin md:grid md:grid-cols-9 gap-5 flex flex-col">
                 {/* Gambar Produk */}
-                <section className="col-span-3">
+                <section className="md:col-span-3 ">
                     <Image
                         width={500}
                         height={500}
@@ -54,7 +54,7 @@ export default function ProductDetail() {
                         <p className="text-xs text-muted-foreground font-semibold capitalize">
                             {unslugify(data.sourcePage)}
                         </p>
-                        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-mainColorLight dark:text-mainColorDark">
+                        <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-mainColorLight dark:text-mainColorDark">
                             {data.type}
                         </h1>
                     </div>
@@ -72,7 +72,7 @@ export default function ProductDetail() {
                                         <SelectGroup key={idx}>
                                             <SelectItem value={el.type}>
                                                 <div
-                                                    className={``}>
+                                                    className={`max-w-full md:max-w-[200px]`}>
                                                     <h1 className="text-sm">
                                                         {el.type}
                                                     </h1>
@@ -118,7 +118,7 @@ export default function ProductDetail() {
                         </div>
 
                         {/* CTA */}
-                        <div className="mt-auto grid grid-cols-2 gap-2 w-fit">
+                        <div className="mt-auto grid grid-cols-2 gap-2 md:w-fit">
                             <Link
                                 href={data.link}
                             >
@@ -146,16 +146,17 @@ export default function ProductDetail() {
             </main>
             <main className="margin my-10">
                 <Tabs defaultValue="desc">
-                    <TabsList className={"bg-transparent space-x-5"}>
-                        <TabsTrigger className={"data-[state=active]:bg-transparent data-[state=active]:shadow-none text-2xl px-0 opacity-50 data-[state=active]:opacity-100 data-[state=active]:font-semibold data-[state=active]:scale-105"} value="desc">
+                    <TabsList className={"w-full md:w-fit md:bg-transparent space-x-5"}>
+                        <TabsTrigger className={"md:data-[state=active]:bg-transparent data-[state=active]:shadow-none text-lg md:text-2xl md:px-0 opacity-50 data-[state=active]:opacity-100 data-[state=active]:font-semibold md:data-[state=active]:scale-105"} value="desc">
                             Deskripsi
                         </TabsTrigger>
-                        <TabsTrigger className={"data-[state=active]:bg-transparent data-[state=active]:shadow-none text-2xl px-0 opacity-50 data-[state=active]:opacity-100 data-[state=active]:font-semibold data-[state=active]:scale-105"} value="faq">
+                        
+                        <TabsTrigger className={"md:data-[state=active]:bg-transparent data-[state=active]:shadow-none text-lg md:text-2xl md:px-0 opacity-50 data-[state=active]:opacity-100 data-[state=active]:font-semibold md:data-[state=active]:scale-105"} value="faq">
                             FAQ
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value="desc">
-                        <section className="grid grid-cols-3">
+                        <section className="grid md:grid-cols-3">
                             <div>
                                 <p className="font-semibold mb-2 mt-5">
                                     Yang Kamu Dapatkan

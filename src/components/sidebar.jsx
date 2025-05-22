@@ -82,7 +82,7 @@ export const Sidebar = () => {
 }
 
 
-const ToggleSection = ({ id, title, openKeys, setOpenKeys, children }) => {
+export const ToggleSection = ({ id, title, openKeys, setOpenKeys, children }) => {
     const isOpen = openKeys.includes(id)
 
     const toggle = () => {
@@ -108,7 +108,7 @@ const ToggleSection = ({ id, title, openKeys, setOpenKeys, children }) => {
     )
 }
 
-const ToggleChildrenWrapper = ({ children, className }) => {
+export const ToggleChildrenWrapper = ({ children, className }) => {
     return (
         <section className={`${className} border-l border-l-mainColorDark/30 pl-4 ml-4 mt-2 space-y-1`}>
             {children}
