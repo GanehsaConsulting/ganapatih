@@ -11,14 +11,14 @@ export const Footer = () => {
                             height={35}
                             src={"/assets/icon.png"}
                             alt="Ganapatih Logo"
-                            className="dark:brightness-125 z-50"
+                            className="dark:brightness-125 z-50 w-6 h-6"
                         />
                         <Image
                             width={220}
                             height={21}
                             src={"/assets/icon-text.png"}
                             alt="Ganapatih Logo"
-                            className="dark:brightness-125 z-50 -ml-3"
+                            className="dark:brightness-125 z-50 md:-ml-3 -ml-1 h-6 w-40 object-cover"
                         />
                     </div>
                     <h2 className="text-base font-semibold text-mainColorLight dark:text-mainColorDark mb-2 mt-5">

@@ -124,8 +124,8 @@ export default function ProductDetail() {
                             >
                                 <Button
                                     size={"lg"}
-                                    variant={"outline"}
-                                    className="w-full text-green-500 dark:text-green-400 border-green-500 dark:border-green-400 cursor-pointer"
+                                    variant={"outlineSubmit"}
+                                    className="w-full  cursor-pointer"
                                 >
                                     <RiWhatsappFill />
                                     Konsultasi
@@ -144,67 +144,74 @@ export default function ProductDetail() {
                 </section>
 
             </main>
-            <main className="margin grid grid-cols-9 gap-5 my-10">
-                <section className="col-span-3 p-5 rounded-main bg-lightColor dark:bg-darkColor">
-                    <p className="font-semibold">
-                        FAQ
-                    </p>
+            <main className="margin my-10">
+                <Tabs defaultValue="desc">
+                    <TabsList className={"bg-transparent space-x-5"}>
+                        <TabsTrigger className={"data-[state=active]:bg-transparent data-[state=active]:shadow-none text-2xl px-0 opacity-50 data-[state=active]:opacity-100 data-[state=active]:font-semibold data-[state=active]:scale-105"} value="desc">
+                            Deskripsi
+                        </TabsTrigger>
+                        <TabsTrigger className={"data-[state=active]:bg-transparent data-[state=active]:shadow-none text-2xl px-0 opacity-50 data-[state=active]:opacity-100 data-[state=active]:font-semibold data-[state=active]:scale-105"} value="faq">
+                            FAQ
+                        </TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="desc">
+                        <section className="grid grid-cols-3">
+                            <div>
+                                <p className="font-semibold mb-2 mt-5">
+                                    Yang Kamu Dapatkan
+                                </p>
+                                <div className="">
+                                    {data.features.map((feature, i) => (
+                                        <div key={i} className="flex items-center gap-3 mb-1">
+                                            <span>
+                                                {feature.status
+                                                    ? <RiCheckboxCircleFill className="text-green-500" />
+                                                    : <BsFillXCircleFill className="text-red-500" />}
+                                            </span>
+                                            <h4 className="font-medium dark:text-neutral-100 text-neutral-900">
+                                                {feature.feature}
+                                            </h4>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div>
+                                <p className="font-semibold mb-2 mt-5">
+                                    Yang Kamu Dapatkan
+                                </p>
+                                <div className="">
+                                    {data.requirements.map((req, i) => (
+                                        <div key={i} className="flex items-start gap-3 mb-1">
+                                            <RiInformationFill className="dark:text-amber-500 text-yellow-400 mt-1" />
+                                            <p className="font-medium dark:text-neutral-100 text-neutral-900">{req}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    </TabsContent>
+                    <TabsContent value="faq">
 
-                    {taxConsultingFAQ.slice(0, 5).map((el, idx) => (
-                        <Accordion className="border-b" key={idx} collapsible>
-                            <AccordionItem value="item-1">
-                                <AccordionTrigger>
-                                    <div className="flex items-start gap-3 text-left">
-                                        <RiQuestionFill className="mt-1 min-w-[20px] text-muted-foreground" />
-                                        <span className="text-sm font-medium leading-snug">
-                                            {el.question}
-                                        </span>
-                                    </div>
-                                </AccordionTrigger>
+                        <Accordion type="single" collapsible className="w-full">
+                            {taxConsultingFAQ.slice(0, 5).map((el, idx) => (
+                                <AccordionItem key={idx} value={`item-${idx}`}>
+                                    <AccordionTrigger>
+                                        <div className="flex items-start gap-3 text-left">
+                                            <RiQuestionFill className="mt-1 min-w-[20px] text-muted-foreground" />
+                                            <span className="text-sm font-medium leading-snug">
+                                                {el.question}
+                                            </span>
+                                        </div>
+                                    </AccordionTrigger>
 
-                                <AccordionContent className={"px-8 text-justify"}>
-                                    {el.answer}
-                                </AccordionContent>
-                            </AccordionItem>
+                                    <AccordionContent className={"px-8 text-justify"}>
+                                        {el.answer}
+                                    </AccordionContent>
+                                </AccordionItem>
+                            ))}
                         </Accordion>
-                    ))}
-                </section>
-
-                <section className="col-span-6 space-y-4 flex flex-col">
-                    <Tabs defaultValue="account" className="w-full">
-                        <TabsList className={"w-full"}>
-                            <TabsTrigger value="account">Yang Kamu Dapatkan</TabsTrigger>
-                            <TabsTrigger value="password">Persyaratan</TabsTrigger>
-                        </TabsList>
-                        <TabsContent value="account">
-                            <div className="">
-                                {data.features.map((feature, i) => (
-                                    <div key={i} className="flex items-center gap-3 mb-1">
-                                        <span>
-                                            {feature.status
-                                                ? <RiCheckboxCircleFill className="text-green-500" />
-                                                : <BsFillXCircleFill className="text-red-500" />}
-                                        </span>
-                                        <h4 className="font-medium dark:text-neutral-100 text-neutral-900">
-                                            {feature.feature}
-                                        </h4>
-                                    </div>
-                                ))}
-                            </div>
-                        </TabsContent>
-                        <TabsContent value="password">
-                            <div className="">
-                                {data.requirements.map((req, i) => (
-                                    <div key={i} className="flex items-start gap-3 mb-1">
-                                        <RiInformationFill className="dark:text-amber-500 text-yellow-400 mt-1" />
-                                        <p className="font-medium dark:text-neutral-100 text-neutral-900">{req}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </TabsContent>
-                    </Tabs>
-                </section>
-
+                    </TabsContent>
+                </Tabs>
             </main>
         </>
     )

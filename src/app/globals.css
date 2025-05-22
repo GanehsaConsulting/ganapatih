@@ -204,5 +204,5 @@ body {
 }
 
 .margin {
-  @apply mx-5 md:mx-24;
+  @apply mx-3 md:mx-24;
 }

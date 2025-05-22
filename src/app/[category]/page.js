@@ -21,7 +21,7 @@ export default function CategoryPage() {
             </section>
 
             <main className="margin grid grid-cols-9">
-                <section className="col-span-2 h-full">
+                <section className="col-span-2 h-full md:block hidden">
                     <Sidebar />
                 </section>
 

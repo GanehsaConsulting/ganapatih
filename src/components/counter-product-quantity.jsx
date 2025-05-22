@@ -30,7 +30,7 @@ export default function ProductQuantityCounter({ min = 1, max = 99, onChange }) 
                 variant={"ghost"}
                 onClick={handleDecrement}
                 disabled={quantity <= min}
-                className="text-muted-foreground rounded-full hover:text-mainColorLight disabled:opacity-40"
+                className="text-muted-foreground rounded-full hover:text-mainColorLight dark:hover:text-mainColorDark disabled:opacity-40"
             >
                 <Minus className="w-3 h-3" />
             </Button>
@@ -40,7 +40,7 @@ export default function ProductQuantityCounter({ min = 1, max = 99, onChange }) 
                 variant={"ghost"}
                 onClick={handleIncrement}
                 disabled={quantity >= max}
-                className="text-muted-foreground rounded-full hover:text-mainColorLight disabled:opacity-40"
+                className="text-muted-foreground rounded-full hover:text-mainColorLight dark:hover:text-mainColorDark disabled:opacity-40"
             >
                 <Plus className="w-3 h-3" />
             </Button>

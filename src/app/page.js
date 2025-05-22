@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Carousel />
       <ServicesButton />
-      <CardCarousel />
+      {/* <CardCarousel /> */}
     </>
   );
 }

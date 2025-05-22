@@ -52,7 +52,7 @@ export const Carousel = () => {
 
     return (
         <>
-            <div className="overflow-hidden rounded-main md:h-[45lvh] h-[75lvh] shadow-custom relative flex flex-col items-center justify-center md:mx-24 group">
+            <div className="margin overflow-hidden rounded-main md:h-[45lvh] h-[25lvh] shadow-mainShadow relative flex flex-col items-center justify-center group">
                 <div
                     className="whitespace-nowrap transition-transform ease-in-out duration-700 w-full h-full"
                     style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
@@ -89,7 +89,7 @@ export const Carousel = () => {
                 <Button
                     size={"icon"}
                     onClick={handlePrev}
-                    className="border-neutral-200/20 absolute left-4 top-1/2 transform -translate-y-1/2 bg-mainColorLight/20 dark:bg-mainColorDark/20 dark:group-hover:bg-mainColorDark group-hover:bg-mainColorLight text-white  w-10 h-10 aspect-square !rounded-full group-hover:shadow-md group-hover:scale-110 scale-90 flex items-center justify-center md:!text-2xl"
+                    className="hidden opacity-0 group-hover:opacity-100 border-neutral-200/20 absolute left-4 top-1/2 transform -translate-y-1/2 bg-mainColorLight/20 dark:bg-mainColorDark/20 dark:group-hover:bg-mainColorDark group-hover:bg-mainColorLight text-white  w-10 h-10 aspect-square !rounded-full group-hover:shadow-md group-hover:scale-110 scale-90 md:flex items-center justify-center md:!text-2xl"
                 >
                     <RiArrowLeftSLine />
                 </Button>
@@ -98,7 +98,7 @@ export const Carousel = () => {
                 <Button
                     size={"icon"}
                     onClick={handleNext}
-                    className="border-neutral-200/20 absolute right-4 top-1/2 transform -translate-y-1/2 bg-mainColorLight/20 dark:bg-mainColorDark/20 dark:group-hover:bg-mainColorDark group-hover:bg-mainColorLight text-white  w-10 h-10 aspect-square !rounded-full group-hover:shadow-md group-hover:scale-110 scale-90 flex items-center justify-center md:!text-2xl"
+                    className="hidden opacity-0 group-hover:opacity-100 border-neutral-200/20 absolute right-4 top-1/2 transform -translate-y-1/2 bg-mainColorLight/20 dark:bg-mainColorDark/20 dark:group-hover:bg-mainColorDark group-hover:bg-mainColorLight text-white  w-10 h-10 aspect-square !rounded-full group-hover:shadow-md group-hover:scale-110 scale-90 md:flex items-center justify-center md:!text-2xl"
                 >
                     <RiArrowRightSLine />
                 </Button>
