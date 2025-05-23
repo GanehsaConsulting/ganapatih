@@ -17,7 +17,7 @@ export default function CategoryPage() {
 
     return (
         <>
-            <section className="margin my-5">
+            <section className="margin my-5 hidden md:block">
                 <BreadcrumbDynamic />
             </section>
 

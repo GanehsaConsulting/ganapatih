@@ -46,6 +46,22 @@ export default function ProductDetail() {
                         src={data.image || "https://res.cloudinary.com/dbez0ceip/image/upload/v1747294371/imgProdukLotus_11zon_ezptvu.webp"}
                         alt={data.type}
                     />
+                       {/* Harga Mobile */}
+                        <div className="md:hidden block mt-2">
+                            <div className="flex items-center gap-2">
+                                <p className="text-2xl font-bold text-mainColorLight dark:text-mainColorDark ">
+                                    {formatToRupiah(data.price)}
+                                </p>
+                                <p className="text-destructive font-bold">
+                                    - {data.discount}%
+                                </p>
+                            </div>
+                            {data.priceOriginal && data.priceOriginal !== 0 && (
+                                <p className="line-through text-sm text-muted-foreground">
+                                    {formatToRupiah(data.priceOriginal)}
+                                </p>
+                            )}
+                        </div>
                 </section>
 
                 {/* Informasi Produk */}
@@ -54,7 +70,7 @@ export default function ProductDetail() {
                         <p className="text-xs text-muted-foreground font-semibold capitalize">
                             {unslugify(data.sourcePage)}
                         </p>
-                        <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-mainColorLight dark:text-mainColorDark">
+                        <h1 className="text-xl sm:text-4xl font-bold tracking-tight text-mainColorLight dark:text-mainColorDark">
                             {data.type}
                         </h1>
                     </div>
@@ -99,8 +115,9 @@ export default function ProductDetail() {
                     </div>
 
                     <section className="mt-auto space-y-5">
-                        {/* Harga */}
-                        <div className="space-y-1">
+
+                        {/* Harga Desktop*/}
+                        <div className="space-y-1 md:block hidden">
                             <p className="text-sm text-muted-foreground">Harga mulai dari:</p>
                             <div className="flex items-center gap-2">
                                 <p className="text-2xl font-bold text-mainColorLight dark:text-mainColorDark ">
@@ -118,7 +135,7 @@ export default function ProductDetail() {
                         </div>
 
                         {/* CTA */}
-                        <div className="mt-auto grid grid-cols-2 gap-2 md:w-fit">
+                        <div className=" mt-auto hidden md:grid grid-cols-2 gap-2 md:w-fit">
                             <Link
                                 href={data.link}
                             >
@@ -146,11 +163,11 @@ export default function ProductDetail() {
             </main>
             <main className="margin my-10">
                 <Tabs defaultValue="desc">
-                    <TabsList className={"w-full md:w-fit md:bg-transparent space-x-5"}>
+                    <TabsList className={"w-full md:w-fit md:bg-transparent space-x-5 sticky top-5 md:shadow-none shadow-secondaryShadow"}>
                         <TabsTrigger className={"md:data-[state=active]:bg-transparent data-[state=active]:shadow-none text-lg md:text-2xl md:px-0 opacity-50 data-[state=active]:opacity-100 data-[state=active]:font-semibold md:data-[state=active]:scale-105"} value="desc">
                             Deskripsi
                         </TabsTrigger>
-                        
+
                         <TabsTrigger className={"md:data-[state=active]:bg-transparent data-[state=active]:shadow-none text-lg md:text-2xl md:px-0 opacity-50 data-[state=active]:opacity-100 data-[state=active]:font-semibold md:data-[state=active]:scale-105"} value="faq">
                             FAQ
                         </TabsTrigger>
@@ -214,6 +231,30 @@ export default function ProductDetail() {
                     </TabsContent>
                 </Tabs>
             </main>
+
+            {/* CTA  Mobile*/}
+            <div className="fixed bottom-0 w-full px-3 py-5 bg-white/80 backdrop-blur-lg z-100 border-t md:hidden grid grid-cols-2 gap-2 md:w-fit">
+                <Link
+                    href={data.link}
+                >
+                    <Button
+                        size={"lg"}
+                        variant={"outlineSubmit"}
+                        className="w-full  cursor-pointer"
+                    >
+                        <RiWhatsappFill />
+                        Konsultasi
+                    </Button>
+                </Link>
+                <Button
+                    size={"lg"}
+                    variant={"main"}
+                    onClick={() => alert("Lanjut ke pembelian")}
+                >
+                    <RiShoppingBagFill />
+                    Beli Sekarang
+                </Button>
+            </div>
         </>
     )
 }
