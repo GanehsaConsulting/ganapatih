@@ -233,14 +233,14 @@ export default function ProductDetail() {
             </main>
 
             {/* CTA  Mobile*/}
-            <div className="fixed bottom-0 w-full px-3 py-5 bg-white/80 backdrop-blur-lg z-100 border-t md:hidden grid grid-cols-2 gap-2 md:w-fit">
+            <div className="fixed bottom-0 w-full px-3 py-5 bg-lightColor/50 dark:bg-darkColor/50 backdrop-blur-lg z-100 border-t md:hidden grid grid-cols-2 gap-2 md:w-fit">
                 <Link
                     href={data.link}
                 >
                     <Button
                         size={"lg"}
                         variant={"outlineSubmit"}
-                        className="w-full  cursor-pointer"
+                        className="w-full bg-white dark:bg-black cursor-pointer"
                     >
                         <RiWhatsappFill />
                         Konsultasi
