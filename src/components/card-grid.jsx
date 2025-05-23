@@ -34,7 +34,7 @@ export const CardGrid = ({
                         <div className="space-y-3 md:p-0 p-3">
                             {item.discountPrice === "0,00" || item.umkmPrice === "0,00" || null ? (
                                 <Link
-                                    href={item.ctaLink || '#'}
+                                    href={item.ctaLink || '/'}
                                     className="w-full"
                                 >
                                     <Button

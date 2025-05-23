@@ -15,11 +15,12 @@ export const sidebarItems = {
         { key: "workspace", label: "Layanan Workspace" },
     ],
     rangeHarga: [
-        { label: '< Rp 500.000', value: '0-500' },
-        { label: '< Rp 1.000.000', value: '500-1000' },
-        { label: '< Rp 2.000.000', value: '1000-2000' },
-        { label: '> Rp. 2.000.000', value: 'gt-2000' },
+        { label: '< Rp 500.000', value: '0-500000' },
+        { label: '< Rp 1.000.000', value: '500000-1000000' },
+        { label: '< Rp 2.000.000', value: '1000000-2000000' },
+        { label: '> Rp. 2.000.000', value: '2000000-9999999999' },
     ]
+
 
 }
 
