@@ -32,22 +32,37 @@ export const CardGrid = ({
                         </div>
 
                         <div className="space-y-3 md:p-0 p-3">
-                            <div className="flex flex-col">
-                                <p className="text-[11.5px] md:text-xs font-medium opacity-60">Mulai Dari</p>
-                                <div>
-                                    <p className="font-bold text-mainColorLight dark:text-mainColorDark text-lg md:text-xl flex items-center gap-1">
-                                        {formatToRupiah(item.discountPrice || item.umkmPrice)} {" "}
-                                        <span className="text-xs text-destructive">
-                                            -{item.discount}%
-                                        </span>
-                                    </p>
-                                    {showPriceOriginal && item.retailPrice && item.retailPrice !== item.discountPrice && (
-                                        <h3 className="line-through text-xs text-muted-foreground">
-                                            {formatToRupiah(item.retailPrice)}
-                                        </h3>
-                                    )}
+                            {item.discountPrice === "0,00" || item.umkmPrice === "0,00" || null ? (
+                                <Link
+                                    href={item.ctaLink || '#'}
+                                    className="w-full"
+                                >
+                                    <Button
+                                        className="w-full  bg-green-500 dark:bg-green-600 font-semibold text-green-100 border-none cursor-pointer"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <RiWhatsappLine /> Konsultasi
+                                    </Button>
+                                </Link>
+                            ) : (
+                                <div className="flex flex-col">
+                                    <p className="text-[11.5px] md:text-xs font-medium opacity-60">Mulai Dari</p>
+                                    <div>
+                                        <p className="font-bold text-mainColorLight dark:text-mainColorDark text-lg md:text-xl flex items-center gap-1">
+                                            {formatToRupiah(item.discountPrice || item.umkmPrice)} {" "}
+                                            <span className="text-xs text-destructive">
+                                                -{item.discount}%
+                                            </span>
+                                        </p>
+                                        {showPriceOriginal && item.retailPrice && item.retailPrice !== item.discountPrice && (
+                                            <h3 className="line-through text-xs text-muted-foreground">
+                                                {formatToRupiah(item.retailPrice)}
+                                            </h3>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                             {showButton && (
                                 <div className="flex items-center gap-2">
                                     <Link href={item.ctaLink || '#'}>

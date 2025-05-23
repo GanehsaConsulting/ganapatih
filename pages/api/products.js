@@ -1,107 +1,113 @@
-import { getSheetData } from '@/lib/googleSheets';
+import { getSheetData } from '@/lib/googleSheets'
 
-const SHEET_ID = process.env.GOOGLE_SHEET_ID;
-const RANGE = process.env.GOOGLE_SHEET_RANGE;
+const SHEET_ID = process.env.GOOGLE_SHEET_ID
+const RANGE = process.env.GOOGLE_SHEET_RANGE
 
-function applyFilters(data, filters) {
-  return data.filter(item => {
-    for (const key in filters) {
-      if (!filters[key]) continue; // skip if filter param kosong
-
-      const filterVal = filters[key].toLowerCase();
-      const itemVal = (item[key] || '').toString().toLowerCase();
-
-      if (key === 'isPublished' || key === 'isPriority') {
-        // Filter boolean fields (Google Sheets simpan string "TRUE" / "FALSE")
-        if (itemVal !== filterVal) return false;
-      } else {
-        // Partial match for other fields
-        if (!itemVal.includes(filterVal)) return false;
-      }
-    }
-    return true;
-  });
-}
-
-function applySearch(data, searchTerm) {
-  if (!searchTerm) return data;
-
-  const term = searchTerm.toLowerCase();
-  return data.filter(item => {
-    return (
-      (item.productName || '').toLowerCase().includes(term) ||
-      (item.category || '').toLowerCase().includes(term) ||
-      (item.subCategory || '').toLowerCase().includes(term) ||
-      (item.keywords || '').toLowerCase().includes(term)
-    );
-  });
-}
-
-function applySort(data, sortField, order = 'asc') {
-  if (!sortField) return data;
-
-  const sorted = [...data].sort((a, b) => {
-    let aVal = a[sortField];
-    let bVal = b[sortField];
-
-    // Try converting numeric fields to numbers for proper sorting
-    const aNum = parseFloat(aVal?.replace(/[^\d.-]/g, ''));
-    const bNum = parseFloat(bVal?.replace(/[^\d.-]/g, ''));
-
-    if (!isNaN(aNum) && !isNaN(bNum)) {
-      aVal = aNum;
-      bVal = bNum;
-    } else {
-      aVal = (aVal || '').toString().toLowerCase();
-      bVal = (bVal || '').toString().toLowerCase();
-    }
-
-    if (aVal < bVal) return order === 'asc' ? -1 : 1;
-    if (aVal > bVal) return order === 'asc' ? 1 : -1;
-    return 0;
-  });
-
-  return sorted;
+// Helper parse harga rupiah ke number
+const parseRupiahToNumber = (rpString) => {
+  if (!rpString) return 0
+  let cleaned = rpString.replace(/\s/g, '').replace(/Rp/gi, '')
+  cleaned = cleaned.replace(/\./g, '').replace(/,/g, '.')
+  const number = parseFloat(cleaned)
+  return isNaN(number) ? 0 : number
 }
 
 export default async function handler(req, res) {
   try {
-    let data = await getSheetData(SHEET_ID, RANGE);
-
     const {
+      sourcePath = '',
+      searchTerm = '',
+      sort = 'default',
+      minPrice = 0,
+      maxPrice = 9999999999,
+      category = '',
+      subCategory = '',
+      isPublished,
+      isPriority,
       page = '1',
-      limit = '10',
-      search = '',
-      sort = '',
-      order = 'asc',
-      ...filters
-    } = req.query;
+      limit = '20',
+    } = req.query
 
-    // Filter dulu berdasarkan query params (kecuali pagination, search, sort)
-    data = applyFilters(data, filters);
+    let data = await getSheetData(SHEET_ID, RANGE)
 
-    // Search keyword di beberapa field
-    data = applySearch(data, search);
+    // Filter by sourcePath (misal kamu simpan sourcePath di sheet)
+    if (sourcePath) {
+      data = data.filter(
+        (item) =>
+          item.sourcePath?.toLowerCase() === sourcePath.toLowerCase()
+      )
+    }
 
-    // Sorting data
-    data = applySort(data, sort, order.toLowerCase());
+    // Filter isPublished & isPriority (boolean string 'TRUE'/'FALSE')
+    if (typeof isPublished !== 'undefined') {
+      const boolVal = isPublished === 'true'
+      data = data.filter((item) => (item.isPublished === 'TRUE') === boolVal)
+    }
+    if (typeof isPriority !== 'undefined') {
+      const boolVal = isPriority === 'true'
+      data = data.filter((item) => (item.isPriority === 'TRUE') === boolVal)
+    }
+
+    // Filter category & subCategory exact match (case insensitive)
+    if (category) {
+      data = data.filter(
+        (item) => item.category?.toLowerCase() === category.toLowerCase()
+      )
+    }
+    if (subCategory) {
+      data = data.filter(
+        (item) => item.subCategory?.toLowerCase() === subCategory.toLowerCase()
+      )
+    }
+
+    // Filter by price range (gunakan price discountPrice dulu jika ada)
+    data = data.filter((item) => {
+      const price = parseRupiahToNumber(item.discountPrice || item.umkmPrice)
+      return price >= Number(minPrice) && price <= Number(maxPrice)
+    })
+
+    // Search by productName, category, subCategory, keywords
+    if (searchTerm) {
+      const term = searchTerm.toLowerCase()
+      data = data.filter(
+        (item) =>
+          (item.productName?.toLowerCase().includes(term) ||
+            item.category?.toLowerCase().includes(term) ||
+            item.subCategory?.toLowerCase().includes(term) ||
+            item.keywords?.toLowerCase().includes(term))
+      )
+    }
+
+    // Sorting
+    if (sort === 'termurah') {
+      data.sort(
+        (a, b) =>
+          parseRupiahToNumber(a.discountPrice || a.umkmPrice) -
+          parseRupiahToNumber(b.discountPrice || b.umkmPrice)
+      )
+    } else if (sort === 'termahal') {
+      data.sort(
+        (a, b) =>
+          parseRupiahToNumber(b.discountPrice || b.umkmPrice) -
+          parseRupiahToNumber(a.discountPrice || a.umkmPrice)
+      )
+    }
 
     // Pagination
-    const pageNum = parseInt(page, 10);
-    const limitNum = parseInt(limit, 10);
-    const startIndex = (pageNum - 1) * limitNum;
-    const paginatedData = data.slice(startIndex, startIndex + limitNum);
+    const pageNum = Math.max(1, parseInt(page))
+    const limitNum = Math.max(1, parseInt(limit))
+    const startIndex = (pageNum - 1) * limitNum
+    const paginatedData = data.slice(startIndex, startIndex + limitNum)
 
-    // Response metadata & data
     res.status(200).json({
       total: data.length,
       page: pageNum,
       limit: limitNum,
       totalPages: Math.ceil(data.length / limitNum),
       data: paginatedData,
-    });
-  } catch (err) {
-    console.error('Google Sheets error:', err);
-    res.status(500).json({ error: 'Gagal mengambil data Google Sheets' });
+    })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Gagal mengambil data dari Google Sheets' })
   }
 }
