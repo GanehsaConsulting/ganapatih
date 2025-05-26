@@ -12,7 +12,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { slugify } from './helper/slugify';
 
-export const BreadcrumbDynamic = () => {
+export const BreadcrumbDynamic = ({ 
+    className = ""
+}) => {
     const path = usePathname();
 
     const pathnames = path
@@ -21,43 +23,44 @@ export const BreadcrumbDynamic = () => {
         .map((segment) => segment.replace(/-/g, ' '));
 
     return (
-        <Breadcrumb>
-            <BreadcrumbList>
-                <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                        <Link href="/">
-                            Beranda
-                        </Link>
-                    </BreadcrumbLink>
-                </BreadcrumbItem>
-                {pathnames.map((value, index) => {
-                    const slug = slugify(value);
-                    const to = `/${pathnames
-                        .slice(0, index + 1)
-                        .map(slugify)
-                        .join('/')}`;
-                    const isLast = index === pathnames.length - 1;
-                    return (
-                        <React.Fragment key={to}>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                {isLast ? (
-                                    <BreadcrumbPage className="capitalize font-medium">
-                                        {value.charAt(0).toUpperCase() + value.slice(1)}
-                                    </BreadcrumbPage>
-                                ) : (
-                                    <BreadcrumbLink asChild>
-                                        <Link href={to} className='capitalize'>
+        <div className={className}>
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/">
+                                Beranda
+                            </Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    {pathnames.map((value, index) => {
+                        const slug = slugify(value);
+                        const to = `/${pathnames
+                            .slice(0, index + 1)
+                            .map(slugify)
+                            .join('/')}`;
+                        const isLast = index === pathnames.length - 1;
+                        return (
+                            <React.Fragment key={to}>
+                                <BreadcrumbSeparator />
+                                <BreadcrumbItem>
+                                    {isLast ? (
+                                        <BreadcrumbPage className="capitalize font-medium">
                                             {value.charAt(0).toUpperCase() + value.slice(1)}
-                                        </Link>
-                                    </BreadcrumbLink>
-                                )}
-                            </BreadcrumbItem>
-                        </React.Fragment>
-                    );
-                })}
-            </BreadcrumbList>
-        </Breadcrumb>
+                                        </BreadcrumbPage>
+                                    ) : (
+                                        <BreadcrumbLink asChild>
+                                            <Link href={to} className='capitalize'>
+                                                {value.charAt(0).toUpperCase() + value.slice(1)}
+                                            </Link>
+                                        </BreadcrumbLink>
+                                    )}
+                                </BreadcrumbItem>
+                            </React.Fragment>
+                        );
+                    })}
+                </BreadcrumbList>
+            </Breadcrumb>
+        </div>
     );
 };
-

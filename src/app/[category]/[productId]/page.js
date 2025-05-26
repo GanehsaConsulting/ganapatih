@@ -68,9 +68,9 @@ export default function ProductDetail() {
     }, [slug]);
 
 
-    if (loading) return <p className="text-center my-10">
+    if (loading) return (
         <ProductDetailSkeleton />
-    </p>
+    )
     if (error) return <p className="text-center my-10 text-red-600">{error}</p>
     if (!data) return null
 
