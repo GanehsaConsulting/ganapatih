@@ -6,7 +6,7 @@
 @theme {
   /* Color */
   --color-mainColorLight: #27548a;
-  --color-mainColorDark: #30b5fc;
+  --color-mainColorDark: #027DE2;
   --color-secondaryColorLight: #dda853;
   --color-secondaryColorDark: #eace6c;
   --color-baseColor: #f3f3e0;
@@ -29,9 +29,9 @@
   --shadow-mainShadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   --shadow-secondaryShadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   --shadow-white: rgba(255, 255, 255, 0.662) 0px 4px 16px,
-  rgba(255, 255, 255, 0.616) 0px 8px 32px;
+    rgba(255, 255, 255, 0.616) 0px 8px 32px;
   --shadow-black: rgba(0, 0, 0, 0.258) 0px 4px 16px,
-  rgba(0, 0, 0, 0.268) 0px 8px 32px;
+    rgba(0, 0, 0, 0.268) 0px 8px 32px;
 }
 
 :root {
@@ -205,4 +205,93 @@ body {
 
 .margin {
   @apply mx-3 md:mx-24;
+}
+
+/* Reusable shimmer animation */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  right: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    225deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(47, 47, 47, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: transform 0.8s ease-in-out;
+  transform: translate(100%, -100%);
+}
+
+.shimmer:hover::before,
+.group:hover .shimmer::before {
+  transform: translate(-100%, 100%);
+  transition: transform 0.9s ease-in-out;
+}
+
+/* Shimmer animation for infinite effect */
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  right: -100%;
+  width: 400%;
+  height: 400%;
+  background: linear-gradient(
+    225deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(47, 47, 47, 0.2) 50%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  animation: shimmerAnimation 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.dark .animate-shimmer::before {
+  background: linear-gradient(
+    225deg,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(200, 200, 200, 0.2) 50%,
+    rgba(0, 0, 0, 0) 80%
+  );
+}
+
+@keyframes shimmerAnimation {
+  0% {
+    transform: translate(100%, -100%);
+  }
+  100% {
+    transform: translate(-100%, 100%);
+  }
+}
+
+/* Shimmer effect for text */
+.text-shimmer {
+  position: relative;
+  color: transparent;
+  background: linear-gradient(90deg, #333 25%, #bababa 50%, #333 75%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmerTextAnimation 2.5s infinite linear;
+}
+
+@keyframes shimmerTextAnimation {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

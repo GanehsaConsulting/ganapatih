@@ -10,20 +10,17 @@ export function PriceRangeFilter({
   onChange = () => {},
   options = [],
 }) {
-  // Pastikan nilai max kalau Infinity diganti ke angka besar untuk input
-  const safeMax = valueMax === Infinity ? 9999999999 : valueMax
+  const [localMin, setLocalMin] = useState("")
+  const [localMax, setLocalMax] = useState("")
+  const [hasInteracted, setHasInteracted] = useState(false)
 
-  const [localMin, setLocalMin] = useState(valueMin.toString())
-  const [localMax, setLocalMax] = useState(safeMax.toString())
-
-  // Sync state lokal jika props berubah
+  // Saat prop berubah dan user belum edit, sync nilai tapi kosongkan input
   useEffect(() => {
-    setLocalMin(valueMin.toString())
-  }, [valueMin])
-
-  useEffect(() => {
-    setLocalMax((valueMax === Infinity ? 9999999999 : valueMax).toString())
-  }, [valueMax])
+    if (!hasInteracted) {
+      setLocalMin("")
+      setLocalMax("")
+    }
+  }, [valueMin, valueMax, hasInteracted])
 
   function handleApply() {
     const min = parseInt(localMin)
@@ -32,16 +29,16 @@ export function PriceRangeFilter({
     const minPrice = isNaN(min) ? 0 : min
     const maxPrice = isNaN(max) ? 9999999999 : max
 
-    console.log('🟩 Terapkan harga:', { minPrice, maxPrice })
-
     onChange({
       minPrice,
       maxPrice,
     })
+
+    setHasInteracted(true)
   }
 
-  // Buat value untuk RadioGroup biar sesuai dengan pilihan saat ini
-  const radioValue = `${localMin}-${localMax}`
+  const radioValue =
+    localMin && localMax ? `${localMin}-${localMax}` : ""
 
   return (
     <div className="space-y-3">
@@ -51,7 +48,10 @@ export function PriceRangeFilter({
             placeholder="Min"
             type="number"
             value={localMin}
-            onChange={(e) => setLocalMin(e.target.value)}
+            onChange={(e) => {
+              setLocalMin(e.target.value)
+              setHasInteracted(true)
+            }}
           />
         </div>
         <div className="col-span-1 flex items-center justify-center">-</div>
@@ -60,7 +60,10 @@ export function PriceRangeFilter({
             placeholder="Max"
             type="number"
             value={localMax}
-            onChange={(e) => setLocalMax(e.target.value)}
+            onChange={(e) => {
+              setLocalMax(e.target.value)
+              setHasInteracted(true)
+            }}
           />
         </div>
       </section>
@@ -72,6 +75,7 @@ export function PriceRangeFilter({
             const [min, max] = val.split('-')
             setLocalMin(min)
             setLocalMax(max)
+            setHasInteracted(true)
           }}
         >
           {options.map((item, idx) => (

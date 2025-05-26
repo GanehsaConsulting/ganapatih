@@ -42,7 +42,6 @@ export function useProducts({
         if (subCategory) params.append('subCategory', subCategory)
         if (typeof isPublished === 'boolean') params.append('isPublished', isPublished.toString())
         if (typeof isPriority === 'boolean') params.append('isPriority', isPriority.toString())
-        console.log('🔍 Fetching with params:', params.toString())
 
         fetch(`/api/products?${params.toString()}`)
             .then((res) => res.json())
@@ -64,7 +63,6 @@ export function useProducts({
             
         }, [sourcePath, searchTerm, sort, minPrice, maxPrice, category, subCategory, isPublished, isPriority, page, perPage])
         
-        console.log('Data:', data.toString())
     return {
         data,
         loading,
