@@ -74,7 +74,7 @@ export const CardCarousel = () => {
                         <div
                             key={idx}
                             className={`${idx === 0 && "ml-5 md:ml-24"} ${idx === KonsultanPajakPackages.length - 1 && "mr-5 md:mr-24"}
-                                min-w-[85lvw] md:min-w-[25lvw] w-full h-fit grow rounded-main p-5 overflow-hidden shadow-custom/5 border border-neutral-300/50 dark:border-darkColor dark:bg-darkColor
+                                min-w-[85lvw] md:min-w-[25lvw] w-full h-fit grow rounded-main p-5 overflow-hidden shadow-secondaryShadow border border-neutral-300/50 dark:border-darkColor dark:bg-darkColor
                             `}
                         >
                             <div className="mb-5 h-[20lvh] flex flex-col justify-between space-y-4">

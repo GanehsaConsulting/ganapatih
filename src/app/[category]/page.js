@@ -264,36 +264,96 @@ export default function CategoryPage() {
                   </button>
                 </div>
               )}
-
-              {/* Show search results count */}
-              {isSearchMode && data.length === 0 && (
-                <div className="text-center py-8">
-                  <p className="text-muted-foreground mb-4">
-                    Tidak ada hasil yang ditemukan untuk "{searchTerm}"
-                  </p>
-                  {searchStats.suggestions?.length > 0 && (
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-2">Coba cari:</p>
-                      <div className="flex flex-wrap justify-center gap-2">
-                        {searchStats.suggestions.slice(0, 3).map((suggestion, index) => (
-                          <button
-                            key={index}
-                            onClick={() => handleSearch(suggestion)}
-                            className="px-3 py-1 text-sm bg-mainColorLight/10 text-mainColorLight rounded-full hover:bg-mainColorLight/20 transition-colors"
-                          >
-                            {suggestion}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
             </>
           )}
 
           {loading && (
-            <CardSkeleton items={12}/>
+            <CardSkeleton items={12} />
+          )}
+
+          {data.length === 0 && !loading && !error && (
+            <div className="min-h-[50lvh] flex items-center justify-center">
+              <div className="text-center max-w-md mx-auto px-6">
+                {/* Icon Container */}
+                <div className="mb-8 relative">
+                  <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-full flex items-center justify-center shadow-lg">
+                    <svg
+                      className="w-12 h-12 text-blue-500 dark:text-blue-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                  </div>
+
+                </div>
+
+                {/* Main Message */}
+                <div className="mb-6">
+                  <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                    Tidak Ada Layanan Ditemukan
+                  </h3>
+                  {!isSearchMode && (
+                    <>
+                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                        Maaf, saat ini layanan belum tersedia untuk kategori ini. Silakan coba kategori lain atau periksa kembali nanti.
+                      </p>
+                    </>
+                  )}
+
+                  {isSearchMode && (
+                    <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mt-4">
+                      <div className="flex items-start space-x-3">
+                        <svg className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                        </svg>
+                        <div>
+                          <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
+                            Tips Pencarian
+                          </p>
+                          <p className="text-sm text-amber-700 dark:text-amber-300 mt-1">
+                            Coba ubah kata kunci atau gunakan saran pencarian yang tersedia.
+                          </p>
+                        </div>
+                        {searchStats.suggestions?.length > 0 && (
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-2">Coba cari:</p>
+                            <div className="flex flex-wrap justify-center gap-2">
+                              {searchStats.suggestions.slice(0, 3).map((suggestion, index) => (
+                                <button
+                                  key={index}
+                                  onClick={() => handleSearch(suggestion)}
+                                  className="px-3 py-1 text-sm bg-mainColorLight/10 text-mainColorLight rounded-full hover:bg-mainColorLight/20 transition-colors"
+                                >
+                                  {suggestion}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+
+                {/* Additional Help */}
+                <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    Butuh bantuan?
+                    <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">
+                      Hubungi tim dukungan kami
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
           )}
         </section>
       </main>

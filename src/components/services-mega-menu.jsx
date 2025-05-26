@@ -46,7 +46,7 @@ export const ServicesMegaMenu = ({ expandedId, onClose }) => {
                             href={el.href}
                             className={cn(
                                 expandAnimationClass,
-                                "group flex flex-row items-center gap-2 hover:p-3 rounded-xl transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                                "group flex flex-row items-center gap-2 hover:scale-102 rounded-xl transition-all duration-300 group"
                             )}
                         >
                             <div className="relative w-12 h-12">
@@ -58,7 +58,7 @@ export const ServicesMegaMenu = ({ expandedId, onClose }) => {
                                 />
                             </div>
                             <div>
-                                <h3 className="font-semibold text-[20px] text-neutral-900 dark:text-neutral-100">
+                                <h3 className="font-semibold text-[20px] text-neutral-900 dark:text-neutral-100 group-hover:text-mainColorLight dark:group-hover:text-mainColorDark">
                                     {el.label}
                                 </h3>
                                 {el.subs?.length > 0 && (
@@ -79,11 +79,11 @@ export const ServicesMegaMenu = ({ expandedId, onClose }) => {
                             href={el.href}
                             className={cn(
                                 expandAnimationClass,
-                                "group flex flex-row items-center gap-2 hover:p-3 rounded-xl transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                                "group flex flex-row items-center gap-2 hover:scale-102 rounded-xl transition-all duration-300 group"
                             )}
                         >
                             <div>
-                                <h3 className="font-semibold text-sm text-neutral-900 dark:text-neutral-100">
+                                <h3 className="font-semibold text-sm text-neutral-900 dark:text-neutral-100 group-hover:text-mainColorLight dark:group-hover:text-mainColorDark">
                                     {el.label}
                                 </h3>
                             </div>

@@ -2,7 +2,7 @@ import { RiBarChartLine, RiBuilding2Line, RiBuilding3Line, RiBuildingLine, RiCal
 
 export const navbarItems = [
     { label: 'Tentang Kami', href: '/tentang' },
-    { label: 'Testimoni', href: '/testimoni' },
+    { label: 'Artikel', href: '/artikel' },
     { label: 'Kontak', href: '/kontak' },
 ];
 
