@@ -34,7 +34,7 @@ export const Navbar = ({ children }) => {
 
     return (
         <>
-            <nav className={`${isScrolled && "pl-4 pr-4 dark:bg-mainColorLight/25 bg-mainColorDark/10 border-b border-darkColor/15 dark:border-lightColor/15 shadow-mainShadow/5 backdrop-blur-3xl"} hidden md:flex navbar min-h-[55px] h-[55px] sticky top-0 px-24 z-[555] duration-200`}>
+            <nav className={`${isScrolled && "pl-4 pr-4 dark:bg-baseColorDark/70 bg-baseColorLight/70 border-b border-darkColor/15 dark:border-lightColor/15 shadow-mainShadow/5 backdrop-blur-3xl"} hidden md:flex navbar min-h-[55px] h-[55px] sticky top-0 px-24 z-[555] duration-200`}>
                 <div className="navbar-start flex items-center">
                     <Link
                         href={"/"}

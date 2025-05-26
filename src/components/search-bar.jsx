@@ -90,9 +90,6 @@ export const SearchBar = ({
               Hapus pencarian
             </button>
           </div>
-          <div className="text-xs text-muted-foreground mt-1">
-            💡 Tip: Pencarian ini mencakup semua kategori dan layanan. Gunakan filter untuk mempersempit hasil.
-          </div>
         </div>
       )}
     </div>

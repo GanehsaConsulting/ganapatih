@@ -29,7 +29,6 @@ export default async function handler(req, res) {
     } = req.query
 
     let data = await getSheetData(SHEET_ID, RANGE)
-
     // Filter by sourcePath (misal kamu simpan sourcePath di sheet)
     if (sourcePath) {
       data = data.filter(

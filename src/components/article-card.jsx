@@ -22,17 +22,16 @@ export const ArticleCard = ({ article }) => {
                     <p className="text-grayneutral-500 truncate-last-1 text-sm mt-1">{article.exerp}</p>
 
                     <div className="flex items-center justify-between gap-2 mt-2">
-                        <div className="px-2 py-1 bg-secondaryColorLight/10 dark:bg-mainColorDark/15 text-sm font-semibold w-fit text-secondaryColorLight dark:text-mainColorDark rounded-secondary">
+                        <div className="px-2 py-1 bg-secondaryColorLight/10 dark:bg-secondaryColorDark/15 text-sm font-semibold w-fit text-secondaryColorLight dark:text-secondaryColorDark rounded-secondary">
                             {article.categories}
                         </div>
-                        <Link
-                            href={`/artikel/${article.slug}`}
+                        <button
                         >
                             <p className="text-mainColorLight dark:text-mainColorDark font-semibold hover:underline flex items-center gap-1 text-[13px]">
                                 Baca lebih lanjut
                                 <ChevronRightIcon size={15} />
                             </p>
-                        </Link>
+                        </button>
                     </div>
                 </Link>
             ))}
