@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ignore credentials.json
+echo "credentials.json"
+git add .gitignore
+git commit -m "chore: ignore credentials.json"
+/credentials.json
