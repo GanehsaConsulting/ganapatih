@@ -1,11 +1,12 @@
 import { ChevronRightIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
-export const ArticleCard = ({ 
-    articles = [], 
+export const ArticleCard = ({
+    articles = [],
     loading = false,
-      imgFallback = "https://images.unsplash.com/photo-1619886384164-a845ee979ee9?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
- }) => {
+    imgFallback = "https://images.unsplash.com/photo-1619886384164-a845ee979ee9?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+}) => {
     // Loading skeleton component
     const LoadingSkeleton = () => (
         <div className="rounded-main group mb-5 animate-pulse">
@@ -48,7 +49,7 @@ export const ArticleCard = ({
     }
 
     return (
-        <main className="margin grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <main className="margin grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {articles.map((article, index) => (
                 <Link
                     key={article.id || article.slug || index}
@@ -56,10 +57,12 @@ export const ArticleCard = ({
                     className="rounded-main group mb-5"
                 >
                     <div className="overflow-hidden rounded-main min-h-[30lvh]">
-                        <img
-                            src={article.coverImg || imgFallback}
+                        <Image
+                            width={800}
+                            height={450}
+                            src={article.coverImage || imgFallback}
                             alt={article.title}
-                            className="rounded-main w-full min-h-[30lvh] group-hover:scale-110 transition-transform duration-300 ease-in-out object-cover aspect-video"
+                            className="rounded-main w-full min-h-[50lvh] group-hover:scale-110 transition-transform duration-300 ease-in-out object-cover"
                             onError={(e) => {
                                 e.target.src = '/placeholder-image.jpg'; // Fallback image
                             }}
@@ -73,11 +76,11 @@ export const ArticleCard = ({
                     </p>
 
                     <div className="flex items-center justify-between gap-2 mt-2">
-                        <div className="px-2 py-1 bg-secondaryColorLight/10 dark:bg-secondaryColorDark/15 text-sm font-semibold w-fit text-secondaryColorLight dark:text-secondaryColorDark rounded-secondary">
+                        <div className="px-2 py-0.5 bg-secondaryColorLight/10 dark:bg-secondaryColorDark/15 text-xs font-semibold w-fit text-secondaryColorLight dark:text-secondaryColorDark rounded-secondary">
                             {article.categories || article.category || 'Artikel'}
                         </div>
                         <button>
-                            <p className="text-mainColorLight dark:text-mainColorDark font-semibold hover:underline flex items-center gap-1 text-[13px]">
+                            <p className="text-mainColorLight dark:text-mainColorDark font-semibold group-hover:underline flex items-center gap-1 text-[13px]">
                                 Baca lebih lanjut
                                 <ChevronRightIcon size={15} />
                             </p>

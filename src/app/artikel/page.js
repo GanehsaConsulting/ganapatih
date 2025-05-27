@@ -2,7 +2,7 @@
 import { ArticleCard } from "@/components/article-card";
 import { ArticleHero } from "@/components/article-hero";
 import DropdownSort from "@/components/dropdown-sort";
-import { PaginationNumber } from "@/components/pagination";
+import { PaginationNumber } from "@/components/pagination-number";
 import useArticles from "@/hooks/useArticles"; // Adjust import path sesuai struktur project
 
 export default function ArtikelPage() {
@@ -70,15 +70,18 @@ export default function ArtikelPage() {
 
     return (
         <>
-            <ArticleHero />
+            <ArticleHero 
+                articles={articles}
+                loading={loading}
+            />
             <div className="margin flex items-center justify-between mb-4">
             <div>
-                <h1 className="text-3xl font-bold">Artikel</h1>
-                {!loading && pagination.total > 0 && (
+                <h1 className="text-3xl font-bold">Artikel Kami</h1>
+                {/* {!loading && pagination.total > 0 && (
                     <p className="text-gray-600 text-sm mt-1">
                         Menampilkan {articles.length} dari {pagination.total} artikel
                     </p>
-                )}
+                )} */}
             </div>
                 <DropdownSort
                     buttonClassName="w-fit"
@@ -110,7 +113,7 @@ export default function ArtikelPage() {
                         onPageChange={goToPage}
                         onNextPage={hasNextPage ? nextPage : undefined}
                         onPrevPage={hasPrevPage ? prevPage : undefined}
-                        showInfo={true}
+                        showInfo={false}
                         totalItems={pagination.total}
                         itemsPerPage={pagination.limit}
                     />
