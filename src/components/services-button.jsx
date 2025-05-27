@@ -72,8 +72,8 @@ export const ServicesButton = () => {
                                         className="flex flex-col items-center justify-center aspect-square rounded-third">
 
                                         <Image
-                                            width={70}
-                                            height={70}
+                                            width={50}
+                                            height={50}
                                             src={item.logo}
                                             alt={item.label}
                                         />
@@ -87,12 +87,12 @@ export const ServicesButton = () => {
                             ))}
 
                             <button
-                                onClick={() => document.getElementById('services')?.showModal()}
+                                onClick={() => document.getElementById('services-button')?.showModal()}
                             >
-                                <div className="flex flex-col items-center justify-center aspect-square rounded-third bg-mainColorLight/10 text-mainColorLight">
+                                <div className="flex flex-col items-center justify-center aspect-square rounded-third bg-mainColorLight/10 dark:bg-mainColorDark/20 text-mainColorLight dark:text-mainColorDark">
                                     <RiApps2Fill className="text-5xl" />
                                 </div>
-                                <div className="text-center text-mainColorLight">
+                                <div className="text-center text-mainColorLight dark:text-mainColorDark">
                                     <span className="text-[10px]">
                                         Semua
                                     </span>
@@ -105,7 +105,7 @@ export const ServicesButton = () => {
             </section>
 
             {/* Modal Semua Layanan */}
-            <dialog id="services" className="modal modal-bottom">
+            <dialog id="services-button" className="modal modal-bottom">
                 <div className="modal-action absolute -top-3 right-3">
                     <form method="dialog">
                         <Button className="rotate-45 !rounded-full bg-lightColor dark:bg-darkColor" variant="secondary" size={"icon"}>

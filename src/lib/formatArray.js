@@ -1,3 +1,13 @@
+function parseArray(raw) {
+  if (!raw) return []
+
+  const str = Array.isArray(raw) ? raw[0] : raw
+
+  return str
+    .split(/[,;\n]/) // bisa pakai koma, titik koma, atau newline
+    .map(f => f.trim())
+    .filter(f => f.length > 0)
+}
 function parseFeatures(raw) {
   if (!raw) return []
 
@@ -22,5 +32,6 @@ function parseRequirements(raw) {
 
 export {
   parseFeatures,
-  parseRequirements
+  parseRequirements,
+  parseArray
 }

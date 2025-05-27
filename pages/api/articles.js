@@ -1,88 +1,10 @@
+import { formatDate } from '@/components/helper/formatDateTime'
+import { parseArray } from '@/lib/formatArray'
 import { getSheetData } from '@/lib/googleSheets'
+import { formatSheetData, normalizeStatus, parseBoolean, parseDate } from '@/lib/helpers'
 
 const SHEET_ID = process.env.GOOGLE_SHEET_ID
 const RANGE = process.env.GOOGLE_SHEET_RANGE_ARTICLE
-
-// Helper untuk parse tanggal
-const parseDate = (dateString) => {
-  if (!dateString) return null
-  return new Date(dateString)
-}
-
-// Helper untuk format tanggal
-const formatDate = (date) => {
-  if (!date) return null
-  return new Date(date).toISOString().split('T')[0]
-}
-
-// Helper untuk parse view count
-const parseViewCount = (viewString) => {
-  if (!viewString) return 0
-  const number = parseInt(viewString)
-  return isNaN(number) ? 0 : number
-}
-
-// Helper untuk konversi string ke boolean
-const parseBoolean = (value) => {
-  if (typeof value === 'boolean') return value
-  if (typeof value === 'string') {
-    const lowerValue = value.toLowerCase().trim()
-    return lowerValue === 'true' || lowerValue === '1' || lowerValue === 'yes'
-  }
-  return false
-}
-
-// Helper untuk konversi nilai dari Google Sheets ke boolean
-const parseBooleanFromSheet = (value) => {
-  if (!value) return false
-  if (typeof value === 'boolean') return value
-  if (typeof value === 'string') {
-    const upperValue = value.toUpperCase().trim()
-    return upperValue === 'TRUE' || upperValue === '1' || upperValue === 'YES' || upperValue === 'BENAR'
-  }
-  return false
-}
-
-// Helper untuk normalize status values
-const normalizeStatus = (status) => {
-  if (!status) return ''
-  const statusMap = {
-    'TRUE': 'published',
-    'FALSE': 'draft',
-    'PUBLISHED': 'published',
-    'DRAFT': 'draft',
-    'ARCHIVED': 'archived',
-    'ACTIVE': 'published',
-    'INACTIVE': 'draft'
-  }
-  
-  const upperStatus = status.toUpperCase().trim()
-  return statusMap[upperStatus] || status.toLowerCase()
-}
-
-// Helper untuk format data dari Google Sheets
-const formatSheetData = (rawData) => {
-  return rawData.map(item => ({
-    ...item,
-    // Convert boolean fields
-    highlight: parseBooleanFromSheet(item.highlight),
-    published: parseBooleanFromSheet(item.published),
-    featured: parseBooleanFromSheet(item.featured),
-    active: parseBooleanFromSheet(item.active),
-    
-    // Normalize status
-    status: normalizeStatus(item.status),
-    
-    // Parse numbers
-    view: parseViewCount(item.view),
-    
-    // Ensure strings are trimmed
-    title: (item.title || '').trim(),
-    category: (item.category || '').trim(),
-    tags: (item.tags || '').trim(),
-    excerpt: (item.excerpt || '').trim(),
-  }))
-}
 
 export default async function handler(req, res) {
   try {
@@ -105,7 +27,7 @@ export default async function handler(req, res) {
 
     // Get raw data from Google Sheets
     let rawData = await getSheetData(SHEET_ID, RANGE)
-    
+
     // Format data with proper type conversions
     let data = formatSheetData(rawData)
 
@@ -186,11 +108,11 @@ export default async function handler(req, res) {
       const term = searchTerm.toLowerCase()
       data = data.filter(
         (item) =>
-          (item.title?.toLowerCase().includes(term) ||
-            item.content?.toLowerCase().includes(term) ||
-            item.excerpt?.toLowerCase().includes(term) ||
-            item.category?.toLowerCase().includes(term) ||
-            item.tags?.toLowerCase().includes(term))
+        (item.title?.toLowerCase().includes(term) ||
+          item.content?.toLowerCase().includes(term) ||
+          item.excerpt?.toLowerCase().includes(term) ||
+          item.category?.toLowerCase().includes(term) ||
+          item.tags?.toLowerCase().includes(term))
       )
     }
 
@@ -203,36 +125,36 @@ export default async function handler(req, res) {
             const dateB = parseDate(a.createdAt)
             return dateA - dateB
           })
-        
+
         case 'oldest':
           return data.sort((a, b) => {
             const dateA = parseDate(a.createdAt)
             const dateB = parseDate(b.createdAt)
             return dateA - dateB
           })
-        
+
         case 'updated':
           return data.sort((a, b) => {
             const dateA = parseDate(b.updatedAt)
             const dateB = parseDate(a.updatedAt)
             return dateA - dateB
           })
-        
+
         case 'title-asc':
           return data.sort((a, b) => (a.title || '').localeCompare(b.title || ''))
-        
+
         case 'title-desc':
           return data.sort((a, b) => (b.title || '').localeCompare(a.title || ''))
-        
+
         case 'most-viewed':
           return data.sort((a, b) => b.view - a.view)
-        
+
         case 'least-viewed':
           return data.sort((a, b) => a.view - b.view)
-        
+
         case 'category':
           return data.sort((a, b) => (a.category || '').localeCompare(b.category || ''))
-        
+
         case 'featured-first':
           return data.sort((a, b) => {
             if (a.featured && !b.featured) return -1
@@ -242,7 +164,7 @@ export default async function handler(req, res) {
             const dateB = parseDate(a.createdAt)
             return dateA - dateB
           })
-        
+
         default:
           return data
       }
@@ -272,7 +194,7 @@ export default async function handler(req, res) {
       updatedAt: formatDate(article.updatedAt),
       publishedAt: formatDate(article.publishedAt || article.createdAt),
       date: formatDate(article.createdAt), // Alias untuk backward compatibility
-      tags: article.tags,
+      tags: parseArray(article.tags),
       categories: article.category, // Alias untuk backward compatibility
       view: article.view,
       slug: article.slug || article.title?.toLowerCase()
@@ -310,10 +232,10 @@ export default async function handler(req, res) {
     res.status(200).json(response)
   } catch (error) {
     console.error('Error fetching articles:', error)
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
       error: 'Gagal mengambil data artikel dari Google Sheets',
-      message: error.message 
+      message: error.message
     })
   }
 }

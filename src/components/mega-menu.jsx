@@ -1,6 +1,7 @@
 'use client'
 import { IoIosArrowDown } from 'react-icons/io';
 import { RxCross2 } from "react-icons/rx";
+import { useEffect, useState } from 'react';
 
 export const MegaMenuNavbar = ({
     id,
@@ -8,11 +9,37 @@ export const MegaMenuNavbar = ({
     expandedId,
     setExpandedId,
     children,
-    arrowVisibility,
+    arrowVisibility = "block",
     icon,
     iconClassName,
-    mobile,
+    isMobile = false,
 }) => {
+    const [navbarHeight, setNavbarHeight] = useState(56);
+
+    useEffect(() => {
+        const updateNavbarHeight = () => {
+            // Get actual navbar height dynamically
+            const navbar = document.querySelector('nav');
+            if (navbar) {
+                setNavbarHeight(navbar.offsetHeight);
+            }
+        };
+
+        // Update on mount and resize
+        updateNavbarHeight();
+        window.addEventListener('resize', updateNavbarHeight);
+
+        // Also update when scroll state might change navbar appearance
+        const handleScroll = () => {
+            updateNavbarHeight();
+        };
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('resize', updateNavbarHeight);
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     const isExpanded = expandedId === id;
 
@@ -20,13 +47,14 @@ export const MegaMenuNavbar = ({
         setExpandedId(isExpanded ? null : id);
     };
 
+    // For mobile, remove mouse events and use click only
+    const containerProps = isMobile ? {} : {
+        onMouseEnter: () => setExpandedId(id),
+        onMouseLeave: () => setExpandedId(null)
+    };
 
     return (
-        <div
-            className="relative"
-            onMouseEnter={() => setExpandedId(id)}
-            onMouseLeave={() => setExpandedId(null)}
-        >
+        <div className="relative" {...containerProps}>
             {/* Trigger */}
             <div className="z-[100] relative">
                 {title ? (
@@ -46,41 +74,40 @@ export const MegaMenuNavbar = ({
                             <div className={iconClassName}>{icon}</div>
                         </div>
                         <div className="swap-on">
-                            <div className={iconClassName}><RxCross2 className="text-xl" /></div>
+                            <div className={iconClassName}><RxCross2 className="text-[18px] md:text-xl" /></div>
                         </div>
                     </label>
                 )}
             </div>
 
-            {/* Mega Menu */}
-            <div
-                onMouseEnter={() => setExpandedId(id)}
-                className={`fixed top-[0px] left-0 w-full bg-white dark:bg-black transition-all duration-450 ease-[cubic-bezier(0.25, 0.1, 0.25, 1)] overflow-hidden 
-                         ${isExpanded
-                        ? 'pointer-events-auto opacity-100 translate-y-0 max-h-[80vh]'
-                        : 'pointer-events-none opacity-0 -translate-y-5 max-h-0'}`}
-                style={{
-                    minHeight: isExpanded ? '30vh' : '0',
-                }}
-            >
-                <div className={`md:mx-24 mt-20`}>
-                    {children}
-                </div>
-            </div>
-
-
-
-            {mobile && (
+            {/* Desktop Mega Menu */}
+            {!isMobile && (
                 <div
                     onMouseEnter={() => setExpandedId(id)}
-                    className={`fixed inset-0 w-full bg-secondaryDark/20 dark:bg-secondaryLight/10 backdrop-blur-2xl transition-all duration-700 ease-[cubic-bezier(0.25, 0.1, 0.25, 1)] overflow-hidden
-                             ${isExpanded ? 'pointer-events-auto max-h-[100vh] opacity-100 translate-y-0 overflow-y-scroll noBar' : 'pointer-events-none max-h-0 opacity-0 -translate-y-5'}`}
+                    className={`fixed top-[0px] left-0 w-full bg-white dark:bg-black transition-all duration-450 ease-[cubic-bezier(0.25, 0.1, 0.25, 1)] overflow-hidden 
+                             ${isExpanded
+                            ? 'pointer-events-auto opacity-100 translate-y-0 max-h-[80vh]'
+                            : 'pointer-events-none opacity-0 -translate-y-5 max-h-0'}`}
+                    style={{
+                        minHeight: isExpanded ? '30vh' : '0',
+                    }}
+                >
+                    <div className={`md:mx-24 mt-20`}>
+                        {children}
+                    </div>
+                </div>
+            )}
+
+            {/* Mobile Mega Menu */}
+            {isMobile && (
+                <div
+                    onMouseEnter={() => setExpandedId(id)}
+                    className={`fixed inset-0 w-full transition-all duration-700 ease-[cubic-bezier(0.25, 0.1, 0.25, 1)] ${isExpanded ? 'pointer-events-auto max-h-[100vh] opacity-100 translate-y-0 overflow-y-scroll noBar' : 'pointer-events-none max-h-0 opacity-0 -translate-y-5'} overflow-hidden`}
                 >
                     <div
-                        className={` transition-transform duration-700 ease-[cubic-bezier(0.25, 0.1, 0.25, 1)]
-                                 ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`}
+                        className={`transition-transform duration-700 ease-[cubic-bezier(0.25, 0.1, 0.25, 1)] ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}   `}
                     >
-                        {mobile}
+                        {children}
                     </div>
                 </div>
             )}

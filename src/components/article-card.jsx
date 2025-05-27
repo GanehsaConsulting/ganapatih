@@ -90,11 +90,7 @@ export const ArticleCard = ({
                     {/* Optional: Show date if available */}
                     {(article.createdAt || article.publishedAt || article.date) && (
                         <div className="text-xs text-gray-500 mt-2">
-                            {new Date(article.createdAt || article.publishedAt || article.date).toLocaleDateString('id-ID', {
-                                day: 'numeric',
-                                month: 'long',
-                                year: 'numeric'
-                            })}
+                            {article.updatedAt}
                         </div>
                     )}
                 </Link>

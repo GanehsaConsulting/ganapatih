@@ -98,23 +98,19 @@ export const ArticleHero = () => {
                             />
                         </div>
                         <h1 className="text-xl lg:text-2xl font-bold mt-4 group-hover:text-mainColorLight dark:group-hover:text-mainColorDark">{mainArticle.title}</h1>
-                        <p className="text-gray-600 mt-2">{mainArticle.exerp || mainArticle.excerpt || mainArticle.description}</p>
+                        <p className="text-muted-foreground mt-2">{mainArticle.exerp || mainArticle.excerpt || mainArticle.description}</p>
 
                         {/* Article meta info */}
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 gap-3">
                             <div className="flex items-center gap-3">
-                                <div className="px-2 py-1 bg-secondaryColorLight/10 dark:bg-mainColorDark/15 text-sm font-semibold w-fit text-secondaryColorLight dark:text-mainColorDark rounded-secondary">
+                                <div className="px-2 py-0.5 bg-secondaryColorLight/10 dark:bg-secondaryColorDark/15 text-sm font-semibold w-fit text-secondaryColorLight dark:text-secondaryColorDark rounded-secondary">
                                     {mainArticle.category || 'Unggulan'}
                                 </div>
                                 {/* Show date if available */}
                                 {(mainArticle.createdAt || mainArticle.publishedAt || mainArticle.date) && (
-                                    <span className="text-sm text-gray-500">
-                                        {new Date(mainArticle.createdAt || mainArticle.publishedAt || mainArticle.date).toLocaleDateString('id-ID', {
-                                            day: 'numeric',
-                                            month: 'long',
-                                            year: 'numeric'
-                                        })}
-                                    </span>
+                                    <div className="text-xs text-gray-500 mt-2">
+                                        {mainArticle.updatedAt}
+                                    </div>
                                 )}
                             </div>
                             <Link
@@ -149,7 +145,7 @@ export const ArticleHero = () => {
                                         />
                                     </div>
                                     <div className="w-[70%]">
-                                        <div className="mb-2 px-2 py-0.5 bg-secondaryColorLight/10 dark:bg-mainColorDark/15 text-xs font-semibold w-fit text-secondaryColorLight dark:text-mainColorDark rounded-secondary">
+                                        <div className="px-2 py-0.5 bg-secondaryColorLight/10 dark:bg-secondaryColorDark/15 text-xs font-semibold w-fit text-secondaryColorLight dark:text-secondaryColorDark rounded-secondary">
                                             {article.category || 'Unggulan'}
                                         </div>
                                         <h3 className="font-semibold truncate-last-3 text-sm lg:text-base group-hover:text-mainColorLight dark:group-hover:text-mainColorDark">{article.title}</h3>
