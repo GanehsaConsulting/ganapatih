@@ -10,10 +10,12 @@ import { SearchBar } from '@/components/search-bar'
 import { CardGrid } from '@/components/card-grid'
 import { GroupFilter } from '@/components/group-filter'
 
+
 import { useProducts } from '@/hooks/useProducts'
 import { useSearchProducts } from '@/hooks/useSearchProduct'
 import { Search } from 'lucide-react'
 import { CardSkeleton } from '@/components/skeleton/card-skeleton'
+import { PaginationNumber } from '@/components/pagination-number'
 
 export default function CategoryPage() {
   const path = usePathname()
@@ -95,11 +97,27 @@ export default function CategoryPage() {
     .filter((x) => x)
     .map((segment) => segment.replace(/-/g, ' '))
 
-  function handlePageChange(newPage) {
+  // Pagination helper functions
+  const goToPage = (newPage) => {
     if (isSearchMode) return // No pagination in search mode
     if (newPage < 1 || newPage > pagination.totalPages) return
     setPage(newPage)
   }
+
+  const nextPage = () => {
+    if (page < pagination.totalPages) {
+      setPage(page + 1)
+    }
+  }
+
+  const prevPage = () => {
+    if (page > 1) {
+      setPage(page - 1)
+    }
+  }
+
+  const hasNextPage = page < pagination.totalPages
+  const hasPrevPage = page > 1
 
   function handleSearch(newSearchTerm) {
     setSearchTerm(newSearchTerm)
@@ -242,26 +260,19 @@ export default function CategoryPage() {
 
               <CardGrid data={data} />
 
-              {/* Pagination - hanya tampil jika bukan search mode */}
+              {/* Pagination menggunakan PaginationNumber component */}
               {!isSearchMode && pagination.totalPages > 1 && (
-                <div className="flex justify-center items-center space-x-4 mt-5">
-                  <button
-                    disabled={page <= 1}
-                    onClick={() => handlePageChange(page - 1)}
-                    className="btn btn-sm"
-                  >
-                    Prev
-                  </button>
-                  <span>
-                    Halaman {pagination.currentPage} dari {pagination.totalPages}
-                  </span>
-                  <button
-                    disabled={page >= pagination.totalPages}
-                    onClick={() => handlePageChange(page + 1)}
-                    className="btn btn-sm"
-                  >
-                    Next
-                  </button>
+                <div className="margin mt-8">
+                  <PaginationNumber
+                    currentPage={pagination.currentPage}
+                    totalPages={pagination.totalPages}
+                    onPageChange={goToPage}
+                    onNextPage={hasNextPage ? nextPage : undefined}
+                    onPrevPage={hasPrevPage ? prevPage : undefined}
+                    showInfo={false}
+                    totalItems={pagination.totalItems}
+                    itemsPerPage={pagination.perPage}
+                  />
                 </div>
               )}
             </>
@@ -341,7 +352,6 @@ export default function CategoryPage() {
                     </div>
                   )}
                 </div>
-
 
                 {/* Additional Help */}
                 <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">

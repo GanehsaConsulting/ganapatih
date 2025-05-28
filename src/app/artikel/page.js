@@ -28,10 +28,6 @@ export default function ArtikelPage() {
         hasPrevPage,
     } = useArticles();
 
-    console.log('====================================');
-    console.log(articles);
-    console.log('====================================');
-
     // Handle sort change dari dropdown
     const handleSortChange = (sortValue) => {
         // Map dari dropdown values ke hook values
