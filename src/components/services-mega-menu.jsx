@@ -67,7 +67,7 @@ export const ServicesMegaMenu = ({ expandedId, onClose, isMobile = false, path }
                                             key={idx}
                                             href={el.href}
                                             onClick={onClose}
-                                            className="group flex items-center gap-3 py-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200 border border-transparent hover:border-neutral-200 dark:hover:border-neutral-700"
+                                            className="group flex items-center gap-3 py-2 rounded-lg transition-colors duration-200 border border-transparent hover:border-neutral-200 dark:hover:border-neutral-700"
                                         >
                                             {el.logo && (
                                                 <div className="relative w-10 h-10 flex-shrink-0">
@@ -115,7 +115,7 @@ export const ServicesMegaMenu = ({ expandedId, onClose, isMobile = false, path }
                                             key={idx}
                                             href={el.href}
                                             onClick={onClose}
-                                            className="group flex items-center gap-4 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+                                            className="group flex items-center gap-4 transition-all duration-200"
                                         >
                                             <div className="relative w-12 h-12 flex-shrink-0">
                                                 <Image
@@ -147,7 +147,7 @@ export const ServicesMegaMenu = ({ expandedId, onClose, isMobile = false, path }
                             <div>
                                 <button
                                     onClick={() => setShowAllServices(true)}
-                                    className="group w-full flex items-center gap-4 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-all duration-200 pb-2"
+                                    className="group w-full flex items-center gap-4 transition-all duration-200 pb-2"
                                 >
                                     <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-mainColorLight/10 dark:bg-mainColorDark/10 rounded-lg">
                                         <RiApps2Fill className="text-mainColorLight dark:text-mainColorDark" size={24} />
@@ -209,7 +209,7 @@ export const ServicesMegaMenu = ({ expandedId, onClose, isMobile = false, path }
                         <div className="flex items-center gap-3 ">
                             <button
                                 onClick={() => setShowAllServices(false)}
-                                className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-muted-foreground flex items-center gap-1"
+                                className="p-2 rounded-lg transition-colors text-muted-foreground flex items-center gap-1"
                             >
                                 <IoChevronBack className="text-neutral-600 dark:text-neutral-400" size={20} />
                                 Kembali
@@ -223,7 +223,7 @@ export const ServicesMegaMenu = ({ expandedId, onClose, isMobile = false, path }
                                     key={idx}
                                     href={el.href}
                                     onClick={onClose}
-                                    className="group flex items-center gap-3 p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
+                                    className="group flex items-center gap-3 p-3 rounded-lg transition-colors duration-200"
                                 >
 
                                     <span className='pb-3 text-lg'>

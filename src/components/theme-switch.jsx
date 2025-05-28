@@ -16,7 +16,7 @@ export default function ThemeSwitch({ className }) {
   const currentTheme = theme === 'system' ? systemTheme : theme;
 
   return (
-    <div className='flex'>
+    <div className='flex z-555'>
       <label className="swap swap-rotate">
         {/* Hidden checkbox to control the state */}
         <input
