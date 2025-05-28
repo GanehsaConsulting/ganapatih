@@ -54,7 +54,7 @@ export const ServicesButton = () => {
                                 </Link>
                             ))}
                             <button
-                                onClick={() => document.getElementById('services')?.showModal()}
+                                onClick={() => document.getElementById('services-button')?.showModal()}
                                 className="cursor-pointer bg-mainColorLight text-white rounded-main aspect-square flex flex-col p-6 justify-center items-center gap-3">
                                 <RiApps2Fill className="text-4xl" />
                                 Semua Layanan
@@ -106,9 +106,12 @@ export const ServicesButton = () => {
 
             {/* Modal Semua Layanan */}
             <dialog id="services-button" className="modal modal-bottom">
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
                 <div className="modal-action absolute -top-3 right-3">
                     <form method="dialog">
-                        <Button className="rotate-45 !rounded-full bg-lightColor dark:bg-darkColor" variant="secondary" size={"icon"}>
+                        <Button className="rotate-45 !rounded-full bg-destructive" variant="secondary" size={"icon"}>
                             <Plus />
                         </Button>
                     </form>
