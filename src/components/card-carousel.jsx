@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { KonsultanPajakPackages } from "@/data/categories/tax";
 import { RiCheckFill, RiInformationFill, RiWhatsappLine } from "react-icons/ri";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { BsFillXCircleFill } from "react-icons/bs";
 import { formatToRupiah } from "./helper/formatToRupiah";
 import { LuPlus } from "react-icons/lu";
@@ -14,6 +15,7 @@ export const CardCarousel = () => {
     const [carouselRef, setCarouselRef] = useState(null);
     const [isAtStart, setIsAtStart] = useState(true);
     const [isAtEnd, setIsAtEnd] = useState(false);
+    const [seeMore, setSeeMore] = useState([]);
 
     const updateCarouselPosition = () => {
         if (carouselRef) {
@@ -35,13 +37,20 @@ export const CardCarousel = () => {
         );
     };
 
+    // Add function to toggle seeMore for specific card
+    const toggleSeeMore = (idx) => {
+        setSeeMore(prev =>
+            prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
+        );
+    };
+
     return (
         <section className="my-10">
             <div className="margin flex items-center justify-between">
                 <h1 className="text-2xl md:text-3xl font-medium flex flex-col gap-1">
                     Paket Pelaporan Pajak
                     <span className="text-xs flex items-center gap-1">
-                        <HiChevronRight />  Lihat semua
+                        <HiChevronRight />  
                     </span>
                 </h1>
 
@@ -58,7 +67,6 @@ export const CardCarousel = () => {
                     >
                         <HiChevronRight />
                     </button>
-
                 </div>
             </div>
             <div
@@ -69,6 +77,8 @@ export const CardCarousel = () => {
                 {KonsultanPajakPackages.map((el, idx) => {
                     const isFeatureExpanded = expandedFeatures.includes(idx);
                     const isRequirementExpanded = expandedRequirements.includes(idx);
+                    // Check if this specific card's seeMore is active
+                    const isCardExpanded = seeMore.includes(idx);
 
                     return (
                         <div
@@ -77,10 +87,18 @@ export const CardCarousel = () => {
                                 min-w-[85lvw] md:min-w-[25lvw] w-full h-fit grow rounded-main p-5 overflow-hidden shadow-secondaryShadow border border-neutral-300/50 dark:border-darkColor dark:bg-darkColor
                             `}
                         >
-                            <div className="mb-5 h-[20lvh] flex flex-col justify-between space-y-4">
-                                <h1 className="font-semibold text-lg">
-                                    {el.type}
+                            <div className="mb-5 h-fit min-h-[25lvh] flex flex-col gap-1 justify-between space-y-4">
+                               <div className="flex items-center justify-between" >
+                                 {/* Use isCardExpanded instead of seeMore and call toggleSeeMore with idx */}
+                                 <h1 className={isCardExpanded ? `font-semibold text-lg` : `font-semibold text-lg line-clamp-2`}>
+                                    {el.type} 
                                 </h1>
+                                <button 
+                                className="text-2xl cursor-pointer"
+                                onClick={() => toggleSeeMore(idx)} >
+                                    {isCardExpanded ? <IoMdArrowDropdown/> : <IoMdArrowDropup/> }
+                                </button>
+                               </div>
                                 <div className="space-y-3">
                                     <div className="flex flex-col">
                                         <p className="text-sm font-medium opacity-60">
@@ -144,7 +162,7 @@ export const CardCarousel = () => {
                                 {el.requirements && (
                                     <div onClick={() => toggleRequirement(idx)} className="cursor-pointer">
                                         <button
-                                            className="w-full"
+                                            className="w-full cursor-pointer"
                                         >
                                             {el.requirements && (
                                                 <div className="flex items-center justify-between font-semibold text-sm">
