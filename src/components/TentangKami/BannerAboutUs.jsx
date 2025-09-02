@@ -46,7 +46,7 @@ export const BannerAboutUs = () => {
             <p className="text-xs sm:text-sm lg:text-base text-black/90 leading-relaxed">
               Pusat Pelayanan Pajak yang menghadirkan kemudahan disetiap
               Layanannya. Temukan beragam solusi pajak untuk Bisnis dan Pribadi
-              Anda hanya di Ganapathi! Kami siap menjadikan urusan Perpajakan
+              Anda hanya di Ganapatih! Kami siap menjadikan urusan Perpajakan
               Anda menjadi lebih mudah dan efisien!
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -78,7 +78,7 @@ export const BannerAboutUs = () => {
           Our Story
         </Badge>
         <p className="text-center font-semibold text-lg sm:text-xl leading-relaxed max-w-4xl">
-          Mitra Optimis Bersama (Ganapathi) adalah Perusahaan Tax Consultant
+          Mitra Optimis Bersama (Ganapatih) adalah Perusahaan Tax Consultant
           yang terdiri dari para profesional perpajakan yang berdedikasi serta
           berkomitmen untuk memberikan layanan konsultasi pajak yang berkualitas
           tinggi. Kami menggabungkan pengetahuan perpajakan dengan pendekatan

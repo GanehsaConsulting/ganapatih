@@ -12,7 +12,7 @@ export const FAQ = () => {
   const faqs = [
     {
       question:
-        "Apa layanan utama yang ditawarkan oleh Mitra Optimis Bersama (Ganapathi)?",
+        "Apa layanan utama yang ditawarkan oleh Mitra Optimis Bersama (Ganapatih)?",
       answer:
         "Kami menyediakan layanan konsultasi pajak, perencanaan pajak, kepatuhan perpajakan, serta pendampingan dalam menghadapi pemeriksaan dan sengketa pajak.",
     },
@@ -47,7 +47,7 @@ export const FAQ = () => {
         <p className="text-gray-600 dark:text-white/80 leading-relaxed">
           Berikut adalah beberapa pertanyaan yang sering diajukan mengenai
           layanan kami. Jika Anda memiliki pertanyaan lain, tim Mitra Optimis
-          Bersama (Ganapathi) siap membantu memberikan jawaban yang jelas dan
+          Bersama (Ganapatih) siap membantu memberikan jawaban yang jelas dan
           terpercaya.
         </p>
       </div>
