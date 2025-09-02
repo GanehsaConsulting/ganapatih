@@ -1,5 +1,5 @@
-import { BannerAboutUs } from "@/components/TentangKami/BannerAboutUs";
-import { OurValues } from "@/components/TentangKami/OurValues";
+import { BannerAboutUs } from "@/components/tentangKami/BannerAboutUs";
+import { OurValues } from "@/components/tentangKami/OurValues";
 
 const TentangKamiPage = () => {
   return (
