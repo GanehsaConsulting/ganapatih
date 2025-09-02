@@ -1,7 +1,7 @@
 import { RiBarChartLine, RiBuilding2Line, RiBuilding3Line, RiBuildingLine, RiCalculatorLine, RiCheckDoubleLine, RiFileCopyLine, RiFileTextLine, RiGlobalLine, RiScalesLine, RiSearchLine, RiSettings3Line, RiSmartphoneLine, RiUser3Line } from "react-icons/ri";
 
 export const navbarItems = [
-    { label: 'Tentang Kami', href: '/tentang' },
+    { label: 'Tentang Kami', href: '/tentang-kami' },
     { label: 'Artikel', href: '/artikel' },
     { label: 'Kontak', href: '/kontak' },
 ];
