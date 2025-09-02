@@ -44,10 +44,10 @@ export const BannerAboutUs = () => {
               berpengalaman.
             </h1>
             <p className="text-xs sm:text-sm lg:text-base text-black/90 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Pusat Pelayanan Pajak yang menghadirkan kemudahan disetiap
+              Layanannya. Temukan beragam solusi pajak untuk Bisnis dan Pribadi
+              Anda hanya di Ganapathi! Kami siap menjadikan urusan Perpajakan
+              Anda menjadi lebih mudah dan efisien!
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <Button className="bg-mainColorLight text-white rounded-full text-sm sm:text-base px-4 sm:px-6 py-2 flex items-center gap-3">
@@ -77,11 +77,16 @@ export const BannerAboutUs = () => {
         >
           Our Story
         </Badge>
-        <p className="text-center font-semibold text-lg sm:text-xl lg:text-3xl leading-relaxed max-w-4xl">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+        <p className="text-center font-semibold text-lg sm:text-xl leading-relaxed max-w-4xl">
+          Mitra Optimis Bersama (Ganapathi) adalah Perusahaan Tax Consultant
+          yang terdiri dari para profesional perpajakan yang berdedikasi serta
+          berkomitmen untuk memberikan layanan konsultasi pajak yang berkualitas
+          tinggi. Kami menggabungkan pengetahuan perpajakan dengan pendekatan
+          yang inovatif untuk memastikan klien kami meraih manfaat maksimal dari
+          struktur perpajakan yang mereka miliki karena keberhasilan dan
+          kepuasan klien adalah prioritas utama kami. Kami juga menjunjung
+          tinggi standar integritas dan etika bisnis, setiap saran dan keputusan
+          yang kami ambil didasarkan pada prinsip kejujuran dan transparansi.
         </p>
         <FaQuoteRight className="text-3xl sm:text-4xl lg:text-6xl text-mainColorLight mt-2" />
       </div>

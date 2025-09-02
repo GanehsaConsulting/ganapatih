@@ -14,30 +14,24 @@ export const KontakForm = () => {
         Let's Chat, Reach Out to Us
       </h2>
       <p className="text-gray-600 mt-2">
-        Have questions or feedback? We're here to help. Send us a message, and
-        we'll respond within 24 hours
+        Punya pertanyaan atau masukan? Kami siap membantu Anda. Kirimkan pesan,
+        dan tim kami akan merespons dalam waktu 24 jam.
       </p>
 
       <form className="mt-6 space-y-4 flex-1 flex flex-col">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="text"
-            placeholder="First name"
-            className="w-full rounded-lg border px-4 py-3 focus:ring-2 focus:ring-orange-500"
-          />
-          <input
-            type="text"
-            placeholder="Last name"
-            className="w-full rounded-lg border px-4 py-3 focus:ring-2 focus:ring-orange-500"
-          />
-        </div>
+        
+        <input
+          type="text"
+          placeholder="Fullname"
+          className="w-full rounded-lg border px-4 py-3 focus:ring-2 focus:ring-orange-500"
+        />
         <input
           type="email"
           placeholder="Email address"
           className="w-full rounded-lg border px-4 py-3 focus:ring-2 focus:ring-orange-500"
         />
         <textarea
-          placeholder="Leave us message"
+          placeholder="Tulis pesan Anda di sini"
           className="w-full rounded-lg border px-4 py-3 focus:ring-2 focus:ring-orange-500"
           rows={5}
         ></textarea>
@@ -48,7 +42,7 @@ export const KontakForm = () => {
           </label>
         </div>
         <Button className="block w-full bg-mainColorLight text-white mt-auto">
-          Send Message
+          Kirim Pesan
         </Button>
       </form>
     </div>

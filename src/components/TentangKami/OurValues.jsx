@@ -1,27 +1,30 @@
 import React from "react";
-import { FaStarOfLife } from "react-icons/fa";
+import { FaStarOfLife, FaLightbulb  } from "react-icons/fa";
 import { Badge } from "../ui/badge";
+import { BsPersonFillCheck } from "react-icons/bs";
+import { HiMiniCheckBadge } from "react-icons/hi2";
+import { FaPeopleGroup } from "react-icons/fa6";
 
 const dataValues = [
   {
-    icon: <FaStarOfLife />,
-    title: "Lorem Ipsum",
-    desc: " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon: <BsPersonFillCheck />,
+    title: "Profesional & Berpengalaman",
+    desc: "Tim kami terdiri dari para konsultan pajak yang berdedikasi dan memiliki keahlian mendalam untuk memberikan solusi terbaik bagi klien.",
   },
   {
-    icon: <FaStarOfLife />,
-    title: "Lorem Ipsum",
-    desc: " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon: <HiMiniCheckBadge />,
+    title: "Integritas & Transparansi",
+    desc: "Setiap langkah, saran, dan keputusan selalu didasarkan pada prinsip kejujuran, keterbukaan, serta etika bisnis yang tinggi.",
   },
   {
-    icon: <FaStarOfLife />,
-    title: "Lorem Ipsum",
-    desc: " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon: <FaLightbulb />,
+    title: "Inovasi & Solusi Tepat",
+    desc: "Kami menggabungkan pengetahuan perpajakan dengan pendekatan inovatif agar klien meraih manfaat maksimal dari struktur pajaknya.",
   },
   {
-    icon: <FaStarOfLife />,
-    title: "Lorem Ipsum",
-    desc: " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon: <FaPeopleGroup />,
+    title: "Kepuasan Klien Utama",
+    desc: "Keberhasilan dan kenyamanan klien adalah prioritas kami. Layanan kami selalu diarahkan untuk mempermudah urusan perpajakan Anda.",
   },
 ];
 
@@ -46,7 +49,7 @@ export const OurValues = () => {
                 key={i}
                 className=" p-5 rounded-2xl flex flex-col gap-5 bg-mainColorLight text-white"
               >
-                <div className="bg-white p-3 text-mainColorDark rounded-third text-2xl w-fit">
+                <div className="bg-white p-3 drop-shadow-2xl text-mainColorDark rounded-third text-4xl w-fit">
                   {e.icon}
                 </div>
                 <h3 className="text-2xl md:text-3xl font-semibold">

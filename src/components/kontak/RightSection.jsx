@@ -21,14 +21,14 @@ export const RightSection = () => {
           <Mail className="text-mainColorLight w-6 h-6" />
           <div>
             <p className="text-sm font-medium">Email</p>
-            <p className="text-gray-600">techteam@kawruh.com</p>
+            <p className="text-gray-600">info@ganeshaconsulting.id</p>
           </div>
         </div>
         <div className="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
           <Phone className="text-mainColorLight w-6 h-6" />
           <div>
             <p className="text-sm font-medium">Phone</p>
-            <p className="text-gray-600">(0252) 8324 9231</p>
+            <p className="text-gray-600">+62 889‑9945‑1996</p>
           </div>
         </div>
       </div>
