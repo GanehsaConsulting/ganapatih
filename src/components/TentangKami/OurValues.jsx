@@ -7,22 +7,22 @@ import { FaPeopleGroup } from "react-icons/fa6";
 
 const dataValues = [
   {
-    icon: <BsPersonFillCheck />,
+    icon: <BsPersonFillCheck className="text-green-600" />,
     title: "Profesional & Berpengalaman",
     desc: "Tim kami terdiri dari para konsultan pajak yang berdedikasi dan memiliki keahlian mendalam untuk memberikan solusi terbaik bagi klien.",
   },
   {
-    icon: <HiMiniCheckBadge />,
+    icon: <HiMiniCheckBadge className="text-blue-700" />,
     title: "Integritas & Transparansi",
     desc: "Setiap langkah, saran, dan keputusan selalu didasarkan pada prinsip kejujuran, keterbukaan, serta etika bisnis yang tinggi.",
   },
   {
-    icon: <FaLightbulb />,
+    icon: <FaLightbulb className="text-yellow-600" />,
     title: "Inovasi & Solusi Tepat",
     desc: "Kami menggabungkan pengetahuan perpajakan dengan pendekatan inovatif agar klien meraih manfaat maksimal dari struktur pajaknya.",
   },
   {
-    icon: <FaPeopleGroup />,
+    icon: <FaPeopleGroup className="text-purple-700" />,
     title: "Kepuasan Klien Utama",
     desc: "Keberhasilan dan kenyamanan klien adalah prioritas kami. Layanan kami selalu diarahkan untuk mempermudah urusan perpajakan Anda.",
   },
@@ -40,8 +40,8 @@ export const OurValues = () => {
           >
             Our Values
           </Badge>
-          <h1 className="font-medium text-3xl md:text-5xl leading-snug">
-            Built On Principles That Matter
+          <h1 className="font-medium text-3xl mb-7 md:text-5xl leading-snug">
+            Why Ganapatih?
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
             {dataValues.map((e, i) => (
@@ -49,7 +49,7 @@ export const OurValues = () => {
                 key={i}
                 className=" p-5 rounded-2xl flex flex-col gap-5 bg-mainColorLight text-white"
               >
-                <div className="bg-white p-3 drop-shadow-2xl text-mainColorDark rounded-third text-4xl w-fit">
+                <div className="bg-white p-3 drop-shadow-2xl rounded-third text-4xl w-fit">
                   {e.icon}
                 </div>
                 <h3 className="text-2xl md:text-3xl font-semibold">
