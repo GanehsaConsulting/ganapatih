@@ -36,7 +36,7 @@ export const OurValues = () => {
         <div className="flex flex-col gap-2 h-full">
           <Badge
             variant="outline"
-            className="border border-mainColorLight text-mainColorLight bg-mainColorLight/10 text-xs sm:text-sm md:text-base rounded-full px-3 sm:px-4 py-1"
+            className="border border-mainColorLight text-mainColorLight dark:text-mainColorDark dark:border-mainColorDark bg-mainColorLight/10 text-xs sm:text-sm md:text-base rounded-full px-3 sm:px-4 py-1"
           >
             Our Values
           </Badge>

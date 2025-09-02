@@ -30,13 +30,13 @@ export const BannerAboutUs = () => {
           <div className="bg-white/65 border border-white-70 backdrop-blur-md p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl w-full max-w-sm sm:max-w-md lg:max-w-xl flex flex-col gap-3 sm:gap-4 lg:gap-5 shadow-lg">
             <Badge
               variant="outline"
-              className="border border-mainColorLight text-mainColorLight bg-mainColorLight/10 text-xs sm:text-sm lg:text-base rounded-full px-3 sm:px-4 py-1 w-fit"
+              className="border border-mainColorLight text-mainColorLight dark:border-mainColorDark dark:text-mainColorDark bg-mainColorLight/10 dark:bg-mainColorDark/10 text-xs sm:text-sm lg:text-base rounded-full px-3 sm:px-4 py-1 w-fit"
             >
               About Ganapatih
             </Badge>
             <h1
               className={clsx(
-                "text-xl sm:text-2xl lg:text-4xl font-semibold leading-tight",
+                "text-xl sm:text-2xl lg:text-4xl font-semibold leading-tight text-black/90",
                 monaSans.className
               )}
             >
@@ -50,7 +50,7 @@ export const BannerAboutUs = () => {
               Anda menjadi lebih mudah dan efisien!
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <Button className="bg-mainColorLight text-white rounded-full text-sm sm:text-base px-4 sm:px-6 py-2 flex items-center gap-3">
+              <Button className="bg-mainColorLight dark:bg-mainColorDark text-white rounded-full text-sm sm:text-base px-4 sm:px-6 py-2 flex items-center gap-3">
                 <Link href="/login" className="block w-full">
                   Get Started With us
                 </Link>
@@ -58,7 +58,7 @@ export const BannerAboutUs = () => {
               </Button>
               <Button
                 variant="outline"
-                className="rounded-full text-sm sm:text-base text-mainColorLight border border-mainColorLight font-bold px-4 sm:px-6 py-2"
+                className="rounded-full text-sm sm:text-base text-mainColorLight dark:text-mainColorDark border border-mainColorLight dark:border-mainColorDark font-bold px-4 sm:px-6 py-2"
               >
                 <Link href="/login" className="block w-full">
                   Learn More
@@ -73,7 +73,7 @@ export const BannerAboutUs = () => {
       <div className="px-4 sm:px-8 lg:px-30 py-12 sm:py-16 lg:py-20 flex flex-col items-center gap-4 sm:gap-5">
         <Badge
           variant="outline"
-          className="border border-mainColorLight text-mainColorLight bg-mainColorLight/10 text-xs sm:text-sm lg:text-base rounded-full px-3 sm:px-4 py-1 w-fit"
+          className="border border-mainColorLight text-mainColorLight dark:text-mainColorDark bg-mainColorLight/10 text-xs sm:text-sm lg:text-base rounded-full px-3 sm:px-4 py-1 w-fit"
         >
           Our Story
         </Badge>
@@ -88,7 +88,7 @@ export const BannerAboutUs = () => {
           tinggi standar integritas dan etika bisnis, setiap saran dan keputusan
           yang kami ambil didasarkan pada prinsip kejujuran dan transparansi.
         </p>
-        <FaQuoteRight className="text-3xl sm:text-4xl lg:text-6xl text-mainColorLight mt-2" />
+        <FaQuoteRight className="text-3xl sm:text-4xl lg:text-6xl text-mainColorLight dark:text-mainColorDark mt-2" />
       </div>
     </section>
   );

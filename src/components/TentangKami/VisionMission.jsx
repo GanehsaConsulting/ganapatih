@@ -5,7 +5,7 @@ import { CheckCircle2 } from "lucide-react";
 
 export const VisionMission = () => {
   return (
-    <section className="w-full mb-30 py-12 px-6 md:px-16 bg-white">
+    <section className="w-full mb-30 py-12 px-6 md:px-16 ">
       <div className="grid md:grid-cols-2 gap-18 items-center">
         {/* Gambar */}
         <div className="relative">
@@ -31,13 +31,13 @@ export const VisionMission = () => {
 
         {/* Teks */}
         <div className="mt-10 md:mt-0">
-          <h2 className="text-5xl text-mainColorLight font-bold mb-4">Visi</h2>
+          <h2 className="text-5xl text-mainColorLight dark:text-mainColorDark font-bold mb-4">Visi</h2>
           <p className="text-main mb-6 leading-relaxed text-xl">
             Kami berkomitmen untuk menjadi kantor konsultan pajak yang
             unggul dalam memberikan layanan profesional dan terbaik dalam
             kinerja.
           </p>
-          <h2 className="text-5xl text-mainColorLight font-bold mb-4">Misi</h2>
+          <h2 className="text-5xl text-mainColorLight dark:text-mainColorDark font-bold mb-4">Misi</h2>
           <p className="text-main mb-6 leading-relaxed text-xl">
             Kami hadir untuk memberikan layanan dan solusi perpajakan yang
             terbaik untuk para klien.
