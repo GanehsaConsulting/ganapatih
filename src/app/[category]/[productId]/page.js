@@ -1,4 +1,7 @@
+// [category]/[productId]
+
 "use client";
+
 import Image from "next/image";
 import { BreadcrumbDynamic } from "@/components/breadcrumb-dynamic";
 import { useParams, usePathname, useRouter } from "next/navigation";
@@ -55,7 +58,7 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // QR Payment states
   const [showQRModal, setShowQRModal] = useState(false);
   const [qrData, setQrData] = useState(null);
@@ -95,62 +98,71 @@ export default function ProductDetail() {
   const handleQRPayment = async () => {
     setPaymentLoading(true);
     setPaymentError(null);
-    
+
     try {
       // Validate required data
       if (!selectedVariant || !selectedVariant.price) {
-        throw new Error('Data produk tidak valid');
+        throw new Error("Data produk tidak valid");
       }
+
+      // Create a shorter order ID (max 50 characters for Midtrans)
+      const orderId = `ord-${Date.now()}-${Math.random()
+        .toString(36)
+        .substring(2, 8)}`;
+
+      // Calculate total amount
+      const totalAmount = selectedVariant.price * quantity;
 
       // Create payment request
       const paymentData = {
         payment_type: "qris",
         transaction_details: {
-          order_id: `order-${selectedVariant.slug}-${Date.now()}`,
-          gross_amount: selectedVariant.price * quantity,
+          order_id: orderId,
+          gross_amount: totalAmount,
         },
         item_details: [
           {
-            id: selectedVariant.slug || "unknown",
+            id:
+              selectedVariant.id ||
+              selectedVariant.slug?.substring(0, 20) ||
+              "unknown",
             price: selectedVariant.price,
             quantity: quantity,
-            name: selectedVariant.name || "Product",
-          }
+            name: (selectedVariant.name || "Product").substring(0, 50),
+          },
         ],
-        // customer_details: {
-        //   first_name: "Customer",
-        //   last_name: "",
-        //   email: "customer@example.com",
-        //   phone: "081234567890"
-        // },
+        currency: "IDR",
       };
 
-      console.log('Sending payment data:', paymentData);
-
-      const response = await fetch('/api/payment', {
-        method: 'POST',
+      const response = await fetch("/api/payment", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(paymentData),
       });
 
       const result = await response.json();
-    //   console.log('Payment response:', result);
 
       if (!response.ok) {
-        throw new Error(result.message || result.error || `HTTP Error: ${response.status}`);
+        throw new Error(
+          result.message || result.error || `HTTP Error: ${response.status}`
+        );
       }
-      
+
       if (result.status_code === "201" || result.status_code === 201) {
         setQrData(result);
         setShowQRModal(true);
       } else {
-        throw new Error(result.status_message || result.message || 'Gagal membuat QR Code');
+        throw new Error(
+          result.status_message || result.message || "Gagal membuat QR Code"
+        );
       }
     } catch (err) {
-      console.error('Payment error:', err);
-      setPaymentError(err.message || 'Terjadi kesalahan saat membuat pembayaran');
+      console.error("Payment error:", err);
+      setPaymentError(
+        err.message || "Terjadi kesalahan saat membuat pembayaran"
+      );
     } finally {
       setPaymentLoading(false);
     }
@@ -164,10 +176,12 @@ export default function ProductDetail() {
     useEffect(() => {
       if (qrData && showQRModal) {
         // Get QR code URL from actions
-        const qrAction = qrData.actions?.find(action => 
-          action.name === "generate-qr-code" || action.name === "generate-qr-code-v2"
+        const qrAction = qrData.actions?.find(
+          (action) =>
+            action.name === "generate-qr-code" ||
+            action.name === "generate-qr-code-v2"
         );
-        
+
         if (qrAction) {
           setQrCodeUrl(qrAction.url);
         }
@@ -195,8 +209,17 @@ export default function ProductDetail() {
     const formatTime = (seconds) => {
       const mins = Math.floor(seconds / 60);
       const secs = seconds % 60;
-      return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      return `${mins.toString().padStart(2, "0")}:${secs
+        .toString()
+        .padStart(2, "0")}`;
     };
+
+    // Calculate total amount - use qrData if available, otherwise calculate from selectedVariant
+    const totalAmount = qrData?.gross_amount
+      ? parseInt(qrData.gross_amount)
+      : selectedVariant
+      ? selectedVariant.price * quantity
+      : 0;
 
     return (
       <Dialog open={showQRModal} onOpenChange={setShowQRModal}>
@@ -206,11 +229,11 @@ export default function ProductDetail() {
               <RiQrCodeLine className="text-blue-600" />
               Pembayaran QRIS
             </DialogTitle>
-            <DialogDescription className="mb-5" >
+            <DialogDescription className="mb-5">
               Scan QR code di bawah ini dengan aplikasi pembayaran Anda
             </DialogDescription>
           </DialogHeader>
-          
+
           <div className="flex flex-col items-center space-y-4">
             {/* QR Code */}
             <div className="border-2 border-dashed border-gray-300 p-4 rounded-lg bg-white">
@@ -237,7 +260,7 @@ export default function ProductDetail() {
             {/* Payment Info */}
             <div className="text-center space-y-2">
               <p className="text-lg font-semibold">
-                {formatToRupiah(qrData?.gross_amount || selectedVariant.price * quantity)}
+                {formatToRupiah(totalAmount)}
               </p>
               <p className="text-sm text-muted-foreground">
                 Order ID: {qrData?.order_id}
@@ -264,15 +287,15 @@ export default function ProductDetail() {
 
             {/* Actions */}
             <div className="flex gap-2 w-full">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={() => setShowQRModal(false)}
                 className="flex-1"
               >
                 Tutup
               </Button>
               {timeLeft === 0 && (
-                <Button 
+                <Button
                   onClick={handleQRPayment}
                   disabled={paymentLoading}
                   className="flex-1"
@@ -380,7 +403,7 @@ export default function ProductDetail() {
               </SelectContent>
             </Select>
           </div>
-          
+
           <div className="space-y-1">
             <p className="text-sm text-muted-foreground">Pilih Kuantitas:</p>
             <ProductQuantityCounter
@@ -442,7 +465,7 @@ export default function ProductDetail() {
           </section>
         </section>
       </main>
-      
+
       <main className="margin my-10">
         <Tabs defaultValue="desc">
           <TabsList
