@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import Script from 'next/script'
+import { FloatingButton } from "@/components/floating-button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider enableSystem attribute={"class"}>
           <Navbar>{children}</Navbar>
           <Footer />
+          <FloatingButton/>
         </ThemeProvider>
         <Script
           src="https://app.sandbox.midtrans.com/snap/snap.js"

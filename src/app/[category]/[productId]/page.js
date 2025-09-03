@@ -117,12 +117,12 @@ export default function ProductDetail() {
             name: selectedVariant.name || "Product",
           }
         ],
-        customer_details: {
-          first_name: "Customer",
-          last_name: "",
-          email: "customer@example.com",
-          phone: "081234567890"
-        },
+        // customer_details: {
+        //   first_name: "Customer",
+        //   last_name: "",
+        //   email: "customer@example.com",
+        //   phone: "081234567890"
+        // },
       };
 
       console.log('Sending payment data:', paymentData);
