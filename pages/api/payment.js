@@ -6,7 +6,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
   try {
     const body = await request.json();
-    console.log('Received payment request:', body);
+    // console.log('Received payment request:', body);
 
     // Validasi data
     if (!body.transaction_details || !body.transaction_details.order_id || !body.transaction_details.gross_amount) {
@@ -34,7 +34,7 @@ export async function POST(request) {
       ? 'https://api.midtrans.com/v2/charge'
       : 'https://api.sandbox.midtrans.com/v2/charge';
 
-    console.log('Calling Midtrans API:', midtransUrl);
+    // console.log('Calling Midtrans API:', midtransUrl);
 
     // Call Midtrans API
     const response = await fetch(midtransUrl, {
@@ -48,8 +48,8 @@ export async function POST(request) {
     });
 
     const result = await response.json();
-    console.log('Midtrans response status:', response.status);
-    console.log('Midtrans response:', result);
+    // console.log('Midtrans response status:', response.status);
+    // console.log('Midtrans response:', result);
 
     if (!response.ok) {
       return NextResponse.json(
@@ -91,7 +91,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log('Received payment request:', req.body);
+    // console.log('Received payment request:', req.body);
 
     // Validasi data
     if (!req.body.transaction_details || !req.body.transaction_details.order_id || !req.body.transaction_details.gross_amount) {
@@ -119,7 +119,7 @@ export default async function handler(req, res) {
       ? 'https://api.midtrans.com/v2/charge'
       : 'https://api.sandbox.midtrans.com/v2/charge';
 
-    console.log('Calling Midtrans API:', midtransUrl);
+    // console.log('Calling Midtrans API:', midtransUrl);
 
     // Call Midtrans API
     const response = await fetch(midtransUrl, {
@@ -133,8 +133,8 @@ export default async function handler(req, res) {
     });
 
     const result = await response.json();
-    console.log('Midtrans response status:', response.status);
-    console.log('Midtrans response:', result);
+    // console.log('Midtrans response status:', response.status);
+    // console.log('Midtrans response:', result);
 
     if (!response.ok) {
       return res.status(response.status).json({

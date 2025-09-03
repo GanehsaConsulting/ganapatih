@@ -136,7 +136,7 @@ export default function ProductDetail() {
       });
 
       const result = await response.json();
-      console.log('Payment response:', result);
+    //   console.log('Payment response:', result);
 
       if (!response.ok) {
         throw new Error(result.message || result.error || `HTTP Error: ${response.status}`);
