@@ -74,7 +74,7 @@ const ArticleDetail = ({ slug }) => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen p-6">
       <div className="space-y-5">
         <div className="max-w-4xl mx-auto my-5">
           <BreadcrumbDynamic />

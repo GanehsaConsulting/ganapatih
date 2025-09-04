@@ -72,7 +72,7 @@ export const RecommendedArticleCard = ({ article }) => {
         
         <div className="p-4">
           {article.category && (
-            <span className="inline-block bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full mb-2">
+            <span className="inline-block bg-secondaryColorLight/10 dark:bg-secondaryColorDark/15 text-secondaryColorLight dark:text-secondaryColorDark text-xs px-2 py-1 rounded-full mb-2 font-bold">
               {article.category}
             </span>
           )}
