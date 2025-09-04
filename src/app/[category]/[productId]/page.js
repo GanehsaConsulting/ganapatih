@@ -222,8 +222,8 @@ export default function ProductDetail() {
       : 0;
 
     return (
-      <Dialog open={showQRModal} onOpenChange={setShowQRModal}>
-        <DialogContent className="sm:max-w-md">
+      <Dialog open={showQRModal} onOpenChange={setShowQRModal} >
+        <DialogContent className="w-full sm:max-w-md sm:my-2 mb-2 fixed">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <RiQrCodeLine className="text-blue-600" />
@@ -441,7 +441,7 @@ export default function ProductDetail() {
             </div>
 
             {/* CTA */}
-            <div className=" mt-auto hidden md:grid grid-cols-2 gap-2 md:w-fit">
+            <div className=" mt-auto hidden md:grid grid-cols-2 gap-2 md:w-fit z-10">
               <Link href={selectedVariant.ctaLink}>
                 <Button
                   size={"lg"}
@@ -571,7 +571,7 @@ export default function ProductDetail() {
       </main>
 
       {/* CTA Mobile*/}
-      <div className="fixed bottom-0 w-full px-3 py-5 bg-lightColor/50 dark:bg-darkColor/50 backdrop-blur-lg z-100 border-t md:hidden grid grid-cols-2 gap-2 md:w-fit">
+      <div className=" fixed bottom-0 w-full px-3 py-5 bg-lightColor/50 dark:bg-darkColor/50 backdrop-blur-lg z-10 border-t md:hidden grid grid-cols-2 gap-2 md:w-fit">
         <Link href={selectedVariant.ctaLink}>
           <Button
             size={"lg"}

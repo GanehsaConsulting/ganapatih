@@ -119,8 +119,8 @@ export const Navbar = ({ children }) => {
         <>
             {/* Desktop Navbar */}
             <nav className={`
-                hidden lg:flex navbar min-h-[60px] h-[60px] sticky top-0 z-[555] 
-                transition-all duration-300 ease-in-out
+                hidden lg:flex navbar min-h-[60px] h-[60px] sticky top-0 z-10 
+                transition-all duration-300 ease-in-out 
                 ${isScrolled
                     ? "px-6 xl:px-12 dark:bg-baseColorDark/80 bg-baseColorLight/80 border-b border-darkColor/10 dark:border-lightColor/10 shadow-lg backdrop-blur-xl"
                     : "px-6 xl:px-24"
