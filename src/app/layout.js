@@ -3,7 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import Script from 'next/script'
+import Script from "next/script";
 import { FloatingButton } from "@/components/floating-button";
 
 const geistSans = Geist({
@@ -22,6 +22,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth ">
       <head>
@@ -37,7 +38,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider enableSystem attribute={"class"}>
           <Navbar>{children}</Navbar>
           <Footer />
-          <FloatingButton/>
+          <FloatingButton />
         </ThemeProvider>
         <Script
           src="https://app.sandbox.midtrans.com/snap/snap.js"
