@@ -6,7 +6,7 @@ const SHEET_ID = process.env.GOOGLE_SHEET_ID;
 const RANGES = {
   services: process.env.GOOGLE_SHEET_RANGE_SERVICES,
   articles: process.env.GOOGLE_SHEET_RANGE_ARTICLE,
-  faq: process.env.GOOGLE_SHEET_RANGE_FAQ,
+  // faq: process.env.GOOGLE_SHEET_RANGE_FAQ,
 };
 
 export default async function handler(req, res) {
@@ -71,19 +71,19 @@ export default async function handler(req, res) {
           href = `/artikel/${encodeURIComponent(slug)}`;
         }
 
-        if (key === "faq") {
-          searchField = d.question || "";
-          excerpt = d.answer || "";
+        // if (key === "faq") {
+        //   searchField = d.question || "";
+        //   excerpt = d.answer || "";
 
-          const slug =
-            d.slug ||
-            searchField
-              .toLowerCase()
-              .replace(/\s+/g, "-")
-              .replace(/[^\w-]/g, "");
+        //   const slug =
+        //     d.slug ||
+        //     searchField
+        //       .toLowerCase()
+        //       .replace(/\s+/g, "-")
+        //       .replace(/[^\w-]/g, "");
 
-          href = `/faq/${encodeURIComponent(slug)}`;
-        }
+        //   href = `/faq/${encodeURIComponent(slug)}`;
+        // }
 
         return {
           title: searchField,
