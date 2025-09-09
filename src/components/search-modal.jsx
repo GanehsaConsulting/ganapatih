@@ -43,10 +43,10 @@ export const SearchModal = ({ isScrolled, onClose }) => {
 
   return (
     <section
-      className={`fixed left-0 top-[50px] w-full dark:bg-baseColorDark/80 bg-baseColorLight/80 shadow-lg backdrop-blur-xl border-t z-90 h-[calc(100vh-50px)] py-5 transition-all`}
+      className={`fixed left-0 w-full dark:bg-baseColorDark/60 bg-baseColorLight/60 shadow-lg backdrop-blur-xl border-t z-90 h-[100svh] py-5 transition-all`}
     >
       <div
-        className={`block bg-white/80 dark:bg-darkColor transition-all rounded-xl h-full ${
+        className={`shadow-lg backdrop-blur-xl block bg-white/60 dark:bg-darkColor/60 transition-all rounded-xl h-full ${
           isScrolled
             ? "mx-6 py-6 xl:mx-12 shadow-lg backdrop-blur-xl"
             : "mx-6 py-6 xl:mx-24"
@@ -107,18 +107,18 @@ export const SearchModal = ({ isScrolled, onClose }) => {
             )}
 
             {/* ✅ scroll container full height */}
-            <div className="flex flex-col overflow-y-auto h-[calc(100%-180px)] px-2">
+            <div className="flex flex-col overflow-y-auto h-[calc(100%-155px)] px-2">
               {resultSearch.length > 0
                 ? resultSearch.map((e, idx) => (
                     <Link key={idx} href={e.href} passHref>
                       <div
                         onClick={() => onClose?.()}
-                        className="cursor-pointer hover:bg-gray-200 px-6 py-5 flex flex-col gap-3 rounded-lg"
+                        className="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 px-6 py-5 flex flex-col gap-3 rounded-lg"
                       >
                         <Badge className="bg-secondaryColorLight/10 dark:bg-secondaryColorDark/15 border border-secondaryColorLight text-secondaryColorLight rounded-full px-3 sm:px-4 py-1 w-fit">
                           {e.category}
                         </Badge>
-                        <h1 className="font-medium text-mainColorLight">
+                        <h1 className="font-medium text-mainColorLight dark:text-mainColorDark">
                           {e.title}
                         </h1>
                         <p className="text-sm text-black dark:text-gray-300">

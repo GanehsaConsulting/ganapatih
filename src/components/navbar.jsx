@@ -5,34 +5,23 @@ import Image from "next/image";
 import ThemeSwitch from "./theme-switch";
 import { navbarItems } from "@/data/system";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { MegaMenuNavbar } from "./mega-menu";
 import { ServicesMegaMenu } from "./services-mega-menu";
-import {
-  IoSearchOutline,
-  IoMenuOutline,
-  IoChevronForward,
-} from "react-icons/io5";
+import { IoSearchOutline, IoMenuOutline } from "react-icons/io5";
 import { Button } from "./ui/button";
-// import { useSearch } from "@/context/SearchContext";
 import { SearchModal } from "./search-modal";
-import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Navbar = ({ children }) => {
   const path = usePathname();
-  const [showSearch, setShowSearch] = useState(false);
-  // search value nya dari form  on submit jangan onchange
   const [expandedId, setExpandedId] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -42,23 +31,6 @@ export const Navbar = ({ children }) => {
   useEffect(() => {
     setExpandedId(null);
   }, [path]);
-
-  const handleSearchToggle = () => {
-    setShowSearch(!showSearch);
-    if (showSearch) {
-      setSearchValue("");
-    }
-  };
-
-  const handleSearchBlur = () => {
-    if (!searchValue) {
-      setShowSearch(false);
-    }
-  };
-
-  const closeMobileMenu = () => {
-    setExpandedId(null);
-  };
 
   const Logo = () => (
     <Link href="/" className="flex items-center gap-1 z-50">
@@ -79,65 +51,18 @@ export const Navbar = ({ children }) => {
     </Link>
   );
 
-  const SearchComponent = ({ isMobile = false }) => (
-    <>
-      {/* {showSearch ? (
-        <form
-          onSubmit={handleGlobalSearch}
-          className={`flex items-center ${isMobile ? "w-full" : ""}`}
-        >
-          <label
-            className={`input h-[36px] border border-neutral-400/15 bg-lightColor dark:bg-darkColor rounded-btnMain flex items-center pr-2 ${
-              isMobile ? "flex-1" : ""
-            }`}
-          >
-            <svg
-              className="h-[1em] opacity-50 ml-3"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="2.5"
-                fill="none"
-                stroke="currentColor"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
-            </svg>
-            <input
-              autoFocus
-              type="text"
-              placeholder="Cari layanan..."
-              className="grow bg-transparent outline-none px-2"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              onBlur={handleSearchBlur}
-              onKeyDown={(e) => {
-                if (e.key === "Escape") {
-                  setShowSearch(false);
-                  setSearchValue("");
-                }
-              }}
-            />
-          </label>
-        </form>
-      ) : ( */}
-      <Button
-        size="icon"
-        variant="ghost"
-        onClick={() => {
-          setShowModal(true);
-        }}
-        aria-label="Open search"
-        className="bg-lightColor dark:bg-darkColor hover:brightness-110 border"
-      >
-        <IoSearchOutline size={18} />
-      </Button>
-      {/* )} */}
-    </>
+  const SearchButton = ({ isMobile = false }) => (
+    <Button
+      size="icon"
+      variant="ghost"
+      onClick={() => setShowModal(true)}
+      aria-label="Open search"
+      className={`bg-lightColor dark:bg-darkColor hover:brightness-110 border ${
+        isMobile ? "w-full" : ""
+      }`}
+    >
+      <IoSearchOutline size={18} />
+    </Button>
   );
 
   return (
@@ -145,14 +70,14 @@ export const Navbar = ({ children }) => {
       {/* Desktop Navbar */}
       <nav
         className={`
-                hidden lg:flex navbar min-h-[60px] h-[60px] sticky top-0 z-100 
-                transition-all duration-300 ease-in-out 
-                ${
-                  isScrolled
-                    ? "px-6 xl:px-12 dark:bg-baseColorDark/80 bg-baseColorLight/80 border-b border-darkColor/10 dark:border-lightColor/10 shadow-lg backdrop-blur-xl"
-                    : "px-6 xl:px-24"
-                }
-            `}
+          hidden lg:flex navbar min-h-[60px] h-[60px] sticky top-0 z-100
+          transition-all duration-300 ease-in-out 
+          ${
+            isScrolled
+              ? "px-6 xl:px-12 dark:bg-baseColorDark/80 bg-baseColorLight/80 border-b border-darkColor/10 dark:border-lightColor/10 shadow-lg backdrop-blur-xl"
+              : "px-6 xl:px-24"
+          }
+        `}
       >
         <div className="navbar-start flex items-center">
           <Logo />
@@ -173,14 +98,14 @@ export const Navbar = ({ children }) => {
                 <Link
                   href={el.href}
                   className={`
-                                        hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg
-                                        transition-colors duration-200
-                                        ${
-                                          path === el.href
-                                            ? "bg-neutral-100 dark:bg-neutral-800"
-                                            : ""
-                                        }
-                                    `}
+                    hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg
+                    transition-colors duration-200
+                    ${
+                      path === el.href
+                        ? "bg-neutral-100 dark:bg-neutral-800"
+                        : ""
+                    }
+                  `}
                 >
                   {el.label}
                 </Link>
@@ -189,39 +114,46 @@ export const Navbar = ({ children }) => {
           </ul>
         </div>
         <div className="navbar-end flex items-center gap-3">
-          <SearchComponent />
+          <SearchButton />
           <ThemeSwitch className="bg-lightColor dark:bg-darkColor p-2 w-9 h-9 rounded-btnMain hover:brightness-110 border transition-all duration-200" />
         </div>
       </nav>
-      {/* coba ini modal nya muncul setelah search nya di submit yang harapannya nanti munculin modal berisi result search sesuai query yg di lempar ke param (perlu ga?) */}
-      {showModal && (
-        <SearchModal
-          isScrolled={isScrolled}
-          onClose={() => {
-            setShowModal(false); // tutup modal
-            setSearchQuery(""); // optional: reset query juga
-          }}
-        />
-      )}
+
+      {/* Search Modal with animation */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed inset-0 z-[200] flex justify-center items-start h-full bg-black/50 backdrop-blur-sm"
+          >
+            <SearchModal
+              isScrolled={isScrolled}
+              onClose={() => setShowModal(false)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Mobile Navbar */}
       <nav
         className={`
-                lg:hidden flex items-center justify-between sticky top-0 z-[555] 
-                min-h-[56px] h-[56px] px-4 sm:px-6
-                transition-all duration-300 ease-in-out
-                ${
-                  isScrolled && !expandedId
-                    ? "dark:bg-baseColorDark/80 bg-baseColorLight/80 border-b border-darkColor/10 dark:border-lightColor/10 shadow-lg backdrop-blur-xl"
-                    : "shadow-none"
-                }
-            `}
+          lg:hidden flex items-center justify-between sticky top-0 z-[555] 
+          min-h-[56px] h-[56px] px-4 sm:px-6
+          transition-all duration-300 ease-in-out
+          ${
+            isScrolled && !expandedId
+              ? "dark:bg-baseColorDark/80 bg-baseColorLight/80 border-b border-darkColor/10 dark:border-lightColor/10 shadow-lg backdrop-blur-xl"
+              : "shadow-none"
+          }
+        `}
       >
         <Logo />
-
         <div className="flex items-center gap-2">
           <div className="hidden sm:block">
-            <SearchComponent />
+            <SearchButton />
           </div>
           <ThemeSwitch className="bg-lightColor dark:bg-darkColor p-2 w-9 h-9 rounded-btnMain hover:brightness-110 border transition-all duration-200" />
 
@@ -236,15 +168,12 @@ export const Navbar = ({ children }) => {
             isMobile={true}
           >
             <div className="p-6 space-y-6 min-h-screen">
-              {/* Services Section */}
-              <div className="">
-                <ServicesMegaMenu
-                  onClose={closeMobileMenu}
-                  expandedId={expandedId}
-                  isMobile={true}
-                  path={path}
-                />
-              </div>
+              <ServicesMegaMenu
+                onClose={() => setExpandedId(null)}
+                expandedId={expandedId}
+                isMobile={true}
+                path={path}
+              />
             </div>
           </MegaMenuNavbar>
         </div>
@@ -253,13 +182,13 @@ export const Navbar = ({ children }) => {
       {/* Mega Menu Backdrop for Desktop */}
       <div
         className={`fixed top-0 z-[80] transition-opacity duration-500
-                ${
-                  expandedId
-                    ? "opacity-100 backdrop-blur-none md:backdrop-blur-sm w-screen h-screen"
-                    : "opacity-0 pointer-events-none"
-                } 
-                md:bg-lightColor/30 dark:md:bg-lightColor/20 bg-lightColor dark:bg-darkColor
-            `}
+          ${
+            expandedId
+              ? "opacity-100 backdrop-blur-none md:backdrop-blur-sm w-screen h-screen"
+              : "opacity-0 pointer-events-none"
+          } 
+          md:bg-lightColor/30 dark:md:bg-lightColor/20 bg-lightColor dark:bg-darkColor
+        `}
       />
 
       {/* Main Content */}
