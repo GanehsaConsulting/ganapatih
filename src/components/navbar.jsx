@@ -57,9 +57,7 @@ export const Navbar = ({ children }) => {
       variant="ghost"
       onClick={() => setShowModal(true)}
       aria-label="Open search"
-      className={`bg-lightColor dark:bg-darkColor hover:brightness-110 border ${
-        isMobile ? "w-full" : ""
-      }`}
+      className={`bg-lightColor dark:bg-darkColor hover:brightness-110 border`}
     >
       <IoSearchOutline size={18} />
     </Button>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { IoSearch, IoClose } from "react-icons/io5";
+import { BiLoaderCircle } from "react-icons/bi";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
@@ -46,7 +47,7 @@ export const SearchModal = ({ isScrolled, onClose }) => {
       className={`fixed left-0 w-full dark:bg-baseColorDark/60 bg-baseColorLight/60 shadow-lg backdrop-blur-xl border-t z-90 h-[100svh] py-5 transition-all`}
     >
       <div
-        className={`shadow-lg backdrop-blur-xl block bg-white/60 dark:bg-darkColor/60 transition-all rounded-xl h-full ${
+        className={`shadow-lg backdrop-blur-xl block bg-white/80 dark:bg-darkColor/80 transition-all rounded-xl h-full ${
           isScrolled
             ? "mx-6 py-6 xl:mx-12 shadow-lg backdrop-blur-xl"
             : "mx-6 py-6 xl:mx-24"
@@ -84,7 +85,7 @@ export const SearchModal = ({ isScrolled, onClose }) => {
           >
             {isLoading ? (
               <div className="flex items-center gap-2">
-                <IoSearch className="animate-spin" /> Loading...
+                <BiLoaderCircle className="animate-spin" /> Loading...
               </div>
             ) : (
               "Cari"
@@ -94,9 +95,9 @@ export const SearchModal = ({ isScrolled, onClose }) => {
 
         {/* Search Result */}
         {isLoading ? (
-          <div className="flex justify-center items-center h-[50vh]">
-            <IoSearch className="animate-spin text-3xl text-mainColorLight" />
-            <p className="ml-3 text-mainColorLight font-medium">
+          <div className="flex text-mainColorLight dark:text-mainColorDark justify-center items-center h-[50vh]">
+            <BiLoaderCircle className="animate-spin text-3xl" />
+            <p className="ml-3  font-medium">
               Sedang mencari...
             </p>
           </div>
