@@ -48,7 +48,7 @@ export default async function handler(req, res) {
             .replace(/\s+/g, "-")
             .replace(/[^\w-]/g, "");
 
-          const packageSlug = (d.packagesName || "")
+          const packageSlug = (d.sourcePath || "")
             .toLowerCase()
             .replace(/\s+/g, "-")
             .replace(/[^\w-]/g, "");
