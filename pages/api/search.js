@@ -9,6 +9,27 @@ const RANGES = {
   // faq: process.env.GOOGLE_SHEET_RANGE_FAQ,
 };
 
+// Helper function untuk membuat slug yang bersih
+function createSlug(text) {
+  if (!text) return "";
+  
+  return text
+    .toLowerCase()
+    .trim()
+    // Ganti + dengan spasi dulu sebelum processing
+    .replace(/\+/g, " ")
+    // Ganti multiple spasi dengan single spasi
+    .replace(/\s+/g, " ")
+    // Baru ganti spasi dengan dash
+    .replace(/\s/g, "-")
+    // Remove karakter yang tidak diinginkan kecuali dash
+    .replace(/[^\w-]/g, "")
+    // Remove multiple dashes
+    .replace(/-+/g, "-")
+    // Remove dash di awal dan akhir
+    .replace(/^-+|-+$/g, "");
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -43,15 +64,9 @@ export default async function handler(req, res) {
           searchField = d.productName || "";
           excerpt = d.features || "";
 
-          const productSlug = (d.productName || "")
-            .toLowerCase()
-            .replace(/\s+/g, "-")
-            .replace(/[^\w-]/g, "");
-
-          const packageSlug = (d.sourcePath || "")
-            .toLowerCase()
-            .replace(/\s+/g, "-")
-            .replace(/[^\w-]/g, "");
+          // ✅ Gunakan helper function untuk slug yang bersih
+          const productSlug = createSlug(d.productName || "");
+          const packageSlug = createSlug(d.sourcePath || "");
 
           // ✅ langsung tanpa /products
           href = `/${packageSlug}/${productSlug}`;
@@ -61,13 +76,8 @@ export default async function handler(req, res) {
           searchField = d.title || "";
           excerpt = d.excerpt || "";
 
-          const slug =
-            d.slug ||
-            searchField
-              .toLowerCase()
-              .replace(/\s+/g, "-")
-              .replace(/[^\w-]/g, "");
-
+          // ✅ Gunakan helper function atau slug yang sudah ada
+          const slug = d.slug || createSlug(searchField);
           href = `/artikel/${encodeURIComponent(slug)}`;
         }
 
@@ -75,13 +85,7 @@ export default async function handler(req, res) {
         //   searchField = d.question || "";
         //   excerpt = d.answer || "";
 
-        //   const slug =
-        //     d.slug ||
-        //     searchField
-        //       .toLowerCase()
-        //       .replace(/\s+/g, "-")
-        //       .replace(/[^\w-]/g, "");
-
+        //   const slug = d.slug || createSlug(searchField);
         //   href = `/faq/${encodeURIComponent(slug)}`;
         // }
 
