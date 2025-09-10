@@ -1,4 +1,4 @@
-// [category]/[productId]
+// file: /[category]/productId
 
 "use client";
 
@@ -64,6 +64,8 @@ export default function ProductDetail() {
   const [qrData, setQrData] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentError, setPaymentError] = useState(null);
+  const { category } = useParams();
+  const [faqData, setFaqData] = useState(null);
 
   useEffect(() => {
     if (!slug) return;
@@ -91,8 +93,30 @@ export default function ProductDetail() {
       }
     };
 
+    const fetchDataFAQ = async () => {
+      try {
+        // Mengirim category sebagai query parameter
+        const res = await fetch(`/api/faq?sourcePath=/${category}`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        if (data.success && data.data) {
+          setFaqData(data.data);
+        } else {
+          setFaqData([]);
+        }
+      } catch (err) {
+        console.error("Gagal ambil data FAQ:", err);
+        setFaqData([]);
+      }
+    };
+
     fetchData();
-  }, [slug]);
+    fetchDataFAQ();
+  }, [slug, category]);
 
   // Handle QR Payment
   const handleQRPayment = async () => {
@@ -222,7 +246,7 @@ export default function ProductDetail() {
       : 0;
 
     return (
-      <Dialog open={showQRModal} onOpenChange={setShowQRModal} >
+      <Dialog open={showQRModal} onOpenChange={setShowQRModal}>
         <DialogContent className="w-full sm:max-w-md sm:my-2 mb-2 fixed">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
@@ -549,22 +573,32 @@ export default function ProductDetail() {
 
           <TabsContent value="faq">
             <Accordion type="single" collapsible className="w-full">
-              {taxConsultingFAQ.slice(0, 5).map((el, idx) => (
-                <AccordionItem key={idx} value={`item-${idx}`}>
-                  <AccordionTrigger>
-                    <div className="flex items-start gap-3 text-left">
-                      <RiQuestionFill className="mt-1 min-w-[20px] text-muted-foreground" />
-                      <span className="text-sm font-medium leading-snug">
-                        {el.question}
-                      </span>
-                    </div>
-                  </AccordionTrigger>
+              {/* ✅ Better conditional rendering */}
+              {faqData && faqData.length > 0 ? (
+                faqData.map((el, idx) => (
+                  <AccordionItem key={idx} value={`item-${idx}`}>
+                    <AccordionTrigger>
+                      <div className="flex items-start gap-3 text-left">
+                        <RiQuestionFill className="mt-1 min-w-[20px] text-muted-foreground" />
+                        <span className="text-sm font-medium leading-snug">
+                          {el.question}
+                        </span>
+                      </div>
+                    </AccordionTrigger>
 
-                  <AccordionContent className={"px-8 text-justify"}>
-                    {el.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
+                    <AccordionContent className={"px-8 text-justify"}>
+                      {el.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))
+              ) : (
+                // ✅ Show message when no FAQ data
+                <div className="p-4 text-center text-muted-foreground">
+                  {faqData === null
+                    ? "Memuat FAQ..."
+                    : "Belum ada FAQ untuk kategori ini."}
+                </div>
+              )}
             </Accordion>
           </TabsContent>
         </Tabs>
