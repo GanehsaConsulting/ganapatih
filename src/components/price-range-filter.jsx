@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { useState, useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export function PriceRangeFilter({
   valueMin = 0,
@@ -10,35 +10,46 @@ export function PriceRangeFilter({
   onChange = () => {},
   options = [],
 }) {
-  const [localMin, setLocalMin] = useState("")
-  const [localMax, setLocalMax] = useState("")
-  const [hasInteracted, setHasInteracted] = useState(false)
+  const [localMin, setLocalMin] = useState("");
+  const [localMax, setLocalMax] = useState("");
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   // Saat prop berubah dan user belum edit, sync nilai tapi kosongkan input
   useEffect(() => {
     if (!hasInteracted) {
-      setLocalMin("")
-      setLocalMax("")
+      setLocalMin("");
+      setLocalMax("");
     }
-  }, [valueMin, valueMax, hasInteracted])
+  }, [valueMin, valueMax, hasInteracted]);
 
   function handleApply() {
-    const min = parseInt(localMin)
-    const max = parseInt(localMax)
+    const min = parseInt(localMin);
+    const max = parseInt(localMax);
 
-    const minPrice = isNaN(min) ? 0 : min
-    const maxPrice = isNaN(max) ? 9999999999 : max
+    const minPrice = isNaN(min) ? 0 : min;
+    const maxPrice = isNaN(max) ? 9999999999 : max;
 
     onChange({
       minPrice,
       maxPrice,
-    })
+    });
 
-    setHasInteracted(true)
+    setHasInteracted(true);
   }
 
-  const radioValue =
-    localMin && localMax ? `${localMin}-${localMax}` : ""
+  const radioValue = localMin && localMax ? `${localMin}-${localMax}` : "";
+
+  function handleReset() {
+    setLocalMin("");
+    setLocalMax("");
+    setHasInteracted(false);
+
+    // balikin ke nilai default
+    onChange({
+      minPrice: 0,
+      maxPrice: Infinity,
+    });
+  }
 
   return (
     <div className="space-y-3">
@@ -49,8 +60,8 @@ export function PriceRangeFilter({
             type="number"
             value={localMin}
             onChange={(e) => {
-              setLocalMin(e.target.value)
-              setHasInteracted(true)
+              setLocalMin(e.target.value);
+              setHasInteracted(true);
             }}
           />
         </div>
@@ -61,8 +72,8 @@ export function PriceRangeFilter({
             type="number"
             value={localMax}
             onChange={(e) => {
-              setLocalMax(e.target.value)
-              setHasInteracted(true)
+              setLocalMax(e.target.value);
+              setHasInteracted(true);
             }}
           />
         </div>
@@ -72,10 +83,10 @@ export function PriceRangeFilter({
         <RadioGroup
           value={radioValue}
           onValueChange={(val) => {
-            const [min, max] = val.split('-')
-            setLocalMin(min)
-            setLocalMax(max)
-            setHasInteracted(true)
+            const [min, max] = val.split("-");
+            setLocalMin(min);
+            setLocalMax(max);
+            setHasInteracted(true);
           }}
         >
           {options.map((item, idx) => (
@@ -87,9 +98,22 @@ export function PriceRangeFilter({
         </RadioGroup>
       </section>
 
-      <Button size="sm" variant="secondary" className="w-full" onClick={handleApply}>
+      <Button
+        size="sm"
+        variant="secondary"
+        className="w-full bg-mainColorLight text-white dark:bg-mainColorLight"
+        onClick={handleApply}
+      >
         Terapkan
       </Button>
+      <Button
+        size="sm"
+        variant="secondary"
+        className="w-full"
+        onClick={handleReset}
+      >
+        Reset Filter
+      </Button>
     </div>
-  )
+  );
 }
