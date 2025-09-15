@@ -246,8 +246,8 @@ export default function ProductDetail() {
       : 0;
 
     return (
-      <Dialog open={showQRModal} onOpenChange={setShowQRModal}>
-        <DialogContent className="w-full sm:max-w-md sm:my-2 mb-2 fixed">
+      <Dialog open={showQRModal} onOpenChange={setShowQRModal}  >
+        <DialogContent className="w-full sm:max-w-md sm:my-2 mb-2 fixed  z-[200]">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <RiQrCodeLine className="text-blue-600" />
