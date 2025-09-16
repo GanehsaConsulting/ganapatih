@@ -10,9 +10,16 @@ export default function Home() {
     <>
       <Carousel />
       <ServicesButton />
-      <CardCarousel />
-      <RecommendServices/>
-      <CTA/>
+      <CardCarousel
+        sourcePath="konsultan-pajak"
+        title="Paket Konsultan Pajak"
+      />
+      <CardCarousel
+        sourcePath="pendirian-pt"
+        title="Paket Pendirian PT"
+      />
+      <RecommendServices />
+      <CTA />
     </>
   );
 }

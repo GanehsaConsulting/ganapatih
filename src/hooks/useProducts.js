@@ -23,6 +23,9 @@ export function useProducts({
         totalItems: 0,
     })
 
+    console.log(data, "<<<");
+    
+
     useEffect(() => {
         if (!sourcePath) return
         setLoading(true)

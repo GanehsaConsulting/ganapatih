@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import Script from "next/script";
 import { FloatingButton } from "@/components/floating-button";
+import { CustomScrollbar } from "@/components/custom-scrollbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
       >
         <ThemeProvider enableSystem attribute={"class"}>
           <Navbar>{children}</Navbar>
+          <CustomScrollbar />
           <Footer />
           <FloatingButton />
         </ThemeProvider>
