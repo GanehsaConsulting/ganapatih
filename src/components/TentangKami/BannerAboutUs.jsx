@@ -17,7 +17,7 @@ export const BannerAboutUs = () => {
     <section className="w-full px-4 sm:px-6 lg:px-10 flex flex-col">
       <div
         className="relative rounded-2xl sm:rounded-3xl lg:rounded-4xl overflow-hidden"
-        style={{ height: "calc(100vh - 4rem)" }}
+        style={{ height: "calc(100svh - 15svh)" }}
       >
         <img
           src="https://images.pexels.com/photos/7641842/pexels-photo-7641842.jpeg"
