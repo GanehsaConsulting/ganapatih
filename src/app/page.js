@@ -19,6 +19,7 @@ export default function Home() {
         title="Paket Pendirian PT"
       />
       <RecommendServices />
+      <RecommendedArticles/>
       <CTA />
     </>
   );

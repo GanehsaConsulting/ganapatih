@@ -73,7 +73,7 @@ export const Navbar = ({ children }) => {
           ${
             isScrolled
               ? "px-6 xl:px-12 dark:bg-baseColorDark/80 bg-baseColorLight/80 border-b border-darkColor/10 dark:border-lightColor/10 shadow-lg backdrop-blur-xl"
-              : "px-6 xl:px-24"
+              : "px-6 xl:px-24 bg-white dark:bg-black"
           }
         `}
       >

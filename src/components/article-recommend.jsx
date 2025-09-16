@@ -6,13 +6,13 @@ import Image from "next/image";
 import { BookOpen, ArrowRight, Calendar, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export const RecommendedArticles = ({ articles, currentSlug }) => {
+export const RecommendedArticles = ({ articles, currentSlug = "/nib-dan-izin-berusaha-panduan-lengkap-oss-2025" }) => {
   if (!articles || articles.length === 0) return null;
 
   // Filter artikel yang bukan artikel saat ini
   const filteredArticles = articles.filter(article => article.slug !== currentSlug);
-  
-  if (filteredArticles.length === 0) return null;
+
+  if (filteredArticles.length === 0) return "Takede";
 
   return (
     <div className="bg-white dark:bg-darkColor rounded-lg shadow-sm p-6 mt-8">
@@ -20,13 +20,13 @@ export const RecommendedArticles = ({ articles, currentSlug }) => {
         <BookOpen size={20} />
         Artikel Rekomendasi
       </h3>
-      
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredArticles.slice(0, 3).map((article, index) => (
           <RecommendedArticleCard key={article.id || index} article={article} />
         ))}
       </div>
-      
+
       {filteredArticles.length > 3 && (
         <div className="text-center mt-6">
           <Link href="/artikel">
@@ -69,24 +69,24 @@ export const RecommendedArticleCard = ({ article }) => {
             />
           </div>
         )}
-        
+
         <div className="p-4">
           {article.category && (
             <span className="inline-block bg-secondaryColorLight/10 dark:bg-secondaryColorDark/15 text-secondaryColorLight dark:text-secondaryColorDark text-xs px-2 py-1 rounded-full mb-2 font-bold">
               {article.category}
             </span>
           )}
-          
+
           <h4 className="font-semibold text-gray-900 dark:text-neutral-100 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
             {article.title}
           </h4>
-          
+
           {article.excerpt && (
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-2">
               {article.excerpt}
             </p>
           )}
-          
+
           <div className="flex items-center justify-between mt-3 text-xs text-gray-500 dark:text-gray-400">
             {article.createdAt && (
               <div className="flex items-center gap-1">
@@ -94,7 +94,7 @@ export const RecommendedArticleCard = ({ article }) => {
                 <span>{formatDate(article.createdAt)}</span>
               </div>
             )}
-            
+
             {article.readingTime && (
               <div className="flex items-center gap-1">
                 <Clock size={12} />
