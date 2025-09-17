@@ -4,11 +4,11 @@ import { useProducts } from "@/hooks/useProducts"; // Adjust the import path as 
 import { RiCheckFill, RiInformationFill, RiWhatsappLine } from "react-icons/ri";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { BsFillXCircleFill } from "react-icons/bs";
-import { formatToRupiah } from "./helper/formatToRupiah";
+import { formatToRupiah } from "../helper/formatToRupiah";
 import { LuPlus } from "react-icons/lu";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
-import { slugify } from "./helper/slugify";
+import { slugify } from "../helper/slugify";
 // Helper function to parse semicolon-separated strings into arrays
 const parseStringToArray = (str) => {
     if (!str) return [];

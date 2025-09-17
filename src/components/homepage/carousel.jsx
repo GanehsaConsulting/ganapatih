@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from "react";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const data = [
     {

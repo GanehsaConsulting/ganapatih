@@ -1,9 +1,9 @@
 import { RecommendedArticles } from "@/components/article-recommend";
-import { CardCarousel } from "@/components/card-carousel";
-import { Carousel } from "@/components/carousel";
+import { CardCarousel } from "@/components/homepage/card-carousel";
+import { Carousel } from "@/components/homepage/carousel";
 import { CTA } from "@/components/cta";
-import { RecommendServices } from "@/components/recommend-services";
-import { ServicesButton } from "@/components/services-button";
+import { RecommendServices } from "@/components/homepage/recommend-services";
+import { ServicesButton } from "@/components/homepage/services-button";
 
 export default function Home() {
   return (
