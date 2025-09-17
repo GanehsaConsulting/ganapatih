@@ -23,7 +23,7 @@ export const RecommendedArticles = ({ articles, currentSlug = "/nib-dan-izin-ber
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredArticles.slice(0, 3).map((article, index) => (
-          <RecommendedArticleCard key={article.id || index} article={article} />
+          <RecommendedArticleCard  key={article.id || index} article={article} />
         ))}
       </div>
 
