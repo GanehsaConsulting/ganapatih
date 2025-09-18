@@ -6,11 +6,42 @@ import Image from "next/image";
 import { BookOpen, ArrowRight, Calendar, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export const RecommendedArticles = ({ articles, currentSlug = "/nib-dan-izin-berusaha-panduan-lengkap-oss-2025" }) => {
+export const RecommendedArticles = ({ articles, currentSlug }) => {
   if (!articles || articles.length === 0) return null;
 
-  // Filter artikel yang bukan artikel saat ini
-  const filteredArticles = articles.filter(article => article.slug !== currentSlug);
+  const relation1 = ["website", "social media"];
+  const relation2 = ["Virtual Office", "Legalitas", "Perizinan", "Haki"];
+  const relation4 = ["Akuntansi", "Pajak"];
+
+  // cari artikel sekarang
+  const currentArticle = articles.find((a) => a.slug === currentSlug);
+
+  // fungsi dapetin relasi sesuai kategori
+  const getRelations = (category) => {
+    if (!category) return [];
+    const cat = category.toLowerCase();
+
+    if (relation1.some((r) => cat.includes(r.toLowerCase()))) return relation1;
+    if (relation2.some((r) => cat.includes(r.toLowerCase()))) return relation2;
+    if (relation4.some((r) => cat.includes(r.toLowerCase()))) return relation4;
+
+    return [];
+  };
+
+  const relatedCategories = getRelations(currentArticle?.category);
+
+  // kalau ada relasi → filter sesuai relasi
+  // kalau ga ada → fallback kayak versi awal
+  const filteredArticles =
+    relatedCategories.length > 0
+      ? articles.filter(
+          (article) =>
+            article?.slug !== currentSlug &&
+            relatedCategories.some((r) =>
+              article.category?.toLowerCase().includes(r.toLowerCase())
+            )
+        )
+      : articles.filter((article) => article?.slug !== currentSlug);
 
   if (filteredArticles.length === 0) return "Takede";
 
@@ -23,7 +54,7 @@ export const RecommendedArticles = ({ articles, currentSlug = "/nib-dan-izin-ber
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredArticles.slice(0, 3).map((article, index) => (
-          <RecommendedArticleCard  key={article.id || index} article={article} />
+          <RecommendedArticleCard key={article.id || index} article={article} />
         ))}
       </div>
 
@@ -43,12 +74,12 @@ export const RecommendedArticles = ({ articles, currentSlug = "/nib-dan-izin-ber
 
 export const RecommendedArticleCard = ({ article }) => {
   const formatDate = (dateString) => {
-    if (!dateString) return '';
+    if (!dateString) return "";
     try {
-      return new Date(dateString).toLocaleDateString('id-ID', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+      return new Date(dateString).toLocaleDateString("id-ID", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       });
     } catch {
       return dateString;
@@ -62,7 +93,7 @@ export const RecommendedArticleCard = ({ article }) => {
           <div className="aspect-video relative overflow-hidden">
             <Image
               src={article.coverImage}
-              alt={article.title || ''}
+              alt={article.title || ""}
               width={400}
               height={240}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
