@@ -3,7 +3,7 @@ import Link from "next/link";
 import { services } from "@/data/system"
 import { RiApps2Fill, RiSearch2Line } from "react-icons/ri";
 import { Plus } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useState } from "react";
 import Image from "next/image";
 

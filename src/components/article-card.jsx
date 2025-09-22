@@ -1,8 +1,11 @@
+import clsx from "clsx";
 import { ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export const ArticleCard = ({
+    cols,
+    fixedCardWidth,
     articles = [],
     loading = false,
     imgFallback = "https://images.unsplash.com/photo-1619886384164-a845ee979ee9?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -23,7 +26,7 @@ export const ArticleCard = ({
     // Show loading skeletons
     if (loading && articles.length === 0) {
         return (
-            <main className="margin grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <main className={clsx("margin gap-4", cols)} >
                 {Array.from({ length: 6 }).map((_, index) => (
                     <LoadingSkeleton key={index} />
                 ))}
@@ -49,12 +52,13 @@ export const ArticleCard = ({
     }
 
     return (
-        <main className="margin grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        // 
+        <main className={cols}>
             {articles.map((article, index) => (
                 <Link
                     key={article.id || article.slug || index}
                     href={`/artikel/${article.slug}`}
-                    className="rounded-main group mb-5"
+                    className={clsx("rounded-main group mb-5 ", fixedCardWidth) }
                 >
                     <div className="overflow-hidden rounded-main min-h-[30lvh]">
                         <Image

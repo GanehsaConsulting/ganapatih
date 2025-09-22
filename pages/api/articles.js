@@ -8,6 +8,7 @@ const RANGE = process.env.GOOGLE_SHEET_RANGE_ARTICLE
 
 export default async function handler(req, res) {
   try {
+    // 
     const {
       sourcePath = '',
       searchTerm = '',
