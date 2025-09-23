@@ -13,16 +13,16 @@ export default function ArtikelPage() {
         error,
         pagination,
         filters,
-        
+
         // Actions
         sortArticles,
-        
+
         // Pagination
         goToPage,
         nextPage,
         prevPage,
         changeLimit,
-        
+
         // Helper states
         hasNextPage,
         hasPrevPage,
@@ -36,7 +36,7 @@ export default function ArtikelPage() {
             'asc': 'oldest',      // Terlama -> oldest  
             'popular': 'popular'  // Populer -> popular
         };
-        
+
         sortArticles(sortMapping[sortValue] || sortValue);
     };
 
@@ -55,8 +55,8 @@ export default function ArtikelPage() {
                             </div>
                             <h3 className="text-lg font-semibold mb-2">Gagal memuat artikel</h3>
                             <p className="text-gray-600 mb-4">{error}</p>
-                            <button 
-                                onClick={() => window.location.reload()} 
+                            <button
+                                onClick={() => window.location.reload()}
                                 className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                             >
                                 Coba Lagi
@@ -70,19 +70,14 @@ export default function ArtikelPage() {
 
     return (
         <>
-            <ArticleHero 
+            <ArticleHero
                 articles={articles}
                 loading={loading}
             />
             <div className="margin flex items-center justify-between mb-4">
-            <div>
-                <h1 className="text-3xl font-bold">Artikel Kami</h1>
-                {/* {!loading && pagination.total > 0 && (
-                    <p className="text-gray-600 text-sm mt-1">
-                        Menampilkan {articles.length} dari {pagination.total} artikel
-                    </p>
-                )} */}
-            </div>
+                <div>
+                    <h1 className="text-3xl font-bold">Artikel Kami</h1>
+                </div>
                 <DropdownSort
                     buttonClassName="w-fit"
                     items={[
@@ -91,16 +86,18 @@ export default function ArtikelPage() {
                         { label: 'Populer', value: 'popular' },
                     ]}
                     value={
-                        filters.sort === 'latest' ? 'desc' : 
-                        filters.sort === 'oldest' ? 'asc' : 
-                        filters.sort === 'popular' ? 'popular' : 'desc'
+                        filters.sort === 'latest' ? 'desc' :
+                            filters.sort === 'oldest' ? 'asc' :
+                                filters.sort === 'popular' ? 'popular' : 'desc'
                     }
                     onChange={handleSortChange}
                 />
             </div>
+            
             {/* Article Cards */}
-            <ArticleCard 
-            cols="margin gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+            <ArticleCard
+                carousel={false}
+                cols="margin gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
                 articles={articles}
                 loading={loading}
             />

@@ -25,7 +25,7 @@ export const RecommendedArticlesHome = () => {
       setIsAtStart(carousel.scrollLeft === 0);
       setIsAtEnd(
         Math.ceil(carousel.scrollLeft + carousel.clientWidth) >=
-          carousel.scrollWidth
+        carousel.scrollWidth
       );
     };
 
@@ -45,8 +45,8 @@ export const RecommendedArticlesHome = () => {
   }
 
   return (
-    <section className="margin my-10">
-      <div className="flex items-center justify-between">
+    <section className="my-10">
+      <div className="margin flex items-center justify-between">
         <div className="flex flex-col gap-1">
           <p className="text-2xl md:text-3xl font-medium">
             Rekomendasi Artikel
@@ -61,11 +61,10 @@ export const RecommendedArticlesHome = () => {
             onClick={() =>
               carouselRef.current?.scrollBy({ left: -700, behavior: "smooth" })
             }
-            className={`hidden md:block z-10 text-xl p-2 rounded-full bg-lightColor dark:bg-darkColor hover:bg-mainColor/70 active:scale-95 transition-opacity duration-300 ${
-              isAtStart
-                ? "opacity-50 cursor-not-allowed"
-                : "opacity-100 cursor-pointer"
-            }`}
+            className={`hidden md:block z-10 text-xl p-2 rounded-full bg-lightColor dark:bg-darkColor hover:bg-mainColor/70 active:scale-95 transition-opacity duration-300 ${isAtStart
+              ? "opacity-50 cursor-not-allowed"
+              : "opacity-100 cursor-pointer"
+              }`}
             disabled={isAtStart}
           >
             <HiChevronLeft />
@@ -74,11 +73,10 @@ export const RecommendedArticlesHome = () => {
             onClick={() =>
               carouselRef.current?.scrollBy({ left: 700, behavior: "smooth" })
             }
-            className={`hidden md:block z-10 text-xl p-2 rounded-full bg-lightColor dark:bg-darkColor hover:bg-mainColor/70 active:scale-95 transition-opacity duration-300 ${
-              isAtEnd
-                ? "opacity-50 cursor-not-allowed"
-                : "opacity-100 cursor-pointer"
-            }`}
+            className={`hidden md:block z-10 text-xl p-2 rounded-full bg-lightColor dark:bg-darkColor hover:bg-mainColor/70 active:scale-95 transition-opacity duration-300 ${isAtEnd
+              ? "opacity-50 cursor-not-allowed"
+              : "opacity-100 cursor-pointer"
+              }`}
             disabled={isAtEnd}
           >
             <HiChevronRight />
@@ -89,11 +87,11 @@ export const RecommendedArticlesHome = () => {
       {/* ✅ scrollable container */}
       <div
         ref={carouselRef}
-        className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar py-4"
+        className="flex gap-4 carousel py-4"
       >
         <ArticleCard
-        fixedCardWidth="w-60 sm:w-75"
-          cols="flex gap-4"
+          fixedCardWidth="w-60 sm:w-75"
+          cols="flex gap-4 w-full"
           articles={articles}
           loading={loading}
         />
