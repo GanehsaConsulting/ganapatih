@@ -1,14 +1,14 @@
-import { BannerAboutUs } from "@/components/tentangKami/BannerAboutUs";
-import { OurValues } from "@/components/tentangKami/OurValues";
-import { VisionMission } from "@/components/tentangKami/VisionMission";
+import { BannerAboutUs } from "@/components/TentangKami/BannerAboutUs";
+import { OurValues } from "@/components/TentangKami/OurValues";
+import { VisionMission } from "@/components/TentangKami/VisionMission";
 
-export default function TentangKamiPage ()  {
+export default function TentangKamiPage() {
   return (
-    <main>
-      <BannerAboutUs/>
-      <VisionMission/>
-      <OurValues/>
-    </main>
+    <>
+      <BannerAboutUs />
+      <VisionMission />
+      <OurValues />
+    </>
   );
 };
 
