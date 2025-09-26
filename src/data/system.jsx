@@ -38,7 +38,7 @@ export const heroSection = {
 export const services = {
     law: [
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/PT_b10fa5d6c0.webp",
+            logo: "/icon/PT.png",
             href: "/pendirian-pt",
             icon: <RiBuilding2Line />,
             label: "Legalitas PT",
@@ -50,7 +50,7 @@ export const services = {
             id: 2
         },
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/CV_2e52983e66.webp",
+            logo: "/icon/CV.png",
             href: "/pendirian-cv",
             icon: <RiBuilding3Line />,
             label: "Legalitas CV",
@@ -62,7 +62,7 @@ export const services = {
             id: 3
         },
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/Badan_Usaha_af40b3bdf6.webp",
+            logo: "/icon/Badan_usaha.png",
             href: "/badan-usaha",
             icon: <RiBuildingLine />,
             label: "Badan Usaha",
@@ -74,7 +74,7 @@ export const services = {
             id: 5
         },
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/Izin_505cbde047.webp",
+            logo: "/icon/Izin.png",
             href: "/perizinan",
             icon: <RiFileTextLine />,
             label: "Izin Tambahan",
@@ -86,7 +86,7 @@ export const services = {
             id: 4
         },
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/HAKI_dbf6b3b0b5.webp",
+            logo: "/icon/HAKI.png",
             href: "/haki",
             icon: <RiFileCopyLine />,
             label: "HAKI",
@@ -100,7 +100,7 @@ export const services = {
     ],
     creative: [
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/Web_60e1017d97.webp",
+            logo: "/icon/Web.png",
             href: "/web-development",
             icon: <RiGlobalLine />,
             label: "Pendirian Website",
@@ -112,7 +112,7 @@ export const services = {
             id: 5
         },
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/SOCMED_ca55c6f9c6.webp",
+            logo: "/icon/SOCMED.png",
             href: "/social-media-management",
             icon: <RiSmartphoneLine />,
             label: "Social Media Management",
@@ -124,7 +124,7 @@ export const services = {
             id: 12
         },
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/Software_02c0abf6d4.webp",
+            logo: "/icon/Software.png",
             href: "/software-management-system",
             icon: <RiSettings3Line />,
             label: "Software Management System",
@@ -138,7 +138,7 @@ export const services = {
     ],
     finance: [
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/TAX_379ea7fdaf.webp",
+            logo: "/icon/TAX.png",
             href: "/konsultan-pajak",
             icon: <RiBarChartLine />,
             label: "Konsultan Pajak",
@@ -150,7 +150,7 @@ export const services = {
             id: 1
         },
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/Akuntansi_c91813d5a3.webp",
+            logo: "/icon/Akuntansi.png",
             href: "/pelayanan-akuntansi",
             icon: <RiCalculatorLine />,
             label: "Pelayanan Akuntansi",
@@ -162,7 +162,7 @@ export const services = {
             id: 7
         },
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/AUDIT_5ca40549b9.webp",
+            logo: "/icon/AUDIT.png",
             href: "/audit",
             icon: <RiUser3Line />,
             label: "Audit",
@@ -176,7 +176,7 @@ export const services = {
     ],
     management: [
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/MANAJEMEN_0ddf250b03.webp",
+            logo: "/icon/MANAJEMEN.png",
             href: '/pelayanan-manajemen',
             icon: <RiSettings3Line />,
             label: 'Pelayanan Manajemen',
@@ -190,7 +190,7 @@ export const services = {
     ],
     workspace: [
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/GO_SPACE_3f8b8b02fc.webp",
+            logo: "/icon/go_space.png",
             href: "/go-space",
             icon: <RiCheckDoubleLine />,
             label: "Go Space",
@@ -202,7 +202,7 @@ export const services = {
             id: 8
         },
         {
-            logo: "https://cms-ganesha.ganeshaconsulting.co.id/uploads/VO_df81a85a83.webp",
+            logo: "/icon/VO.png",
             href: "/virtual-office",
             icon: <RiBuilding3Line />,
             label: "Virtual Office",
