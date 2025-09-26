@@ -90,7 +90,7 @@ export const RecommendedArticlesHome = () => {
         className="flex gap-4 carousel py-4"
       >
         <ArticleCard
-          fixedCardWidth="w-60 sm:w-75"
+          fixedCardWidth="min-w-[70lvw] md:min-w-75 md:max-w-[50vw]"
           cols="flex gap-4 w-full"
           articles={articles}
           loading={loading}
