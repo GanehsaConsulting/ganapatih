@@ -46,7 +46,7 @@ export const FloatingButton = () => {
             onClick={scrollToTop}
             className={`${
               isVisible ? "scale-100 " : "scale-0 translate-x-full"
-            } bg-mainColor/50 duration-300 backdrop-blur-md hover:bg-mainColor hover:text-baseColor dark:text-white text-otherMuted rounded-full p-2 md:p-4 shadow-lg`}
+            } bg-mainColorDark/50 duration-300 backdrop-blur-md hover:bg-mainColor hover:text-baseColor dark:text-white text-otherMuted rounded-full p-2 md:p-4 shadow-lg`}
           >
             <svg
               className="w-6 h-6"

@@ -58,8 +58,7 @@ export const Carousel = () => {
 
   if (loading) {
     return (
-      <div className="h-[25lvh] md:h-[45lvh] flex items-center justify-center">
-        <p className="text-neutral-500">Loading banners...</p>
+      <div className="h-[25lvh] md:h-[45lvh] flex items-center justify-center w-auto bg-darkColor/10 dark:bg-lightColor/20 animate-pulse margin rounded-main">
       </div>
     );
   }
