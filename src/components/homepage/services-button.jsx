@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { services } from "@/data/system";
-import { RiApps2Fill, RiSearch2Line } from "react-icons/ri";
+import { RiApps2Fill } from "react-icons/ri";
 import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
 import { useState } from "react";
@@ -30,6 +30,7 @@ export const ServicesButton = () => {
       <section className="my-5 md:my-10">
         <div className="margin flex flex-col font-semibold gap-2">
           <p className="hidden md:block text-xl md:text-2xl">Layanan Kami</p>
+
           {/* Desktop View */}
           <div className="hidden md:flex gap-2">
             <div className="w-full grid grid-cols-5 gap-2">
@@ -57,6 +58,7 @@ export const ServicesButton = () => {
                   </div>
                 </Link>
               ))}
+
               <button
                 onClick={() =>
                   document.getElementById("services-button")?.showModal()
@@ -118,17 +120,19 @@ export const ServicesButton = () => {
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
         </form>
-        <div className="modal-action absolute -top-3 right-3">
+
+        {/* Tombol Close */}
+        <div className="modal-action absolute top-2 right-2">
           <form method="dialog">
             <Button
-              className="rotate-45 !rounded-full bg-destructive"
+              className="rotate-45 !rounded-full bg-destructive w-10 h-10 flex items-center justify-center"
               variant="secondary"
-              size={"icon"}
             >
-              <Plus />
+              <Plus className="w-5 h-5" />
             </Button>
           </form>
         </div>
+
         <div className="modal-box rounded-t-main bg-white dark:bg-black pt-0 px-0">
           <div className="sticky top-0 z-30 bg-white/50 dark:bg-black/30 backdrop-blur-xl pt-5 px-5">
             <h3 className="font-bold text-xl mb-2">Semua Layanan</h3>
@@ -154,10 +158,12 @@ export const ServicesButton = () => {
                 placeholder="Cari layanan..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="grow"
+                className="grow text-base"
               />
             </label>
           </div>
+
+          {/* Desktop Content */}
           <div className="md:block hidden h-[60svh] px-5">
             <div className="grid grid-cols-6 gap-4 !py-5">
               {filtered.map((item, idx) => (
@@ -194,7 +200,7 @@ export const ServicesButton = () => {
                 </Link>
               ))}
               {filtered.length === 0 && (
-                <p className="col-span-4 text-center text-sm text-gray-400">
+                <p className="col-span-6 text-center text-sm text-gray-400">
                   Tidak ada layanan ditemukan
                 </p>
               )}
@@ -202,10 +208,10 @@ export const ServicesButton = () => {
           </div>
 
           {/* Mobile Content Drawer */}
-          <div className="md:hidden block h-[90svh] px-5">
-            <div className="grid grid-cols-4 gap-3">
+          <div className="md:hidden block h-[60svh] px-5">
+            <div className="grid grid-cols-4 gap-3 pb-10">
               {filtered.map((item, idx) => (
-                <Link href={item.href} key={idx} className="">
+                <Link href={item.href} key={idx}>
                   <div
                     style={{ background: `${item.accentLight}33` }}
                     className="flex flex-col items-center justify-center aspect-square rounded-third"
