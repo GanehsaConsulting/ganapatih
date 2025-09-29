@@ -125,7 +125,7 @@ export const ServicesButton = () => {
         <div className="modal-action absolute top-2 right-2">
           <form method="dialog">
             <Button
-              className="rotate-45 !rounded-full bg-destructive w-10 h-10 flex items-center justify-center"
+              className="rotate-45 !rounded-full  w-10 h-10 flex items-center justify-center"
               variant="secondary"
             >
               <Plus className="w-5 h-5" />
